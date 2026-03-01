@@ -20,7 +20,7 @@ body {
   line-height: 1.6;
 }
 
-/* NAVBAR */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -50,7 +50,7 @@ body {
   color: var(--primary);
 }
 
-/* HERO */
+
 .hero {
   padding: 120px 10%;
   text-align: center;
@@ -83,7 +83,7 @@ body {
   color: #fff;
 }
 
-/* SERVICES */
+
 .services {
   padding: 80px 10%;
 }
@@ -111,7 +111,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* ABOUT */
+
 .about {
   padding: 80px 10%;
   background: #091423;
@@ -124,7 +124,7 @@ body {
   color: var(--muted);
 }
 
-/* CONTACT */
+
 .contact {
   padding: 80px 10%;
   text-align: center;
@@ -138,11 +138,40 @@ body {
   border: 1px solid rgba(255,0,255,0.2);
 }
 
-/* FOOTER */
+
 footer {
   padding: 20px;
   text-align: center;
   background: var(--bg-darker);
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  height: 70px;
+  width: 70px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-text span {
+  color: var(--primary);
+}
+
+.logo-icon {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0,255,224,0.6));
 }
