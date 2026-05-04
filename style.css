@@ -72,6 +72,9 @@ section {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  margin-left: 0;
 }
 
 .logo-icon {
@@ -407,6 +410,15 @@ footer {
 .footer-links span {
   margin: 0 8px;
   color: rgba(151, 165, 181, 0.5);
+}
+
+.mot {
+  text-align: center;
+}
+
+.mot .cta {
+  display: inline-block;
+  margin: 20px 0 40px;
 }
 
 @media (max-width: 900px) {
