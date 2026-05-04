@@ -49,6 +49,10 @@ a {
   color: inherit;
 }
 
+section {
+  scroll-margin-top: 100px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -90,6 +94,7 @@ a {
 nav {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navbar a {
@@ -163,6 +168,16 @@ nav {
   z-index: 1;
 }
 
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
 .hero h1 {
   font-size: clamp(2.4rem, 5vw, 4rem);
   line-height: 1.12;
@@ -173,7 +188,7 @@ nav {
 
 .hero p {
   color: var(--muted);
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto 38px;
   font-size: 1.05rem;
 }
@@ -196,15 +211,29 @@ nav {
   filter: brightness(1.04);
 }
 
-.services {
+.services,
+.mot,
+.audience,
+.trust {
   padding: 90px 10%;
   position: relative;
 }
 
-.services h2 {
+.services h2,
+.mot h2,
+.audience h2,
+.trust h2 {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 22px;
   font-size: 2rem;
+}
+
+.section-intro {
+  max-width: 820px;
+  margin: 0 auto 50px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.03rem;
 }
 
 .service-grid {
@@ -250,7 +279,8 @@ nav {
   color: var(--muted);
 }
 
-.about {
+.about,
+.audience {
   padding: 90px 10%;
   text-align: center;
   background:
@@ -261,7 +291,8 @@ nav {
   position: relative;
 }
 
-.about::before {
+.about::before,
+.audience::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -272,7 +303,8 @@ nav {
   background-size: 260px 260px;
 }
 
-.about h2 {
+.about h2,
+.audience h2 {
   margin-bottom: 24px;
   font-size: 2rem;
   position: relative;
@@ -286,6 +318,10 @@ nav {
   font-size: 1.03rem;
   position: relative;
   z-index: 1;
+}
+
+.about strong {
+  color: var(--text);
 }
 
 .contact {
@@ -326,8 +362,22 @@ nav {
   background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent 35%);
 }
 
+.contact-box p {
+  position: relative;
+  z-index: 1;
+}
+
 .contact-box p + p {
   margin-top: 10px;
+}
+
+.contact-box a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.contact-box a:hover {
+  text-decoration: underline;
 }
 
 footer {
@@ -341,6 +391,24 @@ footer {
   -webkit-backdrop-filter: blur(8px);
 }
 
+.footer-links {
+  margin-top: 8px;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.footer-links span {
+  margin: 0 8px;
+  color: rgba(151, 165, 181, 0.5);
+}
+
 @media (max-width: 900px) {
   .navbar {
     padding: 16px 6%;
@@ -348,26 +416,30 @@ footer {
 
   .hero,
   .services,
+  .mot,
+  .audience,
   .about,
+  .trust,
   .contact {
     padding-left: 6%;
     padding-right: 6%;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .navbar {
     flex-direction: column;
     gap: 14px;
   }
 
   nav {
-    flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
   }
 
   .navbar a {
-    margin: 0 10px;
+    margin: 0 8px;
+    font-size: 0.9rem;
   }
 
   .hero {
