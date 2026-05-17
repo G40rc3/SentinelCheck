@@ -1,0 +1,97 @@
+##############################################################
+#  _headers — Netlify / Cloudflare Pages
+#
+#  These headers are enforced at the CDN/edge layer before
+#  any content is served. They are the authoritative source
+#  of truth. The meta http-equiv tags in HTML are a fallback
+#  only and do not replace server-level header enforcement.
+#
+#  OWASP references:
+#  - OWASP Secure Headers Project
+#  - OWASP Top 10: A05 Security Misconfiguration
+#  - OWASP WSTG-CONF-11
+##############################################################
+
+/*
+  # ── CONTENT SECURITY POLICY ───────────────────────────────────
+  # Strict allowlist. No unsafe-inline, no unsafe-eval, no wildcards.
+  # script-src 'self' — only scripts from this origin
+  # style-src 'self'  — only stylesheets from this origin
+  # img-src 'self' data: — local images + inline SVG data URIs only
+  # connect-src 'none' — blocks all XHR, fetch, WebSocket, EventSource
+  # frame-ancestors 'none' — prevents clickjacking in all browsers
+  # base-uri 'self'   — prevents base-tag injection attacks
+  # form-action 'none' — no form submissions leave this page
+  # upgrade-insecure-requests — forces all sub-resources to HTTPS
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;
+
+  # ── TRANSPORT SECURITY ────────────────────────────────────────
+  # max-age=63072000 = 2 years (recommended minimum is 1 year)
+  # includeSubDomains — applies to all subdomains
+  # preload — eligible for browser HSTS preload list submission
+  # Submit to: https://hstspreload.org after verifying HTTPS works
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # ── CLICKJACKING PROTECTION ───────────────────────────────────
+  # Belt-and-suspenders with CSP frame-ancestors above.
+  # DENY is stricter than SAMEORIGIN — this site never needs framing.
+  X-Frame-Options: DENY
+
+  # ── MIME SNIFFING PROTECTION ──────────────────────────────────
+  # Prevents browsers from MIME-sniffing a response away from the
+  # declared Content-Type. Stops drive-by-download attacks.
+  X-Content-Type-Options: nosniff
+
+  # ── REFERRER POLICY ───────────────────────────────────────────
+  # Sends full referrer to same origin; only origin to cross-origin HTTPS;
+  # nothing over plain HTTP. Prevents URL leakage in analytics.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # ── PERMISSIONS POLICY ────────────────────────────────────────
+  # Explicitly disables every browser feature this site does not use.
+  # Prevents a compromised script from silently activating camera/mic etc.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=(), fullscreen=(self), autoplay=()
+
+  # ── CROSS-ORIGIN POLICIES ─────────────────────────────────────
+  # CORP: prevents other origins from embedding our resources (images etc.)
+  # COOP: isolates our browsing context from other windows/tabs
+  # COEP: ensures all sub-resources opt in to being loaded cross-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+
+  # ── CACHE CONTROL ─────────────────────────────────────────────
+  # HTML is revalidated on every request; assets use longer cache.
+  Cache-Control: no-cache
+
+  # ── SERVER FINGERPRINT SUPPRESSION ───────────────────────────
+  # Hides server version/technology from attackers.
+  # (Netlify/CF strip Server header automatically; included for completeness)
+  X-Powered-By:
+
+# ── STATIC ASSETS — longer cache, immutable ───────────────────
+# CSS and JS are versioned by filename change when updated.
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/main.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Cross-Origin-Resource-Policy: same-origin
+
+/favicon.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── SITEMAP / ROBOTS — public, short cache ────────────────────
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8

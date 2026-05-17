@@ -1,0 +1,15 @@
+# robots.txt — Sentinel Check
+#
+# SECURITY NOTE:
+# robots.txt is PUBLIC and readable by anyone including attackers.
+# It must NEVER list sensitive directories, admin paths, or internal URLs.
+# Security through obscurity via robots.txt is NOT effective.
+# Access control must be enforced server-side, not through this file.
+#
+# This file only tells compliant crawlers what to index.
+# Non-compliant bots and attackers will ignore it entirely.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.sentinelcheck.co.uk/sitemap.xml
