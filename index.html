@@ -4,31 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!--
-    ╔══════════════════════════════════════════════════════════════╗
-    ║  SECURITY NOTE — HTTP HEADERS                                ║
-    ║  The meta tags below replicate headers for documentation     ║
-    ║  purposes. The definitive, enforced versions MUST be set     ║
-    ║  at the server/CDN layer. See _headers (Netlify/Cloudflare   ║
-    ║  Pages) and .htaccess (Apache) / nginx.conf included in      ║
-    ║  this package. Meta http-equiv CSP is a fallback only.       ║
-    ╚══════════════════════════════════════════════════════════════╝
-  -->
 
-  <!--
-    CONTENT SECURITY POLICY — STRICT
-    - default-src 'none'  → deny everything not explicitly allowed
-    - script-src 'self'   → only scripts served from this origin
-    - style-src 'self'    → only stylesheets from this origin
-    - img-src 'self' data: → local images + inline SVG data URIs
-    - font-src 'self'     → local fonts only (no Google Fonts)
-    - connect-src 'none'  → no XHR/fetch/WebSocket calls
-    - frame-ancestors 'none' → blocks clickjacking
-    - base-uri 'self'     → prevents base-tag injection
-    - form-action 'none'  → no form submissions (mailto handled by client)
-    - object-src 'none'   → blocks Flash/plugins
-    - upgrade-insecure-requests → forces HTTPS for all sub-resources
-  -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none';
                  script-src 'self';
@@ -43,23 +19,21 @@
                  object-src 'none';
                  upgrade-insecure-requests;" />
 
-  <!-- Prevents MIME-type sniffing attacks -->
+  
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
-  <!-- Blocks clickjacking (belt-and-suspenders with CSP frame-ancestors) -->
+  
   <meta http-equiv="X-Frame-Options" content="DENY" />
 
-  <!-- Controls referrer leakage -->
+  
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
 
-  <!-- Disables browser features not needed on this site -->
+  <
   <meta http-equiv="Permissions-Policy"
         content="camera=(), microphone=(), geolocation=(), payment=(),
                  usb=(), bluetooth=(), interest-cohort=()" />
 
-  <!-- ═══════════════════════════════════════════
-       PRIMARY SEO META TAGS
-  ═══════════════════════════════════════════ -->
+  
   <title>Cyber MOT for Small Businesses | Sentinel Check UK</title>
   <meta name="description" content="Sentinel Check offers affordable Cyber MOT security assessments for UK small businesses, sole traders, and charities. Identify weak passwords, exposed services, and cyber risks before attackers do. Book a free check today." />
   <meta name="keywords" content="cybersecurity small business UK, cyber MOT, small business cyber check, cybersecurity assessment UK, IT security sole trader, charity cybersecurity, cyber security check London, affordable cybersecurity UK, NCSC cyber essentials" />
@@ -67,9 +41,7 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://www.sentinelcheck.co.uk/" />
 
-  <!-- ═══════════════════════════════════════════
-       OPEN GRAPH (Facebook, LinkedIn)
-  ═══════════════════════════════════════════ -->
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.sentinelcheck.co.uk/" />
   <meta property="og:title" content="Cyber MOT for Small Businesses | Sentinel Check UK" />
@@ -80,30 +52,22 @@
   <meta property="og:site_name" content="Sentinel Check" />
   <meta property="og:locale" content="en_GB" />
 
-  <!-- ═══════════════════════════════════════════
-       TWITTER CARD
-  ═══════════════════════════════════════════ -->
+
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cyber MOT for Small Businesses | Sentinel Check UK" />
   <meta name="twitter:description" content="MOT-style cybersecurity checks for UK small businesses. Identify risks before they become serious problems. Book your free check." />
   <meta name="twitter:image" content="https://www.sentinelcheck.co.uk/assets/og-image.png" />
 
-  <!-- ═══════════════════════════════════════════
-       GEO / LOCAL SEO
-  ═══════════════════════════════════════════ -->
+
   <meta name="geo.region" content="GB" />
   <meta name="geo.placename" content="United Kingdom" />
 
-  <!-- ═══════════════════════════════════════════
-       FAVICONS
-  ═══════════════════════════════════════════ -->
+
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/favicon.png" />
 
-  <!-- ═══════════════════════════════════════════
-       STRUCTURED DATA - Local Business
-  ═══════════════════════════════════════════ -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -125,9 +89,7 @@
   }
   </script>
 
-  <!-- ═══════════════════════════════════════════
-       STRUCTURED DATA - Service
-  ═══════════════════════════════════════════ -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -149,9 +111,7 @@
   }
   </script>
 
-  <!-- ═══════════════════════════════════════════
-       STRUCTURED DATA - FAQ
-  ═══════════════════════════════════════════ -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -201,9 +161,7 @@
   }
   </script>
 
-  <!-- ═══════════════════════════════════════════
-       STRUCTURED DATA - BreadcrumbList
-  ═══════════════════════════════════════════ -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -219,29 +177,18 @@
   }
   </script>
 
-  <!--
-    stylesheet loaded from same origin — no integrity hash needed for same-origin
-    but if you ever move to a CDN, add integrity="sha384-..." crossorigin="anonymous"
-  -->
+
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- ════════════════════════════
-       SKIP LINK (Accessibility + SEO)
-  ════════════════════════════ -->
+
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- ════════════════════════════
-       HEADER / NAV
-  ════════════════════════════ -->
+
   <header class="navbar" role="banner">
-    <!--
-      All hrefs are relative anchors or same-origin paths.
-      No javascript: URIs, no external hrefs in nav.
-      rel="noopener noreferrer" added to any future external links.
-    -->
+
     <a href="/" class="logo" aria-label="Sentinel Check - Home">
       <img src="assets/logo.png"
            alt="Sentinel Check logo"
@@ -263,9 +210,7 @@
     </nav>
   </header>
 
-  <!-- ════════════════════════════
-       MAIN
-  ════════════════════════════ -->
+
   <main id="main-content">
 
     <!-- HERO -->
@@ -298,7 +243,7 @@
       </div>
     </section>
 
-    <!-- CYBER MOT -->
+
     <section id="mot" class="mot" aria-labelledby="mot-heading">
       <div class="section-inner">
         <p class="section-label">The Process</p>
@@ -340,7 +285,7 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
+
     <section id="services" class="services" aria-labelledby="services-heading">
       <div class="section-inner">
         <p class="section-label">What We Cover</p>
@@ -404,7 +349,7 @@
       </div>
     </section>
 
-    <!-- WHO WE HELP -->
+
     <section id="audience" class="audience" aria-labelledby="audience-heading">
       <div class="section-inner">
         <p class="section-label">Who We Serve</p>
@@ -431,7 +376,7 @@
       </div>
     </section>
 
-    <!-- FAQ -->
+
     <section id="faq" class="faq" aria-labelledby="faq-heading">
       <div class="section-inner">
         <p class="section-label">Common Questions</p>
@@ -514,7 +459,7 @@
       </div>
     </section>
 
-    <!-- WHY US -->
+
     <section id="about" class="about" aria-labelledby="about-heading">
       <div class="section-inner about-inner">
         <div class="about-text">
@@ -553,7 +498,7 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
+
     <section id="contact" class="contact" aria-labelledby="contact-heading">
       <div class="section-inner">
         <p class="section-label">Get Started</p>
@@ -566,11 +511,7 @@
         <div class="contact-box" itemscope itemtype="https://schema.org/ContactPoint">
           <p>
             <strong>Email us:</strong><br />
-            <!--
-              mailto: link — no tracking pixels, no third-party form processors,
-              no data submitted to our server. The safest contact method for a
-              static site. No user data is collected by this page.
-            -->
+
             <a href="mailto:andreiprecub@sentinelcheck.co.uk"
                itemprop="email"
                rel="noopener">
@@ -586,9 +527,7 @@
 
   </main>
 
-  <!-- ════════════════════════════
-       FOOTER
-  ════════════════════════════ -->
+
   <footer role="contentinfo">
     <div class="footer-inner">
       <a href="/" class="logo footer-logo" aria-label="Sentinel Check - Home">
@@ -613,13 +552,7 @@
     </div>
   </footer>
 
-  <!--
-    Script loaded with defer — executes after HTML is parsed, non-blocking.
-    src is a same-origin relative path — no external script dependencies,
-    no CDN trust required, no supply-chain risk.
-    No inline event handlers anywhere on this page (onclick="...", etc.)
-    All interactivity is attached via addEventListener in main.js.
-  -->
+
   <script src="main.js" defer></script>
 
 </body>
