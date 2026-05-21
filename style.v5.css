@@ -21,7 +21,7 @@
   --section-pad: clamp(70px, 9vw, 110px);
 }
 
-/* ──────────────────────────────────────── RESET */
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
 img { display: block; max-width: 100%; }
@@ -29,7 +29,7 @@ a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* ──────────────────────────────────────── SKIP LINK */
+
 .skip-link {
   position: absolute;
   top: -9999px;
@@ -43,7 +43,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .skip-link:focus { top: 1rem; }
 
-/* ──────────────────────────────────────── BODY */
+
 body {
   font-family: var(--font-body);
   color: var(--text);
@@ -69,7 +69,7 @@ body::before {
   background-size: 240px 240px, 280px 280px;
 }
 
-/* ──────────────────────────────────────── UTILITIES */
+
 .section-inner {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -87,7 +87,7 @@ body::before {
   margin-bottom: 12px;
 }
 
-/* ──────────────────────────────────────── NAVBAR */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -150,7 +150,7 @@ nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
   background: rgba(0,227,208,0.22) !important;
 }
 
-/* ──────────────────────────────────────── BUTTONS */
+
 .cta {
   display: inline-block;
   padding: 14px 28px;
@@ -186,7 +186,7 @@ nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
   transform: translateY(-2px);
 }
 
-/* ──────────────────────────────────────── HERO */
+
 .hero {
   padding: clamp(90px, 14vw, 150px) clamp(20px, 6%, 80px) clamp(80px, 12vw, 130px);
   text-align: center;
@@ -266,7 +266,7 @@ h1 {
 .trust-bar li { display: flex; align-items: center; gap: 7px; }
 .trust-bar span { color: var(--primary); font-size: 1rem; }
 
-/* ──────────────────────────────────────── SECTIONS */
+
 .mot, .services, .audience, .faq, .contact {
   padding: var(--section-pad) 0;
 }
@@ -309,7 +309,7 @@ h2 {
   line-height: 1.72;
 }
 
-/* ──────────────────────────────────────── CARDS */
+
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
@@ -347,7 +347,7 @@ h2 {
 
 .card p { color: var(--muted); font-size: 0.96rem; line-height: 1.65; }
 
-/* ──────────────────────────────────────── MOT STEPS */
+
 .mot { text-align: center; }
 .mot h2 { margin-bottom: 16px; }
 .mot .cta { margin: 24px auto 52px; }
@@ -377,7 +377,7 @@ h2 {
   right: 26px;
 }
 
-/* ──────────────────────────────────────── SERVICES */
+
 .services { background: transparent; }
 .services h2 { text-align: center; margin-bottom: 52px; }
 
@@ -393,7 +393,7 @@ h2 {
   display: block;
 }
 
-/* ──────────────────────────────────────── AUDIENCE */
+
 .audience { text-align: center; }
 .audience h2 { margin-bottom: 16px; }
 
@@ -423,7 +423,7 @@ h2 {
   color: var(--primary);
 }
 
-/* ──────────────────────────────────────── FAQ */
+
 .faq { background: transparent; }
 .faq h2 { text-align: center; margin-bottom: 48px; }
 
@@ -484,7 +484,7 @@ h2 {
   line-height: 1.7;
 }
 
-/* ──────────────────────────────────────── ABOUT */
+
 .about-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -508,7 +508,7 @@ h2 {
 
 .trust-card { padding: 22px; }
 
-/* ──────────────────────────────────────── CONTACT */
+
 .contact { text-align: center; }
 .contact h2 { margin-bottom: 14px; }
 
@@ -542,7 +542,7 @@ h2 {
 .contact-box a:hover { text-decoration: underline; }
 .contact-nudge { margin-top: 14px; font-size: 0.88rem; opacity: 0.75; }
 
-/* ──────────────────────────────────────── FOOTER */
+
 footer {
   padding: 36px 0;
   background: rgba(3, 9, 15, 0.85);
@@ -585,7 +585,7 @@ footer {
 
 .footer-copy { color: rgba(143, 163, 184, 0.55); font-size: 0.82rem; }
 
-/* ──────────────────────────────────────── RESPONSIVE */
+
 section { scroll-margin-top: 80px; }
 
 @media (max-width: 960px) {
@@ -627,14 +627,14 @@ section { scroll-margin-top: 80px; }
   h2 { font-size: 1.75rem; }
 }
 
-/* ──────────────────────────────────────── PRINT */
+
 @media print {
   body { background: #fff; color: #000; }
   .navbar, .cta, footer { display: none; }
   .hero { padding: 20px 0; }
 }
 
-/* ──────────────────────────────────────── PROSE PAGES (Privacy, Terms) */
+
 .prose-section {
   padding: clamp(60px, 9vw, 110px) 0;
 }
@@ -720,16 +720,7 @@ section { scroll-margin-top: 80px; }
   text-decoration: underline;
 }
 
-/* ══════════════════════════════════════════════════════
-   PATCH v2 — Performance, Accessibility & Security fixes
-   Applied: 2026-05
-   ══════════════════════════════════════════════════════ */
 
-/* ── ACCESSIBILITY: Focus-visible outlines ────────────
-   WCAG 2.1 AA §2.4.7 requires visible keyboard focus.
-   :focus-only hidden for mouse; :focus-visible shown for keyboard.
-   Uses outline-offset so outline sits outside elements cleanly.
-   ──────────────────────────────────────────────────── */
 :focus { outline: none; }
 
 :focus-visible {
@@ -745,52 +736,31 @@ section { scroll-margin-top: 80px; }
   outline-offset: 3px;
 }
 
-/* ── ACCESSIBILITY: Contrast fix for muted text ───────
-   Original --muted: #8fa3b8 on --bg-dark: #07101a
-   Contrast ratio: 4.3:1 — borderline fail for body text.
-   New value: #9eb5cc → 4.8:1 — WCAG AA pass.
-   Applies globally; all existing muted text benefits.
-   ──────────────────────────────────────────────────── */
+
 :root {
   --muted: #9eb5cc;
 }
 
-/* ── PERFORMANCE: Reduce paint cost on animated cards ─
-   contain: layout style — tells browser card children
-   don't affect layout outside the card (true here).
-   Reduces style recalculation scope on hover.
-   ──────────────────────────────────────────────────── */
+
 .card {
   contain: layout style;
 }
 
-/* ── PERFORMANCE: Limit will-change scope ─────────────
-   Only apply will-change on elements the user is
-   actively hovering. Applying globally wastes GPU
-   compositor memory on every card simultaneously.
-   ──────────────────────────────────────────────────── */
+
 .card:hover,
 .cta:hover,
 .audience-tag:hover {
   will-change: transform;
 }
 
-/* ── PERFORMANCE: Reduce fixed background repaint ─────
-   background-attachment: fixed causes full-page repaint
-   on mobile scroll. Switched to scroll for mobile.
-   Desktop keeps the parallax effect.
-   ──────────────────────────────────────────────────── */
+
 @media (max-width: 760px) {
   body {
     background-attachment: scroll;
   }
 }
 
-/* ── ACCESSIBILITY: Screen-reader-only utility ────────
-   For content that should be announced but not shown.
-   Used where aria-label would be awkward (e.g., adding
-   context to icon-only elements via adjacent text).
-   ──────────────────────────────────────────────────── */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -803,11 +773,7 @@ section { scroll-margin-top: 80px; }
   border: 0;
 }
 
-/* ── ACCESSIBILITY: Reduced motion ───────────────────
-   Respects prefers-reduced-motion: removes transitions
-   and animations for users who request it (vestibular
-   disorders, WCAG 2.1 §2.3.3).
-   ──────────────────────────────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -817,27 +783,19 @@ section { scroll-margin-top: 80px; }
   }
 }
 
-/* ── PERFORMANCE: Image rendering ────────────────────
-   Prevents blurry scaling artefacts on logo/favicon.
-   ──────────────────────────────────────────────────── */
+
 .logo-icon {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
-/* ── ACCESSIBILITY: Navbar active state ──────────────
-   Nav links have no current-page indicator.
-   JS in main.js handles aria-current; style it here.
-   ──────────────────────────────────────────────────── */
+
 .navbar nav a[aria-current="page"] {
   color: var(--primary);
   background: var(--primary-dim);
 }
 
-/* ── PERFORMANCE: Avoid CLS from navbar on load ──────
-   Navbar is sticky so min-height prevents reflow
-   when flex wraps on mobile before CSS applies.
-   ──────────────────────────────────────────────────── */
+
 .navbar {
   min-height: 64px;
 }
