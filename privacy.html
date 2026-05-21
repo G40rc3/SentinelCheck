@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07101a" />
 
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none';
@@ -21,27 +22,29 @@
   <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy"
-        content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=()" />
+        content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()" />
 
   <title>Privacy Policy | Sentinel Check - UK Cybersecurity for Small Businesses</title>
   <meta name="description" content="Sentinel Check Privacy Policy. Learn how we collect, use, and protect your data in line with UK GDPR." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.sentinelcheck.co.uk/privacy.html" />
+  <link rel="canonical" href="https://sentinelcheck.co.uk/privacy.html" />
+  <link rel="icon" type="image/webp" href="/favicon.webp" />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.sentinelcheck.co.uk/" },
-      { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://www.sentinelcheck.co.uk/privacy.html" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sentinelcheck.co.uk/" },
+      { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://sentinelcheck.co.uk/privacy.html" }
     ]
   }
   </script>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.v5.css" />
 </head>
 <body>
 
@@ -49,7 +52,7 @@
 
 <header class="navbar" role="banner">
   <a href="/" class="logo" aria-label="Sentinel Check - Home">
-    <img src="assets/logo.png" alt="Sentinel Check logo" class="logo-icon" width="40" height="40" loading="eager" decoding="async" />
+    <picture><source srcset="/assets/logo.webp" type="image/webp" /><img src="/assets/logo.png" alt="Sentinel Check logo" class="logo-icon" width="40" height="40" loading="eager" fetchpriority="high" decoding="async" /></picture>
     <div class="logo-text">Sentinel<span>Check</span></div>
   </a>
   <nav aria-label="Primary navigation">
@@ -123,7 +126,7 @@
 <footer role="contentinfo">
   <div class="footer-inner">
     <a href="/" class="logo footer-logo" aria-label="Sentinel Check - Home">
-      <img src="assets/logo.png" alt="Sentinel Check" class="logo-icon" width="32" height="32" loading="lazy" decoding="async" />
+      <picture><source srcset="/assets/logo.webp" type="image/webp" /><img src="/assets/logo.png" alt="Sentinel Check" class="logo-icon" width="32" height="32" loading="lazy" decoding="async" /></picture>
       <div class="logo-text">Sentinel<span>Check</span></div>
     </a>
     <p class="footer-tagline">Affordable cybersecurity, made simple - for UK small businesses.</p>

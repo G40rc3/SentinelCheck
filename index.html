@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07101a" />
 
-
+ 
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'none';
                  script-src 'self';
@@ -18,55 +19,46 @@
                  form-action 'none';
                  object-src 'none';
                  upgrade-insecure-requests;" />
-
-  
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-
-  
   <meta http-equiv="X-Frame-Options" content="DENY" />
-
-  
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-
-  <
   <meta http-equiv="Permissions-Policy"
         content="camera=(), microphone=(), geolocation=(), payment=(),
-                 usb=(), bluetooth=(), interest-cohort=()" />
+                 usb=(), magnetometer=(), gyroscope=(), accelerometer=()" />
 
-  
-  <title>Cyber MOT for Small Businesses | Sentinel Check UK</title>
-  <meta name="description" content="Sentinel Check offers affordable Cyber MOT security assessments for UK small businesses, sole traders, and charities. Identify weak passwords, exposed services, and cyber risks before attackers do. Book a free check today." />
+  <title>Cybersecurity MOT for Small Businesses in Leicester | Sentinel Check</title>
+  <meta name="description" content="Sentinel Check helps Leicester and UK small businesses find and fix common cybersecurity risks with plain-English security checks, practical reports, and affordable improvements." />
   <meta name="keywords" content="cybersecurity small business UK, cyber MOT, small business cyber check, cybersecurity assessment UK, IT security sole trader, charity cybersecurity, cyber security check London, affordable cybersecurity UK, NCSC cyber essentials" />
   <meta name="author" content="Sentinel Check" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-  <link rel="canonical" href="https://www.sentinelcheck.co.uk/" />
-
+  <link rel="canonical" href="https://sentinelcheck.co.uk/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.sentinelcheck.co.uk/" />
-  <meta property="og:title" content="Cyber MOT for Small Businesses | Sentinel Check UK" />
+  <meta property="og:url" content="https://sentinelcheck.co.uk/" />
+  <meta property="og:title" content="Cybersecurity MOT for Small Businesses in Leicester | Sentinel Check" />
   <meta property="og:description" content="Affordable MOT-style cybersecurity checks for UK small businesses, sole traders &amp; charities. Plain-English reports. No jargon. Book your free check." />
-  <meta property="og:image" content="https://www.sentinelcheck.co.uk/assets/og-image.png" />
+  <meta property="og:image" content="https://sentinelcheck.co.uk/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Sentinel Check" />
   <meta property="og:locale" content="en_GB" />
 
-
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Cyber MOT for Small Businesses | Sentinel Check UK" />
+  <meta name="twitter:title" content="Cybersecurity MOT for Small Businesses in Leicester | Sentinel Check" />
   <meta name="twitter:description" content="MOT-style cybersecurity checks for UK small businesses. Identify risks before they become serious problems. Book your free check." />
-  <meta name="twitter:image" content="https://www.sentinelcheck.co.uk/assets/og-image.png" />
+  <meta name="twitter:image" content="https://sentinelcheck.co.uk/assets/og-image.png" />
 
+  <meta name="geo.region" content="GB-LCE" />
+  <meta name="geo.placename" content="Leicester, United Kingdom" />
 
-  <meta name="geo.region" content="GB" />
-  <meta name="geo.placename" content="United Kingdom" />
-
-
+  <link rel="icon" type="image/webp" href="/favicon.webp" />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/favicon.png" />
 
+ 
+  <link rel="preload" as="image" href="/assets/logo.webp"
+        type="image/webp" fetchpriority="high" />
 
   <script type="application/ld+json">
   {
@@ -74,14 +66,12 @@
     "@type": "LocalBusiness",
     "name": "Sentinel Check",
     "description": "MOT-style cybersecurity checks for small businesses, sole traders, charities, and local organisations in the UK.",
-    "url": "https://www.sentinelcheck.co.uk",
-    "logo": "https://www.sentinelcheck.co.uk/assets/logo.png",
-    "image": "https://www.sentinelcheck.co.uk/assets/og-image.png",
+    "url": "https://sentinelcheck.co.uk",
+    "logo": "https://sentinelcheck.co.uk/assets/logo.png",
+    "image": "https://sentinelcheck.co.uk/assets/og-image.png",
     "email": "andreiprecub@sentinelcheck.co.uk",
-    "areaServed": {
-      "@type": "Country",
-      "name": "United Kingdom"
-    },
+    "address": { "@type": "PostalAddress", "addressLocality": "Leicester", "addressCountry": "GB" },
+    "areaServed": [{ "@type": "City", "name": "Leicester" }, { "@type": "Country", "name": "United Kingdom" }],
     "serviceType": "Cybersecurity Assessment",
     "priceRange": "£",
     "knowsAbout": ["Cybersecurity", "Penetration Testing", "Cyber MOT", "Small Business IT Security", "NCSC Cyber Essentials"],
@@ -89,115 +79,62 @@
   }
   </script>
 
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Cyber MOT - Cybersecurity Assessment",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Sentinel Check",
-      "url": "https://www.sentinelcheck.co.uk"
-    },
+    "provider": { "@type": "LocalBusiness", "name": "Sentinel Check", "url": "https://sentinelcheck.co.uk" },
     "areaServed": "United Kingdom",
     "description": "A comprehensive cybersecurity check for small UK businesses that identifies weak passwords, exposed services, insecure Wi-Fi, device risks, and common cyber gaps.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "GBP",
-      "description": "Free initial cybersecurity check"
-    }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP", "description": "Free initial cybersecurity check" }
   }
   </script>
-
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is a Cyber MOT for small businesses?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A Cyber MOT is an MOT-style cybersecurity health check for your business. Just like a vehicle MOT, it reviews your systems, devices, and setup to uncover security risks early - including weak passwords, exposed services, insecure Wi-Fi, and misconfigurations - before they become serious problems."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How much does a cybersecurity check cost?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sentinel Check offers a free initial cybersecurity check for small UK businesses, sole traders, and charities. Get in touch to arrange your free assessment."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Who is Sentinel Check designed for?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sentinel Check is designed for sole traders, small businesses, local shops, cafes, salons, consultants, charities, healthcare providers, and any UK organisation without a dedicated IT security team."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What does a cybersecurity assessment include?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our assessment covers device security, account safety, Wi-Fi configuration, exposed services, common vulnerabilities, and misconfigurations. You receive a plain-English report with your risks, business impact, and practical next steps."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need technical knowledge to use Sentinel Check?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No technical knowledge is needed. All reports are written in plain English with no jargon. We explain risks calmly and practically so any business owner can understand and act on them."
-        }
-      }
+      { "@type": "Question", "name": "What is a Cyber MOT for small businesses?", "acceptedAnswer": { "@type": "Answer", "text": "A Cyber MOT is an MOT-style cybersecurity health check for your business. Just like a vehicle MOT, it reviews your systems, devices, and setup to uncover security risks early - including weak passwords, exposed services, insecure Wi-Fi, and misconfigurations - before they become serious problems." } },
+      { "@type": "Question", "name": "How much does a cybersecurity check cost?", "acceptedAnswer": { "@type": "Answer", "text": "Sentinel Check offers a free initial cybersecurity check for small UK businesses, sole traders, and charities. Get in touch to arrange your free assessment." } },
+      { "@type": "Question", "name": "Who is Sentinel Check designed for?", "acceptedAnswer": { "@type": "Answer", "text": "Sentinel Check is designed for sole traders, small businesses, local shops, cafes, salons, consultants, charities, healthcare providers, and any UK organisation without a dedicated IT security team." } },
+      { "@type": "Question", "name": "What does a cybersecurity assessment include?", "acceptedAnswer": { "@type": "Answer", "text": "Our assessment covers device security, account safety, Wi-Fi configuration, exposed services, common vulnerabilities, and misconfigurations. You receive a plain-English report with your risks, business impact, and practical next steps." } },
+      { "@type": "Question", "name": "Do I need technical knowledge to use Sentinel Check?", "acceptedAnswer": { "@type": "Answer", "text": "No technical knowledge is needed. All reports are written in plain English with no jargon. We explain risks calmly and practically so any business owner can understand and act on them." } }
     ]
   }
   </script>
-
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.sentinelcheck.co.uk/"
-      }
-    ]
+    "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sentinelcheck.co.uk/" }]
   }
   </script>
 
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.v5.css" />
 </head>
 
 <body>
 
-
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-
   <header class="navbar" role="banner">
-
     <a href="/" class="logo" aria-label="Sentinel Check - Home">
-      <img src="assets/logo.png"
-           alt="Sentinel Check logo"
-           class="logo-icon"
-           width="40"
-           height="40"
-           loading="eager"
-           decoding="async" />
-      <div class="logo-text">Sentinel<span>Check</span></div>
+
+      <picture>
+        <source srcset="/assets/logo.webp" type="image/webp" />
+        <img src="/assets/logo.png"
+             alt="Sentinel Check logo"
+             class="logo-icon"
+             width="40"
+             height="40"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async" />
+      </picture>
+      <div class="logo-text" aria-hidden="true">Sentinel<span>Check</span></div>
     </a>
 
     <nav aria-label="Primary navigation">
@@ -210,30 +147,24 @@
     </nav>
   </header>
 
-
   <main id="main-content">
 
-    <!-- HERO -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-inner">
-        <p class="eyebrow">MOT-style cybersecurity for UK small businesses</p>
-
+        <p class="eyebrow">MOT-style cybersecurity for Leicester and UK small businesses</p>
         <h1 id="hero-heading">
           Protect Your Business<br>
           With a Free <span class="highlight">Cyber MOT</span>
         </h1>
-
         <p class="hero-sub">
           Sentinel Check finds weak passwords, exposed services, insecure Wi-Fi,
           and common cyber gaps before they become serious problems - in plain English,
           without the jargon.
         </p>
-
         <div class="hero-actions">
           <a href="#contact" class="cta cta-primary">Book Your Free Cyber MOT</a>
           <a href="#mot" class="cta cta-secondary">See How It Works</a>
         </div>
-
         <ul class="trust-bar" aria-label="Trust signals">
           <li><span aria-hidden="true">&#10003;</span> Free initial check</li>
           <li><span aria-hidden="true">&#10003;</span> Plain-English report</li>
@@ -242,7 +173,6 @@
         </ul>
       </div>
     </section>
-
 
     <section id="mot" class="mot" aria-labelledby="mot-heading">
       <div class="section-inner">
@@ -253,112 +183,74 @@
           our <strong>Cyber MOT</strong> assesses your business systems, devices, and setup
           to uncover security risks early - giving you a clear picture and practical fixes.
         </p>
-
         <a href="#contact" class="cta cta-primary">Book Your Free Cyber MOT</a>
-
         <ol class="steps-grid" aria-label="Cyber MOT steps">
           <li class="card step-card">
             <span class="step-num" aria-hidden="true">01</span>
             <h3>Check</h3>
-            <p>
-              We review your basic cyber setup - devices, accounts, Wi-Fi,
-              exposed services, password strength, and common risk areas.
-            </p>
+            <p>We review your basic cyber setup - devices, accounts, Wi-Fi, exposed services, password strength, and common risk areas.</p>
           </li>
           <li class="card step-card">
             <span class="step-num" aria-hidden="true">02</span>
             <h3>Report</h3>
-            <p>
-              You receive a plain-English report showing the risks found,
-              their business impact, and clear, practical next steps to fix them.
-            </p>
+            <p>You receive a plain-English report showing the risks found, their business impact, and clear, practical next steps to fix them.</p>
           </li>
           <li class="card step-card">
             <span class="step-num" aria-hidden="true">03</span>
             <h3>Improve</h3>
-            <p>
-              We help close the gaps with practical fixes: MFA setup, firewall
-              configuration, ongoing monitoring, and safer system configurations.
-            </p>
+            <p>We help close the gaps with practical fixes: MFA setup, firewall configuration, ongoing monitoring, and safer system configurations.</p>
           </li>
         </ol>
       </div>
     </section>
 
-
     <section id="services" class="services" aria-labelledby="services-heading">
       <div class="section-inner">
         <p class="section-label">What We Cover</p>
         <h2 id="services-heading">What We Protect You From</h2>
-
         <div class="service-grid">
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#9889;</div>
             <h3 itemprop="name">Automated Attacks</h3>
-            <p itemprop="description">
-              We reduce risks from bots, network scanners, and script-based attacks
-              that constantly probe businesses for easy weaknesses.
-            </p>
+            <p itemprop="description">We reduce risks from bots, network scanners, and script-based attacks that constantly probe businesses for easy weaknesses.</p>
           </article>
-
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#128273;</div>
             <h3 itemprop="name">Weak Passwords &amp; Credentials</h3>
-            <p itemprop="description">
-              We identify exposed credentials, reused passwords, and accounts
-              lacking multi-factor authentication - a leading cause of breaches.
-            </p>
+            <p itemprop="description">We identify exposed credentials, reused passwords, and accounts lacking multi-factor authentication - a leading cause of breaches.</p>
           </article>
-
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#127760;</div>
             <h3 itemprop="name">Exposed Services &amp; Entry Points</h3>
-            <p itemprop="description">
-              We find exposed systems, open ports, unsafe settings, and other
-              gaps attackers commonly target as their first way in.
-            </p>
+            <p itemprop="description">We find exposed systems, open ports, unsafe settings, and other gaps attackers commonly target as their first way in.</p>
           </article>
-
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#9881;&#65039;</div>
             <h3 itemprop="name">Misconfigurations</h3>
-            <p itemprop="description">
-              We identify poor Wi-Fi setup, risky device configurations, and
-              exposed services that could allow unauthorised access.
-            </p>
+            <p itemprop="description">We identify poor Wi-Fi setup, risky device configurations, and exposed services that could allow unauthorised access.</p>
           </article>
-
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#128225;</div>
             <h3 itemprop="name">Ongoing Monitoring</h3>
-            <p itemprop="description">
-              Continuous visibility means suspicious activity gets detected,
-              logged, and addressed faster - before damage is done.
-            </p>
+            <p itemprop="description">Continuous visibility means suspicious activity gets detected, logged, and addressed faster - before damage is done.</p>
           </article>
-
           <article class="card" itemscope itemtype="https://schema.org/Service">
             <div class="card-icon" aria-hidden="true">&#128231;</div>
             <h3 itemprop="name">Phishing &amp; Social Engineering</h3>
-            <p itemprop="description">
-              We highlight common phishing risks and provide guidance on email
-              hygiene, so your team can spot and avoid social engineering attempts.
-            </p>
+            <p itemprop="description">We highlight common phishing risks and provide guidance on email hygiene, so your team can spot and avoid social engineering attempts.</p>
           </article>
         </div>
       </div>
     </section>
 
-
     <section id="audience" class="audience" aria-labelledby="audience-heading">
       <div class="section-inner">
         <p class="section-label">Who We Serve</p>
-        <h2 id="audience-heading">Cybersecurity for Every Small UK Organisation</h2>
+        <h2 id="audience-heading">Cybersecurity for Small Businesses Across Leicester and the UK</h2>
         <p class="section-intro">
-          Sentinel Check is built for organisations that don't have a dedicated IT security team -
+          Sentinel Check is built for small businesses and organisations across Leicester, Leicestershire, and the wider UK that don't have a dedicated IT security team -
           but still hold customer data, process payments, or rely on digital tools to run their business.
         </p>
-
         <ul class="audience-grid" aria-label="Types of businesses we help">
           <li class="audience-tag">Sole Traders</li>
           <li class="audience-tag">Small Businesses</li>
@@ -376,14 +268,11 @@
       </div>
     </section>
 
-
     <section id="faq" class="faq" aria-labelledby="faq-heading">
       <div class="section-inner">
         <p class="section-label">Common Questions</p>
         <h2 id="faq-heading">Frequently Asked Questions</h2>
-
         <dl class="faq-list">
-
           <div class="faq-item">
             <dt>
               <button class="faq-q" aria-expanded="false" aria-controls="faq1" type="button">
@@ -392,13 +281,9 @@
               </button>
             </dt>
             <dd id="faq1" class="faq-a" hidden>
-              A Cyber MOT is a structured cybersecurity health check modelled on the familiar
-              vehicle MOT concept. It reviews your systems, devices, accounts, and network
-              setup to find security weaknesses early - before attackers do. You receive a
-              plain-English report with prioritised fixes.
+              A Cyber MOT is a structured cybersecurity health check modelled on the familiar vehicle MOT concept. It reviews your systems, devices, accounts, and network setup to find security weaknesses early - before attackers do. You receive a plain-English report with prioritised fixes.
             </dd>
           </div>
-
           <div class="faq-item">
             <dt>
               <button class="faq-q" aria-expanded="false" aria-controls="faq2" type="button">
@@ -407,11 +292,9 @@
               </button>
             </dt>
             <dd id="faq2" class="faq-a" hidden>
-              The initial Cyber MOT check is free. Get in touch to arrange a short first
-              conversation about your business setup and we'll take it from there.
+              The initial Cyber MOT check is free. Get in touch to arrange a short first conversation about your business setup and we'll take it from there.
             </dd>
           </div>
-
           <div class="faq-item">
             <dt>
               <button class="faq-q" aria-expanded="false" aria-controls="faq3" type="button">
@@ -420,12 +303,9 @@
               </button>
             </dt>
             <dd id="faq3" class="faq-a" hidden>
-              No. Everything is written in plain English. We explain what each risk means
-              for your specific business, how serious it is, and what to do about it -
-              without jargon or scare tactics.
+              No. Everything is written in plain English. We explain what each risk means for your specific business, how serious it is, and what to do about it - without jargon or scare tactics.
             </dd>
           </div>
-
           <div class="faq-item">
             <dt>
               <button class="faq-q" aria-expanded="false" aria-controls="faq4" type="button">
@@ -434,12 +314,9 @@
               </button>
             </dt>
             <dd id="faq4" class="faq-a" hidden>
-              The initial check is an on-premise session, typically lasting 1 to 2 hours
-              at your business. The exact time depends on the size and complexity of your
-              setup. We work around your schedule to minimise disruption.
+              The initial check is an on-premise session, typically lasting 1 to 2 hours at your business. The exact time depends on the size and complexity of your setup. We work around your schedule to minimise disruption.
             </dd>
           </div>
-
           <div class="faq-item">
             <dt>
               <button class="faq-q" aria-expanded="false" aria-controls="faq5" type="button">
@@ -448,35 +325,22 @@
               </button>
             </dt>
             <dd id="faq5" class="faq-a" hidden>
-              Our checks cover many of the same areas as the UK government's Cyber Essentials
-              framework - including access controls, patch management, firewalls, and malware
-              protection. Sentinel Check can be a practical first step toward Cyber Essentials
-              readiness.
+              Our checks cover many of the same areas as the UK government's Cyber Essentials framework - including access controls, patch management, firewalls, and malware protection. Sentinel Check can be a practical first step toward Cyber Essentials readiness.
             </dd>
           </div>
-
         </dl>
       </div>
     </section>
-
 
     <section id="about" class="about" aria-labelledby="about-heading">
       <div class="section-inner about-inner">
         <div class="about-text">
           <p class="section-label">Why Sentinel Check</p>
           <h2 id="about-heading">Real Threats. Practical Defence. Plain English.</h2>
-          <p>
-            Most cyber incidents don't come from elite hackers. They come from
-            <strong>automated tools, weak passwords, exposed systems, phishing,
-            poor visibility, and small issues left unaddressed for too long.</strong>
-          </p>
-          <p>
-            Sentinel Check focuses on the real-world risks that affect small businesses
-            every day - and gives you an affordable, jargon-free path to fixing them.
-          </p>
+          <p>Most cyber incidents don't come from elite hackers. They come from <strong>automated tools, weak passwords, exposed systems, phishing, poor visibility, and small issues left unaddressed for too long.</strong></p>
+          <p>Based in Leicester and serving small businesses across the UK, Sentinel Check gives you an affordable, jargon-free path to fixing the risks that matter most.</p>
           <a href="#contact" class="cta cta-primary">Get Your Free Check</a>
         </div>
-
         <div class="trust-cards">
           <div class="card trust-card">
             <h3>Plain-English Reports</h3>
@@ -498,47 +362,41 @@
       </div>
     </section>
 
-
     <section id="contact" class="contact" aria-labelledby="contact-heading">
       <div class="section-inner">
         <p class="section-label">Get Started</p>
         <h2 id="contact-heading">Book Your Free Cybersecurity Check</h2>
         <p class="section-intro">
-          Send a short message and we'll arrange a simple first conversation about your
-          business setup. No pressure, no commitment - just a clear picture of where you stand.
+          Send a short message and we'll arrange a simple first conversation about your business setup. No pressure, no commitment - just a clear picture of where you stand.
         </p>
-
         <div class="contact-box" itemscope itemtype="https://schema.org/ContactPoint">
           <p>
             <strong>Email us:</strong><br />
-
-            <a href="mailto:andreiprecub@sentinelcheck.co.uk"
-               itemprop="email"
-               rel="noopener">
+            <a href="mailto:andreiprecub@sentinelcheck.co.uk" itemprop="email" rel="noopener">
               andreiprecub@sentinelcheck.co.uk
             </a>
           </p>
-          <p class="contact-nudge">
-            Typical response within 1 business day.
-          </p>
+          <p class="contact-nudge">Typical response within 1 business day.</p>
         </div>
       </div>
     </section>
 
   </main>
 
-
   <footer role="contentinfo">
     <div class="footer-inner">
       <a href="/" class="logo footer-logo" aria-label="Sentinel Check - Home">
-        <img src="assets/logo.png"
-             alt="Sentinel Check"
-             class="logo-icon"
-             width="32"
-             height="32"
-             loading="lazy"
-             decoding="async" />
-        <div class="logo-text">Sentinel<span>Check</span></div>
+        <picture>
+          <source srcset="/assets/logo.webp" type="image/webp" />
+          <img src="/assets/logo.png"
+               alt="Sentinel Check"
+               class="logo-icon"
+               width="32"
+               height="32"
+               loading="lazy"
+               decoding="async" />
+        </picture>
+        <div class="logo-text" aria-hidden="true">Sentinel<span>Check</span></div>
       </a>
       <p class="footer-tagline">Affordable cybersecurity, made simple - for UK small businesses.</p>
       <nav class="footer-nav" aria-label="Footer navigation">
@@ -552,8 +410,7 @@
     </div>
   </footer>
 
-
-  <script src="main.js" defer></script>
+  <script src="main.v5.js" defer></script>
 
 </body>
 </html>

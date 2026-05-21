@@ -28,7 +28,7 @@
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
   # ── PERMISSIONS POLICY ──────────────────────────────────────
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), interest-cohort=(), fullscreen=(self)"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), fullscreen=(self)"
 
   # ── CROSS-ORIGIN POLICIES ───────────────────────────────────
   Header always set Cross-Origin-Resource-Policy "same-origin"
@@ -86,6 +86,7 @@ ServerSignature Off
   AddType image/x-icon .ico
   AddType application/xml .xml
   AddType text/plain .txt
+  AddType image/webp .webp
 </IfModule>
 
 # ── CACHE CONTROL ─────────────────────────────────────────────
@@ -96,6 +97,7 @@ ServerSignature Off
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
   ExpiresByType application/xml "access plus 1 day"
   ExpiresByType text/plain "access plus 1 day"
 </IfModule>
