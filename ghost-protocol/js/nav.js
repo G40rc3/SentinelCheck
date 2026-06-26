@@ -17,8 +17,7 @@ function renderNav(active) {
     ['search.html','14','Search & Browsing'],
     ['physical.html','15','Physical OPSEC'],
     ['household.html','16','Household & Children'],
-    ['scheduler.html','17','Scheduler'],
-    ['news.html','18','Intel Feed'],
+    ['news.html','17','Intel Feed'],
   ];
   const stats = S.exposureStats();
   const circ = 213.6;

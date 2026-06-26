@@ -75,12 +75,12 @@
   </div>
 
   <div class="page-section">
-    <h2>App Permission Log</h2>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Track which apps you've audited and what you revoked.</p>
+    <h2>App Permission Review</h2>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px">Use this section to note which apps you reviewed and which permissions you removed. These notes are saved locally in this browser only. They are not uploaded to Sentinel Check and are cleared when you reset Ghost Protocol.</p>
     <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
       <input class="form-input" id="appName" placeholder="App name" style="flex:1">
       <input class="form-input" id="appRevoked" placeholder="Permissions revoked (e.g. Location, Microphone)" style="flex:2">
-      <button class="btn-primary" onclick="addApp()">LOG</button>
+      <button class="btn-primary" onclick="addApp()">ADD REVIEW</button>
     </div>
     <div id="appLog"></div>
   </div>
@@ -165,7 +165,7 @@ function removeApp(id) {
 
 function renderAppLog() {
   const log = S.get('appLog',[]);
-  if (!log.length) { document.getElementById('appLog').innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0">No apps logged yet.</div>'; return; }
+  if (!log.length) { document.getElementById('appLog').innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0">No app reviews added yet.</div>'; return; }
   document.getElementById('appLog').innerHTML = `<table class="data-table"><thead><tr><th>APP</th><th>PERMISSIONS REVOKED</th><th>DATE</th><th></th></tr></thead><tbody>
     ${log.map(a=>`<tr><td class="cell-main">${a.name}</td><td style="font-size:12px;color:var(--text2)">${a.revoked||'-'}</td><td style="font-family:var(--mono);font-size:10px;color:var(--text3)">${a.date}</td><td><button class="btn-icon" onclick="removeApp(${a.id})">✕</button></td></tr>`).join('')}
   </tbody></table>`;
