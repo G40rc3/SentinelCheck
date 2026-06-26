@@ -5,7 +5,7 @@
 <title>Ghost Protocol: Exposure Audit</title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body class="audit-page">
 <div class="scanline"></div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <header class="site-bridge" aria-label="Sentinel Check navigation">
@@ -36,10 +36,19 @@
     </div>
   </header>
 
+  <section class="audit-progress-sticky" id="auditProgressPanel" aria-label="Exposure audit progress" aria-live="polite">
+    <div class="audit-progress-copy">
+      <span class="audit-progress-kicker">Audit progress</span>
+      <strong id="auditProgressText">0/18 answered</strong>
+      <span id="auditRemainingText">18 checks remaining</span>
+    </div>
+    <div class="audit-progress-track" aria-hidden="true"><span id="auditProgressBar"></span></div>
+  </section>
+
   <div class="page-section">
     <h2>Browser & Tracking</h2>
     <div id="q_browser">
-      <div class="form-group"><label class="form-label">WHICH BROWSER DO YOU MAINLY USE?</label>
+      <div class="form-group"><label class="form-label">Which browser do you mainly use?</label>
         <select class="form-select" id="q1">
           <option value="">Select an option...</option>
           <option value="chrome">Google Chrome</option>
@@ -50,7 +59,7 @@
           <option value="tor">Tor Browser</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label">DO YOU USE AN AD / TRACKER BLOCKER?</label>
+      <div class="form-group"><label class="form-label">Do you use an ad or tracker blocker?</label>
         <select class="form-select" id="q2">
           <option value="">Select an option...</option>
           <option value="none">No, nothing</option>
@@ -59,7 +68,7 @@
           <option value="other">Other extension</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label">DO YOU USE PRIVATE / INCOGNITO MODE?</label>
+      <div class="form-group"><label class="form-label">Do you use private or incognito mode?</label>
         <select class="form-select" id="q3">
           <option value="">Select an option...</option>
           <option value="never">Never</option>
@@ -67,7 +76,7 @@
           <option value="always">Always</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label">DO YOU HAVE BROWSER CONTAINERS / PROFILES SET UP?</label>
+      <div class="form-group"><label class="form-label">Do you have browser containers or profiles set up?</label>
         <select class="form-select" id="q4">
           <option value="">Select an option...</option>
           <option value="no">No idea what that is</option>
@@ -80,7 +89,7 @@
 
   <div class="page-section">
     <h2>Network & Identity</h2>
-    <div class="form-group"><label class="form-label">DO YOU USE A VPN?</label>
+    <div class="form-group"><label class="form-label">Do you use a VPN?</label>
       <select class="form-select" id="q5">
         <option value="">Select an option...</option>
         <option value="no">No</option>
@@ -89,7 +98,7 @@
         <option value="tor">I use Tor</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">DO YOU USE YOUR REAL EMAIL ADDRESS FOR MOST SIGNUPS?</label>
+    <div class="form-group"><label class="form-label">Do you use your real email address for most signups?</label>
       <select class="form-select" id="q6">
         <option value="">Select an option...</option>
         <option value="yes_main">Yes, one main address for everything</option>
@@ -97,7 +106,7 @@
         <option value="aliases">I use aliases / throwaway addresses</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">DO YOU USE YOUR REAL NAME / DOB ON MOST PLATFORMS?</label>
+    <div class="form-group"><label class="form-label">Do you use your real name or date of birth on most platforms?</label>
       <select class="form-select" id="q7">
         <option value="">Select an option...</option>
         <option value="yes">Yes, real info everywhere</option>
@@ -105,7 +114,7 @@
         <option value="rarely">Rarely: I use fake details</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">DO YOU USE GOOGLE / FACEBOOK LOGIN BUTTONS?</label>
+    <div class="form-group"><label class="form-label">Do you use Google or Facebook login buttons?</label>
       <select class="form-select" id="q8">
         <option value="">Select an option...</option>
         <option value="yes">Yes, often: it's convenient</option>
@@ -117,7 +126,7 @@
 
   <div class="page-section">
     <h2>Data Brokers</h2>
-    <div class="form-group"><label class="form-label">HAVE YOU EVER SEARCHED FOR YOURSELF ON GOOGLE?</label>
+    <div class="form-group"><label class="form-label">Have you ever searched for yourself on Google?</label>
       <select class="form-select" id="q9">
         <option value="">Select an option...</option>
         <option value="yes_lots">Yes: I found a lot of info</option>
@@ -126,7 +135,7 @@
         <option value="no">Never checked</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">HAVE YOU EVER OPTED OUT OF ANY DATA BROKER?</label>
+    <div class="form-group"><label class="form-label">Have you ever opted out of any data broker?</label>
       <select class="form-select" id="q10">
         <option value="">Select an option...</option>
         <option value="no">No, never heard of it</option>
@@ -135,7 +144,7 @@
         <option value="many">I've been systematic about it</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">ARE YOU ON SOCIAL MEDIA WITH YOUR REAL NAME?</label>
+    <div class="form-group"><label class="form-label">Are you on social media with your real name?</label>
       <select class="form-select" id="q11">
         <option value="">Select an option...</option>
         <option value="public">Yes, public profiles</option>
@@ -148,7 +157,7 @@
 
   <div class="page-section">
     <h2>Accounts & Recovery</h2>
-    <div class="form-group"><label class="form-label">DO YOU REUSE PASSWORDS ACROSS IMPORTANT ACCOUNTS?</label>
+    <div class="form-group"><label class="form-label">Do you reuse passwords across important accounts?</label>
       <select class="form-select" id="q12">
         <option value="">Select an option...</option>
         <option value="yes">Yes, several accounts reuse passwords</option>
@@ -156,7 +165,7 @@
         <option value="no">No, every important account has a unique password</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">DO YOU USE 2FA ON EMAIL, BANKING, CLOUD, AND SOCIAL ACCOUNTS?</label>
+    <div class="form-group"><label class="form-label">Do you use 2FA on email, banking, cloud, and social accounts?</label>
       <select class="form-select" id="q13">
         <option value="">Select an option...</option>
         <option value="none">No, or only on a few accounts</option>
@@ -164,7 +173,7 @@
         <option value="app">Authenticator app or hardware key</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">HAVE YOU CHECKED YOUR EMAILS FOR KNOWN BREACHES?</label>
+    <div class="form-group"><label class="form-label">Have you checked your emails for known breaches?</label>
       <select class="form-select" id="q14">
         <option value="">Select an option...</option>
         <option value="never">Never checked</option>
@@ -176,7 +185,7 @@
 
   <div class="page-section">
     <h2>Devices & Daily Privacy</h2>
-    <div class="form-group"><label class="form-label">HAVE YOU REVIEWED APP PERMISSIONS ON YOUR PHONE?</label>
+    <div class="form-group"><label class="form-label">Have you reviewed app permissions on your phone?</label>
       <select class="form-select" id="q15">
         <option value="">Select an option...</option>
         <option value="never">Never</option>
@@ -184,7 +193,7 @@
         <option value="regular">Yes, I review them regularly</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">HOW DO YOU USUALLY HANDLE COOKIE BANNERS?</label>
+    <div class="form-group"><label class="form-label">How do you usually handle cookie banners?</label>
       <select class="form-select" id="q16">
         <option value="">Select an option...</option>
         <option value="accept">I usually accept all</option>
@@ -192,7 +201,7 @@
         <option value="tool">I use a blocker or auto-reject setup</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">DO YOU LEAVE WIFI OR BLUETOOTH ON IN PUBLIC?</label>
+    <div class="form-group"><label class="form-label">Do you leave WiFi or Bluetooth on in public?</label>
       <select class="form-select" id="q17">
         <option value="">Select an option...</option>
         <option value="always">Yes, almost always</option>
@@ -200,7 +209,7 @@
         <option value="rarely">Rarely, I switch them off when not needed</option>
       </select>
     </div>
-    <div class="form-group"><label class="form-label">ARE YOUR DEVICES ENCRYPTED AND BACKED UP?</label>
+    <div class="form-group"><label class="form-label">Are your devices encrypted and backed up?</label>
       <select class="form-select" id="q18">
         <option value="">Select an option...</option>
         <option value="no">No, or I am not sure</option>
@@ -209,6 +218,18 @@
       </select>
     </div>
   </div>
+
+  <section class="audit-bottom-panel" aria-label="Exposure audit actions">
+    <div>
+      <span class="audit-progress-kicker">End of audit</span>
+      <strong id="auditBottomProgressText">0/18 answered</strong>
+      <p id="auditBottomRemainingText">18 checks remaining. Complete the checks above, then run the audit.</p>
+    </div>
+    <div class="audit-controls audit-controls-bottom">
+      <button class="btn-primary" id="runBtnBottom" onclick="runAudit()">RUN AUDIT &amp; SHOW FIXES →</button>
+      <button class="btn-ghost" id="resetAuditBtnBottom" onclick="resetAudit()">RESET AUDIT</button>
+    </div>
+  </section>
 
   <div class="page-section" id="resultsSection" style="display:none">
     <h2>Audit Results <span id="overallBadge" class="badge danger" style="font-size:11px"></span></h2>
@@ -225,11 +246,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   renderNav('Exposure Audit');
   restoreAuditAnswers();
+  bindAuditProgressEvents();
   updateAuditControls();
+  updateAuditProgressUI();
   if (S.get('auditDone', false)) renderAuditResults();
 });
 
 const auditQuestions = Array.from({ length: 18 }, (_, i) => 'q' + (i + 1));
+let auditValidationAttempted = false;
 
 function saveAuditAnswers() {
   const answers = {};
@@ -335,6 +359,82 @@ function answeredAuditCount() {
   }).length;
 }
 
+function auditRemainingCount() {
+  return Math.max(0, S.exposureMax - answeredAuditCount());
+}
+
+function bindAuditProgressEvents() {
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      saveAuditAnswers();
+      el.classList.remove('audit-missing');
+      const group = el.closest('.form-group');
+      if (group) group.classList.remove('audit-missing');
+      updateAuditProgressUI();
+    });
+  });
+}
+
+function updateAuditProgressUI() {
+  const answered = answeredAuditCount();
+  const remaining = Math.max(0, S.exposureMax - answered);
+  const complete = remaining === 0;
+  const percent = Math.round((answered / S.exposureMax) * 100);
+
+  const progressText = document.getElementById('auditProgressText');
+  const remainingText = document.getElementById('auditRemainingText');
+  const bottomProgressText = document.getElementById('auditBottomProgressText');
+  const bottomRemainingText = document.getElementById('auditBottomRemainingText');
+  const bar = document.getElementById('auditProgressBar');
+  const panel = document.getElementById('auditProgressPanel');
+
+  if (progressText) progressText.textContent = answered + '/' + S.exposureMax + ' answered';
+  if (bottomProgressText) bottomProgressText.textContent = answered + '/' + S.exposureMax + ' answered';
+
+  const message = complete
+    ? 'Ready to run audit'
+    : remaining + (remaining === 1 ? ' check remaining' : ' checks remaining');
+  if (remainingText) remainingText.textContent = message;
+  if (bottomRemainingText) {
+    bottomRemainingText.textContent = complete
+      ? 'Ready to run audit and show recommended fixes.'
+      : message + '. Complete the checks above, then run the audit.';
+  }
+  if (bar) bar.style.width = percent + '%';
+  if (panel) panel.classList.toggle('complete', complete);
+
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const group = el.closest('.form-group');
+    const unanswered = !el.value;
+    el.classList.toggle('audit-unanswered', unanswered);
+    if (!unanswered) {
+      el.classList.remove('audit-missing');
+      if (group) group.classList.remove('audit-missing');
+    } else if (auditValidationAttempted) {
+      el.classList.add('audit-missing');
+      if (group) group.classList.add('audit-missing');
+    }
+  });
+}
+
+function firstUnansweredAuditField() {
+  return auditQuestions
+    .map(id => document.getElementById(id))
+    .find(el => el && !el.value) || null;
+}
+
+function focusFirstMissingAuditField() {
+  const first = firstUnansweredAuditField();
+  if (!first) return;
+  const target = first.closest('.form-group') || first;
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => first.focus({ preventScroll: true }), 350);
+}
+
 function setAuditNotice(message, ok) {
   const notice = document.getElementById('auditNotice');
   if (!notice) return;
@@ -343,12 +443,13 @@ function setAuditNotice(message, ok) {
 }
 
 function updateAuditControls() {
-  const runBtn = document.getElementById('runBtn');
-  if (runBtn) {
-    runBtn.innerHTML = S.get('auditDone', false)
-      ? 'UPDATE AUDIT &amp; SHOW FIXES →'
-      : 'RUN AUDIT &amp; SHOW FIXES →';
-  }
+  const label = S.get('auditDone', false)
+    ? 'UPDATE AUDIT &amp; SHOW FIXES →'
+    : 'RUN AUDIT &amp; SHOW FIXES →';
+  ['runBtn', 'runBtnBottom'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.innerHTML = label;
+  });
 }
 
 function resetAudit() {
@@ -366,8 +467,10 @@ function resetAudit() {
   const badge = document.getElementById('overallBadge');
   if (badge) { badge.textContent = ''; badge.className = 'badge muted'; }
 
+  auditValidationAttempted = false;
   setAuditNotice('Ghost Protocol reset. You can now start fresh with the next person or business.', true);
   updateAuditControls();
+  updateAuditProgressUI();
   renderNav('Exposure Audit');
   S.updateScoreUI();
 }
@@ -376,9 +479,15 @@ function runAudit() {
   saveAuditAnswers();
   const answered = answeredAuditCount();
   if (answered < S.exposureMax) {
-    setAuditNotice('Please answer all 18 checks before running the audit. ' + answered + '/18 answered.');
+    auditValidationAttempted = true;
+    const remaining = S.exposureMax - answered;
+    updateAuditProgressUI();
+    setAuditNotice('Please answer all 18 checks before running the audit. ' + answered + '/18 answered, ' + remaining + (remaining === 1 ? ' check remaining.' : ' checks remaining.'));
+    focusFirstMissingAuditField();
     return;
   }
+  auditValidationAttempted = false;
+  updateAuditProgressUI();
   const findings = buildFindings();
   const existingFixed = S.fixedRisks();
   const fixed = {};
@@ -393,6 +502,7 @@ function runAudit() {
   renderNav('Exposure Audit');
   S.updateScoreUI();
   updateAuditControls();
+  updateAuditProgressUI();
   setAuditNotice('Audit complete. Review the exposure score and start marking fixes as completed.', true);
   document.getElementById('resultsSection').scrollIntoView({behavior:'smooth'});
 }
