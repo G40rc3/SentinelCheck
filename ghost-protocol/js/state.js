@@ -83,16 +83,6 @@ const S = {
     const sta = document.getElementById('scoreStatus');
     const fb = document.getElementById('scoreFeedback');
     const meta = document.getElementById('scoreMeta');
-    const mobileScoreText = document.getElementById('mobileScoreText');
-    const mobileScoreStatus = document.getElementById('mobileScoreStatus');
-    const mobileDrawerScoreText = document.getElementById('mobileDrawerScoreText');
-    const mobileDrawerScoreStatus = document.getElementById('mobileDrawerScoreStatus');
-
-    if (mobileScoreText) mobileScoreText.textContent = stats.current + '/' + stats.total;
-    if (mobileScoreStatus) mobileScoreStatus.textContent = stats.level;
-    if (mobileDrawerScoreText) mobileDrawerScoreText.textContent = stats.current + '/' + stats.total;
-    if (mobileDrawerScoreStatus) mobileDrawerScoreStatus.textContent = stats.level;
-
     if (!el) return;
 
     const circ = 213.6;

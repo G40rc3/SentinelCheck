@@ -239,10 +239,8 @@
 </main>
 
 <script src="js/state.js"></script>
-<script src="js/nav.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  renderNav('Overview');
   S.updateScoreUI();
   const brokers = Object.values(S.get('brokerStatus',{})).filter(v=>v==='done').length;
   const tools   = S.get('toolsDone',[]).length;
