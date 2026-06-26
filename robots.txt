@@ -1,4 +1,4 @@
-# robots.txt — Sentinel Check
+# robots.txt: Sentinel Check
 #
 # SECURITY NOTE:
 # robots.txt is PUBLIC and readable by anyone including attackers.

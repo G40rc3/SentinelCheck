@@ -1,5 +1,5 @@
 ##############################################################
-#  .htaccess — Apache Server Hardening
+#  .htaccess: Apache Server Hardening
 #  For use on shared hosting / Apache-based servers.
 #  If using Nginx, see nginx-security.conf instead.
 #

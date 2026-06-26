@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol v3.0: Privacy Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+
+<aside class="sidebar" aria-label="Ghost Protocol sidebar">
+  <div class="logo">
+    <div class="logo-icon"><span class="pulse-ring"></span><span class="logo-dot"></span></div>
+    <div><div class="logo-title">GHOST</div><div class="logo-sub">PROTOCOL v3.0</div></div>
+  </div>
+  <nav class="toolkit-nav" aria-label="Ghost Protocol toolkit navigation">
+  <ul class="nav-links" style="overflow-y:auto;flex:1;padding-bottom:8px">
+    <li><a href="index.html" class="nav-link active" data-label="00" aria-current="page"><span>Overview</span></a></li>
+    <li><a href="pages/audit.html" class="nav-link" data-label="01"><span>Exposure Audit</span></a></li>
+    <li><a href="pages/arsenal.html" class="nav-link" data-label="02"><span>Tool Arsenal</span></a></li>
+    <li><a href="pages/brokers.html" class="nav-link" data-label="03"><span>Broker Opt-Out</span></a></li>
+    <li><a href="pages/aliases.html" class="nav-link" data-label="04"><span>Email Aliases</span></a></li>
+    <li><a href="pages/personas.html" class="nav-link" data-label="05"><span>Persona Generator</span></a></li>
+    <li><a href="pages/fingerprint.html" class="nav-link" data-label="06"><span>Fingerprint Defence</span></a></li>
+    <li><a href="pages/breaches.html" class="nav-link" data-label="07"><span>Breach Monitor</span></a></li>
+    <li><a href="pages/social.html" class="nav-link" data-label="08"><span>Social Media Audit</span></a></li>
+    <li><a href="pages/network.html" class="nav-link" data-label="09"><span>Network Hardening</span></a></li>
+    <li><a href="pages/passwords.html" class="nav-link" data-label="10"><span>Password & 2FA</span></a></li>
+    <li><a href="pages/cookies.html" class="nav-link" data-label="11"><span>Cookie & Consent</span></a></li>
+    <li><a href="pages/permissions.html" class="nav-link" data-label="12"><span>App Permissions</span></a></li>
+    <li><a href="pages/wifi.html" class="nav-link" data-label="13"><span>WiFi & Bluetooth</span></a></li>
+    <li><a href="pages/search.html" class="nav-link" data-label="14"><span>Search & Browsing</span></a></li>
+    <li><a href="pages/physical.html" class="nav-link" data-label="15"><span>Physical OPSEC</span></a></li>
+    <li><a href="pages/household.html" class="nav-link" data-label="16"><span>Household & Children</span></a></li>
+    <li><a href="pages/scheduler.html" class="nav-link" data-label="17"><span>Scheduler</span></a></li>
+    <li><a href="pages/news.html" class="nav-link" data-label="18"><span>Intel Feed</span></a></li>
+  </ul>
+  </nav>
+  <div class="sidebar-home" role="navigation" aria-label="Sentinel Check quick links">
+    <a href="/learning-hub.html">LEARNING HUB</a>
+    <a href="/#contact">FREE CYBER MOT</a>
+  </div>
+
+  <div class="sidebar-score">
+    <div class="score-label">EXPOSURE SCORE</div>
+    <svg viewBox="0 0 80 80" class="score-ring" role="img" aria-label="Current exposure score">
+      <circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="5"/>
+      <circle cx="40" cy="40" r="34" fill="none" stroke="var(--red)" stroke-width="5"
+        stroke-dasharray="213.6" stroke-dashoffset="213.6" id="scoreCircle"
+        stroke-linecap="round" transform="rotate(-90 40 40)" style="transition:stroke-dashoffset 1.2s ease,stroke 0.5s"/>
+      <text x="40" y="45" text-anchor="middle" font-family="'Share Tech Mono'" font-size="13" fill="var(--text)" id="scoreText">0/18</text>
+    </svg>
+    <div class="score-status" id="scoreStatus">Run audit first</div>
+    <div class="score-feedback" id="scoreFeedback">Answer the Exposure Audit to calculate your current exposure.</div>
+    <div class="score-meta" id="scoreMeta">Not assessed yet</div>
+  </div>
+</aside>
+
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">PRIVACY TOOLKIT: 18 MODULES</div>
+      <h1>Ghost Protocol</h1>
+      <p class="page-sub">Reduce exposure. Secure accounts. Build safer digital habits.</p>
+    </div>
+    <a href="pages/audit.html" class="btn-primary">RUN AUDIT →</a>
+  </header>
+
+  <div class="alert-banner" id="auditAlert">
+    <span>⚠</span>
+    <span>Start with the Exposure Audit: answer 18 simple checks to calculate your exposure score and get recommended fixes.</span>
+    <a href="pages/audit.html">START →</a>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid-4" style="margin-bottom:20px">
+    <div class="stat-card"><div class="stat-icon">⊗</div><div class="stat-val" id="s_brokers">0<small>/187</small></div><div class="stat-label">Brokers Opted Out</div></div>
+    <div class="stat-card"><div class="stat-icon">⚙</div><div class="stat-val" id="s_tools">0<small>/12</small></div><div class="stat-label">Tools Installed</div></div>
+    <div class="stat-card"><div class="stat-icon">✓</div><div class="stat-val" id="s_checks">0</div><div class="stat-label">Checklist Items Done</div></div>
+    <div class="stat-card"><div class="stat-icon">@</div><div class="stat-val" id="s_aliases">0</div><div class="stat-label">Email Aliases Active</div></div>
+  </div>
+
+  <!-- Priority modules row -->
+  <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.15em;margin-bottom:10px">CRITICAL: START HERE</div>
+  <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+    <a href="pages/audit.html" class="module-card">
+      <div class="mod-num">01</div><div class="mod-glyph">◎</div>
+      <h2>Exposure Audit</h2>
+      <p>Answer 11 questions about your setup. Get a scored risk report with exactly what to fix first.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_audit">NOT RUN</span><span>→</span></div>
+    </a>
+    <a href="pages/arsenal.html" class="module-card">
+      <div class="mod-num">02</div><div class="mod-glyph">⚙</div>
+      <h2>Tool Arsenal</h2>
+      <p>12 tools rated by impact. uBlock Origin, Firefox containers, AdNauseam, Mullvad, Bitwarden. Install these first.</p>
+      <div class="mod-foot"><span class="badge info" id="b_tools">0/12</span><span>→</span></div>
+    </a>
+    <a href="pages/brokers.html" class="module-card">
+      <div class="mod-num">03</div><div class="mod-glyph">⊗</div>
+      <h2>Broker Opt-Out</h2>
+      <p>187 data brokers. Mass email engine. One send, all brokers. Pre-written GDPR requests. Close the firehose.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_brokers">0/187</span><span>→</span></div>
+    </a>
+  </div>
+
+  <!-- All modules -->
+  <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.15em;margin-bottom:10px">ALL MODULES</div>
+  <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+
+    <a href="pages/aliases.html" class="module-card">
+      <div class="mod-num">04</div><div class="mod-glyph">@</div>
+      <h2>Email Aliases</h2>
+      <p>Log aliases per service. Detect when a service sells your address. Cut off spam at source.</p>
+      <div class="mod-foot"><span class="badge ok">ACTIVE</span><span>→</span></div>
+    </a>
+
+    <a href="pages/personas.html" class="module-card">
+      <div class="mod-num">05</div><div class="mod-glyph">◑</div>
+      <h2>Persona Generator</h2>
+      <p>Fake UK/US/EU identities for throwaway signups. Keep your real details off platforms.</p>
+      <div class="mod-foot"><span class="badge ok">READY</span><span>→</span></div>
+    </a>
+
+    <a href="pages/fingerprint.html" class="module-card">
+      <div class="mod-num">06</div><div class="mod-glyph">⬡</div>
+      <h2>Fingerprint Defence</h2>
+      <p>VPNs don't stop fingerprinting. 12-step checklist to make your browser blend in.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_fp">0/12</span><span>→</span></div>
+    </a>
+
+    <a href="pages/breaches.html" class="module-card">
+      <div class="mod-num">07</div><div class="mod-glyph">⚠</div>
+      <h2>Breach Monitor</h2>
+      <p>Track emails against HaveIBeenPwned. Log old accounts to delete. Breaches feed broker databases.</p>
+      <div class="mod-foot"><span class="badge info">HIBP LINKED</span><span>→</span></div>
+    </a>
+
+    <a href="pages/social.html" class="module-card">
+      <div class="mod-num">08</div><div class="mod-glyph">◉</div>
+      <h2>Social Media Audit</h2>
+      <p>42 settings across Google, Facebook, Instagram, LinkedIn, X, and TikTok. Buried deliberately.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_social">0/42</span><span>→</span></div>
+    </a>
+
+    <a href="pages/network.html" class="module-card">
+      <div class="mod-num">09</div><div class="mod-glyph">⟁</div>
+      <h2>Network Hardening</h2>
+      <p>Privacy DNS, DNS leak testing, VPN setup, DoH, and WebRTC checks. Helps reduce unnecessary network exposure.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_net">0/9</span><span>→</span></div>
+    </a>
+
+    <a href="pages/passwords.html" class="module-card">
+      <div class="mod-num">10</div><div class="mod-glyph">🔑</div>
+      <h2>Password & 2FA</h2>
+      <p>A practical 2FA audit covering hardware keys, authenticator apps, safer login methods, and when to move away from SMS-based codes.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_pw">0/20</span><span>→</span></div>
+    </a>
+
+    <a href="pages/cookies.html" class="module-card">
+      <div class="mod-num">11</div><div class="mod-glyph">🍪</div>
+      <h2>Cookie & Consent</h2>
+      <p>Auto-reject cookie banners. Legitimate interest opt-outs. Your GDPR rights on consent.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_ck">0/12</span><span>→</span></div>
+    </a>
+
+    <a href="pages/permissions.html" class="module-card">
+      <div class="mod-num">12</div><div class="mod-glyph">📱</div>
+      <h2>App Permissions</h2>
+      <p>iOS and Android audit guides. Revoke location, microphone, camera, contacts from apps that don't need them.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_ap">0/16</span><span>→</span></div>
+    </a>
+
+    <a href="pages/wifi.html" class="module-card">
+      <div class="mod-num">13</div><div class="mod-glyph">📶</div>
+      <h2>WiFi & Bluetooth</h2>
+      <p>Probe request broadcasting. In-store Bluetooth tracking. MAC randomisation. Public WiFi risks.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_wb">0/14</span><span>→</span></div>
+    </a>
+
+    <a href="pages/search.html" class="module-card">
+      <div class="mod-num">14</div><div class="mod-glyph">🔍</div>
+      <h2>Search & Browsing</h2>
+      <p>Engine comparison (Brave Search vs DuckDuckGo vs Startpage). The truth about incognito. 15-step checklist.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_sb">0/15</span><span>→</span></div>
+    </a>
+
+    <a href="pages/physical.html" class="module-card">
+      <div class="mod-num">15</div><div class="mod-glyph">🔒</div>
+      <h2>Physical OPSEC</h2>
+      <p>Disk encryption, device disposal, screen filters, camera covers, USB attacks, BIOS passwords.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_po">0/16</span><span>→</span></div>
+    </a>
+
+    <a href="pages/household.html" class="module-card">
+      <div class="mod-num">16</div><div class="mod-glyph">🏠</div>
+      <h2>Household & Children</h2>
+      <p>Smart TV ACR settings, children's app audits, smart speaker hygiene, school device privacy.</p>
+      <div class="mod-foot"><span class="badge warn" id="b_hh">0/18</span><span>→</span></div>
+    </a>
+
+    <a href="pages/scheduler.html" class="module-card">
+      <div class="mod-num">17</div><div class="mod-glyph">⟳</div>
+      <h2>Scheduler</h2>
+      <p>Recurring reminders for every task. Brokers re-add you every 6 to 12 months. Exports .ics calendar.</p>
+      <div class="mod-foot"><span class="badge info">RECURRING</span><span>→</span></div>
+    </a>
+
+    <a href="pages/news.html" class="module-card">
+      <div class="mod-num">18</div><div class="mod-glyph">◈</div>
+      <h2>Intel Feed</h2>
+      <p>EFF, Privacy International, The Markup, Krebs, ICO. Stay current as the surveillance industry evolves.</p>
+      <div class="mod-foot"><span class="badge ok">LIVE</span><span>→</span></div>
+    </a>
+
+    <div class="module-card tips">
+      <div class="mod-num">THE PLAN</div>
+      <h2>Recommended Order</h2>
+      <ol>
+        <li><a href="pages/audit.html">Run Exposure Audit</a></li>
+        <li><a href="pages/arsenal.html">Install core tools</a></li>
+        <li><a href="pages/passwords.html">Fix passwords & 2FA</a></li>
+        <li><a href="pages/brokers.html">Send mass opt-out email</a></li>
+        <li><a href="pages/social.html">Lock social media down</a></li>
+        <li><a href="pages/network.html">Harden DNS & network</a></li>
+        <li><a href="pages/cookies.html">Kill cookie consent</a></li>
+        <li><a href="pages/fingerprint.html">Reduce fingerprint</a></li>
+        <li><a href="pages/permissions.html">Audit app permissions</a></li>
+        <li><a href="pages/physical.html">Physical OPSEC</a></li>
+        <li><a href="pages/household.html">Household devices</a></li>
+        <li><a href="pages/scheduler.html">Set recurring reminders</a></li>
+      </ol>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  S.updateScoreUI();
+  const brokers = Object.values(S.get('brokerStatus',{})).filter(v=>v==='done').length;
+  const tools   = S.get('toolsDone',[]).length;
+  const aliases = S.get('aliases',[]).length;
+  const checks  = ['fpDone','netDone','smDone','pwDone','ckDone','apDone','wbDone','sbDone','poDone','hhDone']
+    .reduce((t,k) => t + S.get(k,[]).length, 0);
+
+  const s = (id,v) => { const e=document.getElementById(id); if(e) e.innerHTML=v; };
+  s('s_brokers', brokers+'<small>/187</small>');
+  s('s_tools',   tools+'<small>/12</small>');
+  s('s_checks',  checks);
+  s('s_aliases', aliases);
+
+  // Update module badges
+  const badges = {
+    b_audit:  [S.get('auditDone',false)?'DONE':'NOT RUN', S.get('auditDone',false)?'ok':'warn'],
+    b_tools:  [tools+'/12', tools===12?'ok':'warn'],
+    b_brokers:[brokers+'/187', brokers>10?'ok':'warn'],
+    b_fp:     [S.get('fpDone',[]).length+'/12', S.get('fpDone',[]).length===12?'ok':'warn'],
+    b_social: [S.get('smDone',[]).length+'/42', S.get('smDone',[]).length>30?'ok':'warn'],
+    b_net:    [S.get('netDone',[]).length+'/9', S.get('netDone',[]).length===9?'ok':'warn'],
+    b_pw:     [S.get('pwDone',[]).length+'/20', S.get('pwDone',[]).length===20?'ok':'warn'],
+    b_ck:     [S.get('ckDone',[]).length+'/12', S.get('ckDone',[]).length===12?'ok':'warn'],
+    b_ap:     [S.get('apDone',[]).length+'/16', S.get('apDone',[]).length===16?'ok':'warn'],
+    b_wb:     [S.get('wbDone',[]).length+'/14', S.get('wbDone',[]).length===14?'ok':'warn'],
+    b_sb:     [S.get('sbDone',[]).length+'/15', S.get('sbDone',[]).length===15?'ok':'warn'],
+    b_po:     [S.get('poDone',[]).length+'/16', S.get('poDone',[]).length===16?'ok':'warn'],
+    b_hh:     [S.get('hhDone',[]).length+'/18', S.get('hhDone',[]).length===18?'ok':'warn'],
+  };
+  Object.entries(badges).forEach(([id,[text,cls]]) => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = text; el.className = 'badge '+cls; }
+  });
+
+  if (S.get('auditDone',false)) {
+    const al = document.getElementById('auditAlert');
+    if (al) al.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

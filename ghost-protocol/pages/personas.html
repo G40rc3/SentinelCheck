@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Persona Generator</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 05</div>
+      <h1>Persona Generator</h1>
+      <p class="page-sub">Fake identities for throwaway signups. Keep your real data off platforms.</p>
+    </div>
+    <button class="btn-primary" onclick="generate()">GENERATE PERSONA →</button>
+  </header>
+
+  <div class="alert-banner" style="background:var(--accent-dim);border-color:rgba(0,227,208,.2)">
+    <span>ℹ</span>
+    <span>Use personas for signups where you don't legally need to give real info: newsletters, forums, trial accounts, loyalty schemes. Never for legal or financial accounts.</span>
+  </div>
+
+  <div class="page-section">
+    <h2>Generator Options</h2>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div class="form-group" style="margin:0">
+        <label class="form-label">GENDER PRESENTATION</label>
+        <select class="form-select" id="genGender">
+          <option value="any">Any</option>
+          <option value="male">Male-presenting</option>
+          <option value="female">Female-presenting</option>
+          <option value="neutral">Gender neutral</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin:0">
+        <label class="form-label">NATIONALITY / NAME STYLE</label>
+        <select class="form-select" id="genNat">
+          <option value="british">British</option>
+          <option value="american">American</option>
+          <option value="european">European</option>
+          <option value="random">Random mix</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin:0">
+        <label class="form-label">AGE RANGE</label>
+        <select class="form-select" id="genAge">
+          <option value="20s">20s</option>
+          <option value="30s">30s</option>
+          <option value="40s">40s</option>
+          <option value="random">Random adult</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="generate()" style="margin-top:14px">GENERATE →</button>
+  </div>
+
+  <div class="page-section" id="personaOut" style="display:none">
+    <h2>Generated Persona <button class="btn-ghost" style="font-size:9px;padding:4px 10px" onclick="copyPersona()">COPY ALL</button></h2>
+    <div id="personaCard"  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="savePersona()">SAVE PERSONA</button>
+      <button class="btn-ghost" onclick="generate()">REGENERATE →</button>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Saved Personas <span id="personaCount" style="font-family:var(--mono);font-size:11px;color:var(--text3)">0</span></h2>
+    <div id="savedList">
+      <div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">No personas saved yet.</div>
+    </div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Persona Generator'); renderSaved(); });
+
+const DATA = {
+  british: {
+    male: ['James','Oliver','Harry','Jack','George','Charlie','Thomas','Noah','William','Liam','Daniel','Ben','Samuel','Joseph','Edward','Henry','Luke','Ethan','Ryan','Adam'],
+    female: ['Olivia','Amelia','Isla','Ava','Emily','Poppy','Isabella','Ella','Mia','Freya','Lily','Sophie','Grace','Evie','Alice','Florence','Daisy','Harriet','Rosie','Imogen'],
+    neutral: ['Charlie','Alex','Frankie','Morgan','Sam','Jamie','Robin','Skyler','Avery','Sasha'],
+    last: ['Smith','Jones','Williams','Taylor','Brown','Davies','Evans','Wilson','Thomas','Roberts','Johnson','Robinson','Walker','Wright','Thompson','White','Hughes','Edwards','Green','Hall']
+  },
+  american: {
+    male: ['Liam','Noah','Oliver','Elijah','James','William','Benjamin','Lucas','Henry','Alexander','Mason','Ethan','Daniel','Jacob','Logan','Jackson','Sebastian','Michael','Owen','Samuel'],
+    female: ['Emma','Olivia','Ava','Sophia','Isabella','Charlotte','Amelia','Mia','Harper','Evelyn','Abigail','Emily','Ella','Elizabeth','Camila','Luna','Sofia','Avery','Mila','Aria'],
+    neutral: ['Riley','Jordan','Morgan','Taylor','Casey','Quinn','Reese','Blake','Peyton','River'],
+    last: ['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Martinez','Wilson','Anderson','Taylor','Thomas','Hernandez','Moore','Martin','Jackson','Thompson','White','Lopez']
+  },
+  european: {
+    male: ['Luca','Matteo','Leon','Julian','Elias','Jonas','Finn','Erik','Lars','Marco','Sven','Axel','Kai','Tobias','Felix','Lukas','Hans','Nico','Diego','Emil'],
+    female: ['Sofia','Emma','Mia','Anna','Laura','Julia','Marie','Sara','Elena','Clara','Lea','Nora','Ingrid','Astrid','Freya','Maja','Elin','Sigrid','Chloe','Lena'],
+    neutral: ['Alex','Robin','Sasha','Kim','Casey','Morgan','Remy','River','Avery','Sam'],
+    last: ['Müller','Schmidt','Garcia','Martin','Bernard','Rossi','Ferrari','Bianchi','Andersen','Jensen','Larsen','Hansen','Nilsson','Eriksson','Svensson','Johansson','Fischer','Weber','Meyer','Wagner']
+  },
+  random: {
+    male: ['James','Luca','Noah','Erik','Marco','Oliver','Finn','Ethan','Leon','Diego'],
+    female: ['Amelia','Sofia','Mia','Laura','Ava','Emma','Freya','Clara','Aria','Isla'],
+    neutral: ['Alex','Morgan','Robin','Sam','River','Sasha','Quinn','Avery','Casey','Jamie'],
+    last: ['Smith','Garcia','Müller','Rossi','Andersen','Williams','Jensen','Martin','Svensson','Brown']
+  }
+};
+
+const STREETS = ['Maple','Oak','Elm','Cedar','Pine','Birch','Ash','Willow','Chestnut','Acacia','Victoria','Albert','Church','High','Mill','Station','Park','Hill','Lake','Bridge'];
+const CITIES_UK = ['Manchester','Bristol','Leeds','Sheffield','Liverpool','Edinburgh','Cardiff','Birmingham','Nottingham','Leicester','Brighton','Oxford','Cambridge','Norwich','Exeter'];
+const CITIES_US = ['Portland','Austin','Denver','Nashville','Seattle','Minneapolis','Phoenix','Raleigh','Charlotte','Columbus','Indianapolis','Milwaukee','Richmond','Tucson','Tampa'];
+const CITIES_EU = ['Amsterdam','Hamburg','Lyon','Seville','Turin','Gothenburg','Antwerp','Ghent','Malmo','Cologne','Rotterdam','Marseille','Valencia','Leipzig','Utrecht'];
+
+const DOMAINS = ['gmail.com','yahoo.com','proton.me','outlook.com','hotmail.co.uk','icloud.com'];
+
+function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randInt(a,b) { return Math.floor(Math.random() * (b-a+1)) + a; }
+function pad(n) { return String(n).padStart(2,'0'); }
+
+let currentPersona = null;
+
+function generate() {
+  const gender = document.getElementById('genGender').value;
+  const nat = document.getElementById('genNat').value;
+  const ageRange = document.getElementById('genAge').value;
+  const pool = DATA[nat] || DATA.british;
+  const g = gender === 'any' ? ['male','female','neutral'][randInt(0,2)] : gender;
+  const namePool = pool[g] || pool.male;
+  const firstName = rand(namePool);
+  const lastName = rand(pool.last);
+
+  const currentYear = 2025;
+  let age;
+  if (ageRange === '20s') age = randInt(20,29);
+  else if (ageRange === '30s') age = randInt(30,39);
+  else if (ageRange === '40s') age = randInt(40,49);
+  else age = randInt(22,55);
+  const birthYear = currentYear - age;
+  const birthMonth = randInt(1,12);
+  const birthDay = randInt(1,28);
+  const dob = `${pad(birthDay)}/${pad(birthMonth)}/${birthYear}`;
+
+  const cities = nat === 'american' ? CITIES_US : nat === 'european' ? CITIES_EU : CITIES_UK;
+  const city = rand(cities);
+  const houseNum = randInt(1,150);
+  const street = rand(STREETS) + (rand([' Street',' Road',' Lane',' Avenue',' Close',' Drive']));
+  const address = `${houseNum} ${street}, ${city}`;
+
+  const usernameBase = (firstName.toLowerCase() + lastName.toLowerCase() + randInt(10,99)).replace(/[^a-z0-9]/g,'');
+  const email = usernameBase + '@' + rand(DOMAINS);
+
+  const phones_uk = `07${randInt(100,999)} ${randInt(100,999)} ${randInt(100,999)}`;
+  const phones_us = `+1 (${randInt(200,999)}) ${randInt(100,999)}-${randInt(1000,9999)}`;
+  const phone = nat === 'american' ? phones_us : phones_uk;
+
+  const occupations = ['Teacher','Freelance designer','Logistics coordinator','Admin assistant','Retail manager','Lab technician','Marketing coordinator','Delivery driver','Warehouse operative','Customer service rep','Accountant','HR officer','Nurse','Electrician','Plumber','IT support','Bookkeeper','Care worker','Chef','Librarian'];
+  const occupation = rand(occupations);
+
+  currentPersona = { firstName, lastName, dob, address, city, email, phone, occupation, gender: g, nationality: nat };
+  renderPersonaCard(currentPersona);
+  document.getElementById('personaOut').style.display = 'block';
+}
+
+function renderPersonaCard(p) {
+  const fields = [
+    {label:'FIRST NAME', val:p.firstName},
+    {label:'LAST NAME', val:p.lastName},
+    {label:'DATE OF BIRTH', val:p.dob},
+    {label:'ADDRESS', val:p.address},
+    {label:'EMAIL (SUGGESTED ALIAS)', val:p.email},
+    {label:'PHONE', val:p.phone},
+    {label:'OCCUPATION', val:p.occupation},
+    {label:'GENDER', val:p.gender},
+    {label:'STYLE', val:p.nationality},
+  ];
+  document.getElementById('personaCard').innerHTML = fields.map(f => `
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:2px">
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;margin-bottom:4px">${f.label}</div>
+      <div style="font-size:13px;color:var(--text)">${f.val}</div>
+    </div>`).join('');
+}
+
+function savePersona() {
+  if (!currentPersona) return;
+  const personas = S.get('personas', []);
+  personas.unshift({ ...currentPersona, id: Date.now(), saved: new Date().toLocaleDateString('en-GB'), used: '' });
+  S.set('personas', personas);
+  renderSaved();
+  S.updateScoreUI();
+  renderNav('Persona Generator');
+  const btn = event.target;
+  btn.textContent = 'SAVED ✓';
+  setTimeout(() => btn.textContent = 'SAVE PERSONA', 2000);
+}
+
+function deletePersona(id) {
+  if (!confirm('Delete this persona?')) return;
+  S.set('personas', S.get('personas', []).filter(p => p.id !== id));
+  renderSaved();
+  S.updateScoreUI();
+  renderNav('Persona Generator');
+}
+
+function copyPersona() {
+  if (!currentPersona) return;
+  const p = currentPersona;
+  const text = `Name: ${p.firstName} ${p.lastName}\nDOB: ${p.dob}\nAddress: ${p.address}\nEmail: ${p.email}\nPhone: ${p.phone}\nOccupation: ${p.occupation}`;
+  navigator.clipboard.writeText(text);
+  const btn = event.target;
+  btn.textContent = 'COPIED ✓';
+  setTimeout(() => btn.textContent = 'COPY ALL', 2000);
+}
+
+function setUsed(id, val) {
+  const personas = S.get('personas', []);
+  const p = personas.find(p => p.id === id);
+  if (p) p.used = val;
+  S.set('personas', personas);
+}
+
+function renderSaved() {
+  const personas = S.get('personas', []);
+  document.getElementById('personaCount').textContent = personas.length;
+  if (personas.length === 0) {
+    document.getElementById('savedList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">No personas saved yet.</div>';
+    return;
+  }
+  document.getElementById('savedList').innerHTML = personas.map(p => `
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+        <div>
+          <div style="font-size:15px;font-weight:500">${p.firstName} ${p.lastName}</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3)">Saved ${p.saved}</div>
+        </div>
+        <button class="btn-icon" onclick="deletePersona(${p.id})">✕ DELETE</button>
+      </div>
+      <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px">
+        <div><span style="color:var(--text3)">DOB: </span>${p.dob}</div>
+        <div><span style="color:var(--text3)">Phone: </span><span style="font-family:var(--mono);font-size:11px">${p.phone}</span></div>
+        <div><span style="color:var(--text3)">Job: </span>${p.occupation}</div>
+        <div style="grid-column:1/-1"><span style="color:var(--text3)">Address: </span>${p.address}</div>
+        <div style="grid-column:1/-1"><span style="color:var(--text3)">Email: </span><span style="font-family:var(--mono);font-size:11px;color:var(--accent)">${p.email}</span></div>
+        <div style="grid-column:1/-1">
+          <label style="font-family:var(--mono);font-size:9px;color:var(--text3);display:block;margin-bottom:4px">USED FOR</label>
+          <input class="form-input" value="${p.used||''}" placeholder="e.g. Reddit, newsletter signup..." style="font-size:12px;padding:6px 10px" oninput="setUsed(${p.id},this.value)">
+        </div>
+      </div>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>

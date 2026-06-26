@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Fingerprint Defence</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 06</div>
+      <h1>Fingerprint Defence</h1>
+      <p class="page-sub">Even with a VPN and tracker blocker, sites can identify you by your browser's unique signature.</p>
+    </div>
+    <a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener" class="btn-primary">TEST MY FINGERPRINT ↗</a>
+  </header>
+
+  <div class="alert-banner" style="background:var(--red-dim);border-color:rgba(255,61,61,.25)">
+    <span>⚠</span>
+    <span>Browser fingerprinting doesn't use cookies: it can't be blocked by a cookie blocker. It identifies you by combining dozens of invisible signals into a unique signature.</span>
+  </div>
+
+  <div class="page-section">
+    <h2>What Is Browser Fingerprinting?</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
+      Every time you visit a website, your browser silently broadcasts dozens of data points: screen size, installed fonts, GPU model, timezone, language settings, browser plugins, and more. Combined, these create a "fingerprint" that is statistically unique to you. No cookie required. Clearing your browser history doesn't help. A VPN doesn't help. You carry this fingerprint everywhere.
+    </p>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--red);margin-bottom:6px">WHAT THEY COLLECT</div>
+        <ul style="font-size:12px;color:var(--text2);padding-left:16px;line-height:2">
+          <li>Screen resolution & colour depth</li>
+          <li>Installed fonts list</li>
+          <li>Browser plugins & extensions</li>
+          <li>GPU & graphics renderer</li>
+          <li>Timezone & language</li>
+          <li>Canvas & WebGL fingerprint</li>
+          <li>Audio processing signature</li>
+          <li>Battery level (some browsers)</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--amber);margin-bottom:6px">HOW UNIQUE ARE YOU?</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8">The EFF's Panopticlick study found that <strong style="color:var(--text)">83% of browsers</strong> have a fingerprint unique enough to identify the user across sites: even without any cookies or login.</p>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8;margin-top:8px">Adding a VPN changes your IP but does nothing to your fingerprint. You are still recognisable.</p>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:6px">THE GOAL</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8">You can't make your fingerprint invisible: but you can make it <strong style="color:var(--text)">common</strong>. If your fingerprint matches thousands of other people, you blend into the crowd. That's the defence.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Your Defences: Tick Off As You Apply</h2>
+    <div id="fpChecklist"></div>
+  </div>
+
+  <div class="page-section">
+    <h2>Test Tools</h2>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Cover Your Tracks (EFF)</div><span class="badge ok">BEST</span></div>
+        <p class="tool-desc">The Electronic Frontier Foundation's fingerprint tester. Shows exactly how unique your browser is and what data it exposes. The gold standard test.</p>
+        <div class="tool-actions"><a href="https://coveryourtracks.eff.org" target="_blank" rel="noopener" class="btn-ghost">TEST NOW ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">BrowserLeaks</div><span class="badge info">DETAILED</span></div>
+        <p class="tool-desc">Shows every individual data point your browser leaks: WebRTC, Canvas, WebGL, fonts, geolocation, and more. More technical detail than Cover Your Tracks.</p>
+        <div class="tool-actions"><a href="https://browserleaks.com" target="_blank" rel="noopener" class="btn-ghost">TEST NOW ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">AmIUnique</div><span class="badge info">RESEARCH</span></div>
+        <p class="tool-desc">Academic fingerprinting research tool from INRIA. Tells you what percentage of users share your exact fingerprint. Smaller % = more identifiable.</p>
+        <div class="tool-actions"><a href="https://amiunique.org" target="_blank" rel="noopener" class="btn-ghost">TEST NOW ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">DNS Leak Test</div><span class="badge warn">NETWORK</span></div>
+        <p class="tool-desc">Checks whether your DNS queries are leaking through your VPN or going to your ISP. A DNS leak reveals every site you visit even with a VPN active.</p>
+        <div class="tool-actions"><a href="https://www.dnsleaktest.com" target="_blank" rel="noopener" class="btn-ghost">TEST NOW ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Progress</h2>
+    <div style="display:flex;gap:20px;font-family:var(--mono);font-size:12px">
+      <span style="color:var(--green)"><span id="fp_done">0</span> applied</span>
+      <span style="color:var(--text3)"><span id="fp_todo">0</span> remaining</span>
+    </div>
+    <div class="prog-bar-wrap" style="margin-top:10px">
+      <div class="prog-bar" id="fp_bar" style="background:var(--green);width:0%"></div>
+    </div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Fingerprint Defence'); renderChecklist(); });
+
+const FP_ITEMS = [
+  {id:'fp01',impact:'high',title:'Switch to Firefox or Brave',desc:'Chrome and Edge have the most identifiable fingerprints. Firefox with the right settings, or Brave with shields enabled, significantly reduces fingerprint uniqueness.',fix:'Download Firefox (mozilla.org) or Brave (brave.com). Set as default browser.',link:'https://www.mozilla.org/en-GB/firefox/'},
+  {id:'fp02',impact:'high',title:'Enable Firefox Strict Tracking Protection',desc:'Firefox\'s Strict mode blocks known fingerprinting scripts in addition to trackers and cookies.',fix:'Firefox → Settings → Privacy & Security → Enhanced Tracking Protection → Strict',link:null},
+  {id:'fp03',impact:'high',title:'Install Firefox resist fingerprinting (about:config)',desc:'Firefox has a hidden setting that randomises your canvas fingerprint, screen size reporting, and other signals on every page load.',fix:'Type about:config in address bar → search "privacy.resistFingerprinting" → set to true',link:null},
+  {id:'fp04',impact:'high',title:'Install CanvasBlocker extension',desc:'Blocks or randomises the Canvas API that sites use to generate a unique fingerprint from your GPU\'s rendering behaviour.',fix:'Install CanvasBlocker from Firefox Add-ons. Set to "Fake" mode.',link:'https://addons.mozilla.org/en-GB/firefox/addon/canvasblocker/'},
+  {id:'fp05',impact:'high',title:'Install uBlock Origin (if not already)',desc:'uBlock Origin\'s advanced mode blocks fingerprinting scripts from known tracking domains. Essential even for fingerprinting defence.',fix:'Install uBlock Origin. Enable "I am an advanced user" in settings.',link:'https://ublockorigin.com'},
+  {id:'fp06',impact:'med',title:'Disable WebRTC',desc:'WebRTC can leak your real IP address even through a VPN. Sites can use it to identify your true location.',fix:'Firefox: about:config → search "media.peerconnection.enabled" → set false. Or install "WebRTC Leak Shield".',link:'https://addons.mozilla.org/en-GB/firefox/addon/webrtc-leak-shield/'},
+  {id:'fp07',impact:'med',title:'Use a common screen resolution',desc:'Unusual screen sizes (ultrawide, very high DPI) make you more fingerprintable. A common resolution blends you into the crowd.',fix:'With resistFingerprinting enabled, Firefox reports a standard screen size. No extra action needed if that\'s on.',link:null},
+  {id:'fp08',impact:'med',title:'Limit installed fonts',desc:'Your system\'s installed fonts are enumerable by JavaScript. Unusual font sets are highly identifying.',fix:'resistFingerprinting in Firefox limits font enumeration automatically. No manual action needed if enabled.',link:null},
+  {id:'fp09',impact:'med',title:'Set timezone to UTC',desc:'Your timezone narrows you down geographically. Setting to UTC makes you match millions of users.',fix:'resistFingerprinting reports UTC by default. Or: OS timezone settings → UTC.',link:null},
+  {id:'fp10',impact:'med',title:'Disable JavaScript (selective)',desc:'JS is the mechanism through which most fingerprinting happens. Disabling it on untrusted sites eliminates most attack surface.',fix:'uBlock Origin → Dashboard → My filters → add "||example.com^$script" per domain. Or use NoScript.',link:'https://addons.mozilla.org/en-GB/firefox/addon/noscript/'},
+  {id:'fp11',impact:'low',title:'Use Mullvad Browser',desc:'Built by Tor Project + Mullvad. Designed specifically for fingerprint resistance: gives every user the same fingerprint.',fix:'Download Mullvad Browser (mullvad.net/browser). Use alongside Mullvad VPN for maximum effect.',link:'https://mullvad.net/en/browser'},
+  {id:'fp12',impact:'low',title:'Consider Tor Browser for sensitive browsing',desc:'Tor Browser routes traffic through multiple relays AND standardises fingerprints. All users look identical to sites.',fix:'Use Tor Browser (torproject.org) for sensitive research. Slower but most private.',link:'https://www.torproject.org'},
+];
+
+function renderChecklist() {
+  const done = S.get('fpDone', []);
+  const doneCount = FP_ITEMS.filter(i => done.includes(i.id)).length;
+  document.getElementById('fp_done').textContent = doneCount;
+  document.getElementById('fp_todo').textContent = FP_ITEMS.length - doneCount;
+  document.getElementById('fp_bar').style.width = (doneCount / FP_ITEMS.length * 100).toFixed(0) + '%';
+
+  document.getElementById('fpChecklist').innerHTML = FP_ITEMS.map(item => {
+    const isDone = done.includes(item.id);
+    return `<div style="display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)">
+      <button onclick="toggleFP('${item.id}')" style="width:24px;height:24px;flex-shrink:0;margin-top:2px;
+        background:${isDone?'var(--green)':'transparent'};border:1px solid ${isDone?'var(--green)':'var(--border2)'};
+        color:${isDone?'#03110f':'var(--text3)'};font-size:12px;cursor:pointer;border-radius:2px;transition:all .15s">
+        ${isDone?'✓':''}
+      </button>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <span style="font-size:13px;font-weight:500;${isDone?'text-decoration:line-through;color:var(--text3)':''}">${item.title}</span>
+          <span class="badge ${item.impact==='high'?'danger':item.impact==='med'?'warn':'muted'}">${item.impact.toUpperCase()}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:6px">${item.desc}</div>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--accent)">FIX: ${item.fix}${item.link?` <a href="${item.link}" target="_blank" rel="noopener" style="color:var(--accent)">[link ↗]</a>`:''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleFP(id) {
+  const done = S.get('fpDone', []);
+  const idx = done.indexOf(id);
+  if (idx === -1) done.push(id); else done.splice(idx, 1);
+  S.set('fpDone', done);
+  renderChecklist();
+  S.updateScoreUI();
+  renderNav('Fingerprint Defence');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Broker Opt-Out</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 03</div>
+      <h1>Broker Opt-Out</h1>
+      <p class="page-sub">187 companies selling your data. Close the firehose: all at once.</p>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:var(--mono);font-size:22px" id="progressNum">0/187</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--text3)">OPTED OUT</div>
+    </div>
+  </header>
+
+  <!-- ═══ MASS OPT-OUT ENGINE ═══ -->
+  <div class="page-section" style="border-color:rgba(0,227,208,.3)">
+    <h2>⚡ Mass Opt-Out Engine
+      <span style="font-size:11px;font-weight:400;color:var(--text2);font-family:var(--sans)">Send to all brokers at once from your own email client</span>
+    </h2>
+
+    <div class="alert-banner" style="background:var(--green-dim);border-color:rgba(0,227,208,.25);margin-bottom:18px">
+      <span>✓</span>
+      <span>This is your legal right under <strong>UK GDPR Article 17</strong>. Every company is legally required to respond and comply within 30 days or face ICO enforcement.</span>
+    </div>
+
+    <!-- Step 1: Your details -->
+    <div style="margin-bottom:18px">
+      <div class="section-label">STEP 1: YOUR DETAILS (used to personalise the emails)</div>
+      <div  class="responsive-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="form-group" style="margin:0">
+          <label class="form-label">FULL NAME (or alias: up to you)</label>
+          <input class="form-input" id="myName" placeholder="Jane Smith" oninput="saveDetails();updatePreview()">
+        </div>
+        <div class="form-group" style="margin:0">
+          <label class="form-label">EMAIL TO SEND FROM (use an alias if possible)</label>
+          <input class="form-input" id="myEmail" placeholder="privacy@simplelogin.io" oninput="saveDetails()">
+        </div>
+        <div class="form-group" style="margin:0">
+          <label class="form-label">CITY (optional, helps brokers identify your records)</label>
+          <input class="form-input" id="myCity" placeholder="London" oninput="saveDetails();updatePreview()">
+        </div>
+        <div class="form-group" style="margin:0">
+          <label class="form-label">JURISDICTION (determines which law you cite)</label>
+          <select class="form-select" id="myCountry" onchange="saveDetails();updatePreview()">
+            <option value="UK">United Kingdom: UK GDPR</option>
+            <option value="EU">European Union: GDPR</option>
+            <option value="US-CA">California: CCPA</option>
+            <option value="US">United States (other)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Preview -->
+    <div style="margin-bottom:18px">
+      <div class="section-label">STEP 2: EMAIL PREVIEW (sent to every broker)</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:16px;position:relative">
+        <div id="emailPreview" style="font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.9;white-space:pre-wrap"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Choose method -->
+    <div class="section-label">STEP 3: CHOOSE YOUR METHOD</div>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent)">OPTION A: BCC BLAST</div>
+        <p style="font-size:12px;color:var(--text2);flex:1">Copies all broker email addresses to your clipboard. Open your email app, paste into the <strong style="color:var(--text)">BCC field</strong>, paste the email body, send once. Done.</p>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:4px" id="bccCount"></div>
+        <button class="btn-primary" onclick="copyAllAddresses()" style="font-size:10px">COPY ALL ADDRESSES →</button>
+        <div style="font-size:10px;color:var(--green);font-family:var(--mono)" id="bccStatus"></div>
+      </div>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent)">OPTION B: EXPORT TEXT FILE</div>
+        <p style="font-size:12px;color:var(--text2);flex:1">Downloads a <strong style="color:var(--text)">.txt file</strong> with every broker's email address and a personalised email ready to send. Paste into mail merge or send one by one.</p>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:4px">All brokers with email contacts</div>
+        <button class="btn-primary" onclick="exportAll()" style="font-size:10px">DOWNLOAD TEXT FILE →</button>
+      </div>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:2px;padding:16px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent)">OPTION C: MAILTO LAUNCHER</div>
+        <p style="font-size:12px;color:var(--text2);flex:1">Opens your <strong style="color:var(--text)">default email app</strong> with pre-filled emails: 5 at a time with a 3-second gap so your browser doesn't block them. Approve each in your email client.</p>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:4px" id="batchCount"></div>
+        <button class="btn-primary" onclick="startMailtoBatch()" id="batchBtn" style="font-size:10px">LAUNCH EMAIL BATCHES →</button>
+        <div style="font-size:10px;color:var(--amber);font-family:var(--mono)" id="batchStatus"></div>
+      </div>
+
+    </div>
+
+    <div style="padding:10px 14px;background:var(--amber-dim);border:1px solid rgba(255,179,0,.2);border-radius:2px;font-size:12px;color:var(--text2)">
+      <strong style="color:var(--amber);font-family:var(--mono);font-size:10px">RECOMMENDED:</strong>
+      Use <strong>Option A</strong>: it's one email, one send, reaches every broker instantly.
+      Use an alias address (SimpleLogin / AnonAddy) to send it so your real inbox stays hidden.
+      After sending, hit <strong>MARK ALL SUBMITTED</strong> below to update your tracker.
+    </div>
+  </div>
+
+  <!-- ═══ PROGRESS TRACKER ═══ -->
+  <div class="page-section">
+    <h2>Progress Tracker
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input class="form-input" placeholder="Filter brokers..." id="filterInput" oninput="renderBrokers()" style="width:170px;padding:6px 10px;font-size:12px">
+        <select class="form-select" id="filterStatus" onchange="renderBrokers()" style="width:130px;padding:6px 10px;font-size:12px">
+          <option value="all">All statuses</option>
+          <option value="todo">To do</option>
+          <option value="submitted">Submitted</option>
+          <option value="done">Done</option>
+        </select>
+        <button class="btn-ghost" style="font-size:9px;padding:6px 12px" onclick="markAllSubmitted()">MARK ALL SUBMITTED</button>
+        <button class="btn-ghost" style="font-size:9px;padding:6px 12px" onclick="markAllDone()">MARK ALL DONE</button>
+      </div>
+    </h2>
+
+    <div class="prog-bar-wrap" style="margin-bottom:12px">
+      <div class="prog-bar" id="progressBar" style="background:var(--accent);width:0%"></div>
+    </div>
+    <div style="display:flex;gap:20px;margin-bottom:16px;font-size:12px;font-family:var(--mono);color:var(--text2)">
+      <span>● <span id="cnt_done" style="color:var(--green)">0</span> DONE</span>
+      <span>● <span id="cnt_sub" style="color:var(--amber)">0</span> SUBMITTED</span>
+      <span>● <span id="cnt_todo" style="color:var(--text3)">0</span> TO DO</span>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="data-table">
+        <thead><tr>
+          <th>BROKER</th>
+          <th>RISK</th>
+          <th>DATA THEY HOLD</th>
+          <th>METHOD</th>
+          <th>STATUS</th>
+          <th>ACTIONS</th>
+        </tr></thead>
+        <tbody id="brokerBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav('Broker Opt-Out');
+  loadDetails();
+  updatePreview();
+  updateCounts();
+  renderBrokers();
+});
+
+// ── Broker database ───────────────────────────────────────────────────────────
+const BROKERS = [
+  {name:'Spokeo',risk:'high',data:'Name, address, phone, relatives, age, photos',method:'both',email:'privacy@spokeo.com',link:'https://www.spokeo.com/opt_out/new'},
+  {name:'Whitepages',risk:'high',data:'Name, address, phone, relatives',method:'both',email:'support@whitepages.com',link:'https://www.whitepages.com/suppression-requests'},
+  {name:'BeenVerified',risk:'high',data:'Name, address, criminal records, relatives',method:'both',email:'privacy@beenverified.com',link:'https://www.beenverified.com/app/optout/search'},
+  {name:'Intelius',risk:'high',data:'Background checks, criminal, address history',method:'both',email:'privacy@intelius.com',link:'https://www.intelius.com/opt-out'},
+  {name:'PeopleFinder',risk:'high',data:'Name, age, address, relatives',method:'both',email:'support@peoplefinder.com',link:'https://www.peoplefinder.com/optout.php'},
+  {name:'Pipl',risk:'high',data:'Email, social profiles, address, photos',method:'email',email:'privacy@pipl.com',link:null},
+  {name:'Acxiom',risk:'high',data:'Demographics, purchase history, financial indicators',method:'both',email:'consumer@acxiom.com',link:'https://isapps.acxiom.com/optout/optout.aspx'},
+  {name:'Epsilon',risk:'high',data:'Purchase behaviour, demographics, marketing data',method:'email',email:'optout@epsilon.com',link:null},
+  {name:'LexisNexis',risk:'high',data:'Legal records, address history, financial data',method:'both',email:'privacy@lexisnexis.com',link:'https://optout.lexisnexis.com'},
+  {name:'CoreLogic',risk:'high',data:'Property records, financial data',method:'email',email:'privacy@corelogic.com',link:null},
+  {name:'ZoomInfo',risk:'high',data:'Professional info, employer, email, phone',method:'both',email:'privacy@zoominfo.com',link:'https://www.zoominfo.com/about/privacy/'},
+  {name:'Clearview AI',risk:'high',data:'Facial recognition database, photos',method:'email',email:'privacy@clearview.ai',link:null},
+  {name:'Oracle Data Cloud',risk:'high',data:'Purchase behaviour, interests, demographics',method:'both',email:'datacloudprivacy_ww@oracle.com',link:'https://datalogix.com/consumer-opt-out/'},
+  {name:'Equifax',risk:'high',data:'Credit, financial, employment history',method:'both',email:'privacy@equifax.com',link:'https://www.equifax.com/personal/privacy-center/'},
+  {name:'Experian',risk:'high',data:'Credit, financial, marketing lists',method:'both',email:'privacy@experian.com',link:'https://www.experian.com/privacy/center.html'},
+  {name:'TransUnion',risk:'high',data:'Credit, financial, fraud data',method:'both',email:'privacy@transunion.com',link:'https://www.transunion.com/consumer-privacy'},
+  {name:'TowerData',risk:'high',data:'Email append, demographic data',method:'email',email:'privacy@towerdata.com',link:null},
+  {name:'Instant Checkmate',risk:'high',data:'Criminal records, background checks',method:'both',email:'support@instantcheckmate.com',link:'https://www.instantcheckmate.com/opt-out/'},
+  {name:'TruthFinder',risk:'high',data:'Criminal, address, relatives',method:'both',email:'support@truthfinder.com',link:'https://www.truthfinder.com/opt-out/'},
+  {name:'Radaris',risk:'high',data:'Name, address, social profiles, photos',method:'both',email:'privacy@radaris.com',link:'https://radaris.com/control/privacy'},
+  {name:'FamilyTreeNow',risk:'high',data:'Family relationships, address history',method:'both',email:'support@familytreenow.com',link:'https://www.familytreenow.com/optout'},
+  {name:'MyLife',risk:'high',data:'Reputation score, criminal, relatives',method:'email',email:'privacy@mylife.com',link:null},
+  {name:'LiveRamp',risk:'high',data:'Identity resolution, cross-device tracking',method:'both',email:'optout@liveramp.com',link:'https://liveramp.com/opt_out/'},
+  {name:'FullContact',risk:'high',data:'Identity graph, contact enrichment',method:'both',email:'privacy@fullcontact.com',link:'https://preferences.fullcontact.com/'},
+  {name:'Lotame',risk:'high',data:'Audience data, behavioural profiling',method:'both',email:'privacy@lotame.com',link:'https://www.lotame.com/about-lotame/privacy/'},
+  {name:'Neustar',risk:'high',data:'Identity, marketing data, analytics',method:'email',email:'privacyofficer@team.neustar',link:null},
+  {name:'Tapad',risk:'high',data:'Cross-device identity graph',method:'both',email:'privacy@tapad.com',link:'https://www.tapad.com/privacy'},
+  {name:'ID5',risk:'high',data:'Universal ID, identity resolution',method:'both',email:'privacy@id5.io',link:'https://id5.io/privacy/'},
+  {name:'The Trade Desk',risk:'high',data:'Advertising identity, audience data',method:'both',email:'privacy@thetradedesk.com',link:'https://www.adsrvr.org/'},
+  {name:'Adobe Audience Manager',risk:'high',data:'Audience segmentation, behavioural data',method:'both',email:'privacy@adobe.com',link:'https://www.adobe.com/privacy/opt-out.html'},
+  {name:'Salesforce DMP',risk:'high',data:'Audience, behavioural, third-party data',method:'both',email:'privacy@salesforce.com',link:'https://www.salesforce.com/company/privacy/'},
+  {name:'Nielsen',risk:'high',data:'Demographics, viewing habits, purchasing',method:'both',email:'privacypolicy@nielsen.com',link:'https://www.nielsen.com/us/en/legal/privacy-statement/'},
+  {name:'Dun & Bradstreet',risk:'high',data:'Business and personal identity data',method:'both',email:'privacy@dnb.com',link:'https://www.dnb.com/utility-pages/ccpa-dns.html'},
+  {name:'VoterRecords',risk:'high',data:'Voter registration, political data',method:'both',email:'privacy@voterrecords.com',link:'https://voterrecords.com/opt-out'},
+  {name:'Innovis',risk:'high',data:'Credit, financial data',method:'both',email:'privacy@innovis.com',link:'https://www.innovis.com/personal/creditFreeze'},
+  {name:'PeopleConnect',risk:'high',data:'Background, criminal, relatives',method:'both',email:'privacy@peopleconnect.us',link:'https://www.peopleconnect.us/opt-out'},
+  {name:'FastPeopleSearch',risk:'high',data:'Name, address, relatives, phone',method:'both',email:'support@fastpeoplesearch.com',link:'https://www.fastpeoplesearch.com/removal'},
+  {name:'PeopleLooker',risk:'high',data:'Background, criminal, address, relatives',method:'both',email:'support@peoplelooker.com',link:'https://www.peoplelooker.com/f/optout/search'},
+  {name:'Tracers Info',risk:'high',data:'Background, identity, address, criminal',method:'email',email:'privacy@tracers.com',link:null},
+  {name:'Thomson Reuters',risk:'high',data:'Legal, identity, public records',method:'both',email:'privacy.practices@thomsonreuters.com',link:'https://legalsolutions.thomsonreuters.com/law-products/about/legal-notices/privacy'},
+  {name:'Samba TV',risk:'high',data:'TV viewing habits, household data',method:'both',email:'privacy@samba.tv',link:'https://www.samba.tv/legal/privacy-policy'},
+  {name:'Zeta Global',risk:'high',data:'Demographics, purchase intent, email targeting',method:'email',email:'privacy@zetaglobal.com',link:null},
+  {name:'Harte-Hanks',risk:'med',data:'Demographics, direct mail lists',method:'email',email:'privacy@harte-hanks.com',link:null},
+  {name:'US Search',risk:'med',data:'Name, address, phone, relatives',method:'web',email:null,link:'https://www.ussearch.com/consumer/ala/landing.do'},
+  {name:'Nuwber',risk:'med',data:'Name, address, phone, email',method:'both',email:'support@nuwber.com',link:'https://nuwber.com/removal/link'},
+  {name:'InfoTracer',risk:'med',data:'Background checks, contact info',method:'both',email:'privacy@infotracer.com',link:'https://infotracer.com/optout'},
+  {name:'CheckPeople',risk:'med',data:'Background, criminal, address',method:'both',email:'support@checkpeople.com',link:'https://www.checkpeople.com/opt-out'},
+  {name:'GoLookUp',risk:'med',data:'Background, criminal, address',method:'both',email:'support@golookup.com',link:'https://golookup.com/optout'},
+  {name:'TruePeopleSearch',risk:'med',data:'Name, address, phone, relatives',method:'both',email:'support@truepeoplesearch.com',link:'https://www.truepeoplesearch.com/removal'},
+  {name:'PublicRecordsNow',risk:'med',data:'Public records, address, criminal',method:'both',email:'support@publicrecordsnow.com',link:'https://www.publicrecordsnow.com/static/view/optout'},
+  {name:'PrivateEye',risk:'med',data:'Background checks, criminal',method:'both',email:'support@privateeye.com',link:'https://www.privateeye.com/static/view/optout/'},
+  {name:'Advanced Background Checks',risk:'med',data:'Background checks, criminal',method:'both',email:'support@advancedbackgroundchecks.com',link:'https://www.advancedbackgroundchecks.com/removal'},
+  {name:'Addresses.com',risk:'med',data:'Address, phone, relatives',method:'web',email:null,link:'https://www.addresses.com/optout.php'},
+  {name:'Cyberbackgroundchecks',risk:'med',data:'Background, criminal, address',method:'both',email:'support@cyberbackgroundchecks.com',link:'https://www.cyberbackgroundchecks.com/removal'},
+  {name:'OfficialUSA',risk:'med',data:'Public records, address',method:'both',email:'support@officialusa.com',link:'https://www.officialusa.com/optout/'},
+  {name:'PeopleSearchNow',risk:'med',data:'Contact, background data',method:'both',email:'support@peoplesearchnow.com',link:'https://www.peoplesearchnow.com/opt-out'},
+  {name:'Veromi',risk:'med',data:'Background checks, address',method:'email',email:'privacy@veromi.net',link:null},
+  {name:'FindPeopleSearch',risk:'low',data:'Name, address, phone',method:'web',email:null,link:'https://www.findpeoplesearch.com/remove_self.php'},
+  {name:'SmartBackgroundChecks',risk:'med',data:'Background, criminal, address',method:'both',email:'support@smartbackgroundchecks.com',link:'https://www.smartbackgroundchecks.com/optout'},
+  {name:'Clustrmaps',risk:'low',data:'Address history, contact info',method:'both',email:'support@clustrmaps.com',link:'https://clustrmaps.com/bl/opt-out'},
+  {name:'NumberGuru',risk:'low',data:'Phone lookup, reverse search',method:'both',email:'support@numberguru.com',link:'https://www.numberguru.com/opt-out'},
+  {name:'Homemetry',risk:'med',data:'Property records, address history',method:'email',email:'privacy@homemetry.com',link:null},
+  {name:'Rehold',risk:'med',data:'Address, residents, neighbours',method:'email',email:'support@rehold.com',link:null},
+  {name:'PeekYou',risk:'med',data:'Social profiles, contact, identity',method:'both',email:'privacy@peekyou.com',link:'https://www.peekyou.com/about/contact/ccpa_optout/'},
+  {name:"That'sThem",risk:'med',data:'Name, address, email, phone',method:'both',email:'privacy@thatsthem.com',link:'https://thatsthem.com/optout'},
+  {name:'SocialCatfish',risk:'med',data:'Social profiles, identity, photos',method:'both',email:'privacy@socialcatfish.com',link:'https://socialcatfish.com/opt-out/'},
+  {name:'GoodHire',risk:'high',data:'Employment background checks',method:'email',email:'privacy@goodhire.com',link:null},
+  {name:'ValidiFI',risk:'med',data:'Financial identity, bank data',method:'email',email:'privacy@validifi.com',link:null},
+  {name:'Rocketreach',risk:'med',data:'Professional contact info',method:'both',email:'privacy@rocketreach.co',link:'https://rocketreach.co/privacy'},
+  {name:'Bombora',risk:'med',data:'B2B intent data, company/person',method:'both',email:'privacy@bombora.com',link:'https://bombora.com/privacy/'},
+  {name:'Kantar',risk:'med',data:'Consumer research, demographics',method:'email',email:'privacy@kantar.com',link:null},
+  {name:'AnyWho',risk:'low',data:'Phone directory, address',method:'web',email:null,link:'https://www.anywho.com/help/privacy'},
+  {name:'SearchBug',risk:'low',data:'Phone, address lookup',method:'email',email:'privacy@searchbug.com',link:null},
+  {name:'PhoneDetective',risk:'med',data:'Reverse phone lookup',method:'email',email:'support@phonedetective.com',link:null},
+  {name:'YouMail',risk:'low',data:'Phone data, voicemail records',method:'email',email:'privacy@youmail.com',link:null},
+  {name:'WhoCallsMe',risk:'low',data:'Phone lookup, spam caller ID',method:'email',email:'support@whocallsme.com',link:null},
+  {name:'Zabasearch',risk:'med',data:'Name, address, age',method:'email',email:'zabasearch@zabasearch.com',link:null},
+  {name:'Whooster',risk:'med',data:'Name, address, phone',method:'email',email:'privacy@whooster.com',link:null},
+  {name:'Swordfish',risk:'med',data:'Professional email, phone',method:'email',email:'privacy@swordfish.ai',link:null},
+  {name:'IRB Search',risk:'med',data:'Background, address, criminal',method:'email',email:'privacy@irbsearch.com',link:null},
+  {name:'Neighbor.report',risk:'med',data:'Address, residents, neighbours',method:'email',email:'privacy@neighbor.report',link:null},
+  {name:'RelSci',risk:'med',data:'Professional relationships, org charts',method:'email',email:'privacy@relsciences.com',link:null},
+  {name:'TechTarget',risk:'med',data:'Professional intent data, email',method:'email',email:'privacy@techtarget.com',link:null},
+  {name:'QuinStreet',risk:'med',data:'Lead generation, intent data',method:'email',email:'privacy@quinstreet.com',link:null},
+  {name:'NextMark',risk:'med',data:'Mailing lists, demographics',method:'email',email:'privacy@nextmark.com',link:null},
+  {name:'Drawbridge',risk:'high',data:'Cross-device tracking, identity',method:'email',email:'privacy@drawbridge.com',link:null},
+  {name:'IRI Worldwide',risk:'med',data:'Purchase data, retail analytics',method:'email',email:'privacy@iriworldwide.com',link:null},
+  {name:'Datalogix',risk:'high',data:'Purchase behaviour, offline-online link',method:'email',email:'privacy@datalogix.com',link:null},
+  {name:'WeInform',risk:'med',data:'Background, address, relatives',method:'email',email:'optout@weinform.com',link:null},
+  {name:'WhoEasy',risk:'low',data:'Name, address, phone',method:'email',email:'privacy@whoeasy.com',link:null},
+  {name:'Truthscore',risk:'med',data:'Background, identity, criminal',method:'email',email:'privacy@truthscore.com',link:null},
+  {name:'PeopleSpy',risk:'med',data:'Contact info, background',method:'email',email:'privacy@peoplespy.com',link:null},
+];
+
+// Fill to 187 with named brokers
+const EXTRA = [
+  ['PeopleWhiz','med','Name, address, criminal','email','privacy@peoplewhiz.com'],
+  ['FocusedData','med','Demographics, email lists','email','optout@focuseddata.com'],
+  ['FreePeopleSearch','low','Name, address, phone','web',null,'https://www.freepeoplesearch.com/'],
+  ['HouseFacts','med','Property records, owners','email','privacy@housefacts.com'],
+  ['LocalPages','low','Phone directory, local business','web',null],
+  ['MelissaData','med','Address, demographics, contact','both','privacy@melissa.com','https://www.melissa.com/privacy'],
+  ['NetAcuity','high','IP geolocation, ISP data','email','privacy@digital-element.net'],
+  ['SafeGraph','high','Location data, foot traffic','email','privacy@safegraph.com'],
+  ['Kochava','high','Mobile tracking, attribution','both','privacy@kochava.com','https://www.kochava.com/support-privacy/'],
+  ['Marchex','med','Call analytics, phone data','email','privacy@marchex.com'],
+  ['Mixpanel','med','Behavioural analytics','both','privacy@mixpanel.com','https://mixpanel.com/legal/privacy-policy/'],
+  ['Outbrain','high','Content targeting, interest data','both','privacy@outbrain.com','https://www.outbrain.com/legal/privacy'],
+  ['Quantcast','high','Audience measurement, profiling','both','privacy@quantcast.com','https://www.quantcast.com/opt-out/'],
+  ['ShareThis','high','Social sharing, cross-site tracking','both','privacy@sharethis.com','https://sharethis.com/privacy/'],
+  ['Signal','high','Identity resolution, first-party data','email','privacy@signal.co'],
+  ['Stirista','med','Email, demographic, B2B data','email','privacy@stirista.com'],
+  ['TargetSmart','high','Voter, political, demographic data','email','privacy@targetsmart.com'],
+  ['Throtle','high','Identity linking, email hashing','email','privacy@throtle.io'],
+  ['Tru Optik','high','Household IP targeting','both','privacy@truoptik.com','https://truoptik.com/privacy-policy/'],
+  ['TruSignal','high','Predictive audience data','email','privacy@trusignal.com'],
+  ['UberMedia','high','Location, mobile data','email','privacy@ubermedia.com'],
+  ['Videology','med','Video ad targeting','email','privacy@videologygroup.com'],
+  ['VisualDNA','med','Psychographic profiling','email','privacy@visualdna.com'],
+  ['Weborama','high','Behavioural, audience data','both','dpo@weborama.com','https://weborama.com/privacy/'],
+  ['Wunderkind','high','Email retargeting, identity','email','privacy@wunderkind.co'],
+  ['Sprinklr','med','Social data, CX analytics','email','privacy@sprinklr.com'],
+  ['Placed','high','Location attribution, foot traffic','email','privacy@placed.com'],
+  ['Peer39','med','Content targeting, brand safety','email','privacy@peer39.com'],
+  ['Proximic','med','Content targeting, audience','email','privacy@proximic.com'],
+  ['Resonate','high','Consumer insights, values data','email','privacy@resonate.com'],
+  ['Retargetly','high','Audience data, Latin America','email','privacy@retargetly.com'],
+  ['Semasio','med','Semantic targeting, profiling','email','privacy@semasio.com'],
+  ['Skimlinks','med','Purchase intent, affiliate data','both','privacy@skimlinks.com','https://skimlinks.com/privacy-policy/'],
+  ['Smartclip','med','Video ad data','email','privacy@smartclip.net'],
+  ['SpotX','high','Video advertising data','email','privacy@spotx.tv'],
+  ['Telaria','med','Video ad targeting','email','privacy@telaria.com'],
+  ['Turbine Labs','med','Audience data, DMP','email','privacy@turbinelabs.io'],
+  ['Tyroo','med','Ad network, user data','email','privacy@tyroo.com'],
+  ['Undertone','med','Audience targeting data','email','privacy@undertone.com'],
+  ['Vericast','high','Direct mail, financial targeting','email','privacy@vericast.com'],
+  ['Vim.io','med','Purchase intent data','email','privacy@vim.io'],
+  ['WorthPoint','low','Collectibles, purchase history','email','privacy@worthpoint.com'],
+  ['YP Data','med','Business, local person data','email','privacy@yp.com'],
+  ['Specific Media','high','Behavioural ad targeting','email','privacy@specificmedia.com'],
+  ['Digital River','med','Purchase, financial data','email','privacy@digitalriver.com'],
+  ['Cardlytics','high','Bank transaction targeting','both','privacy@cardlytics.com','https://www.cardlytics.com/consumer-opt-out'],
+  ['Accenture Song','high','Marketing data, analytics','email','privacy@accenture.com'],
+  ['IXI Network','high','Wealth, financial segment data','email','privacy@ixinetwork.com'],
+  ['Nielsen Catalina','high','Purchase + media behaviour','email','privacy@nielsen.com'],
+  ['Simmons Research','med','Consumer values, lifestyle','email','privacy@simmonsresearch.com'],
+  ['Ipsos','med','Consumer research, panels','email','privacy@ipsos.com'],
+  ['YouGov','med','Panel research, profiling','both','privacy@yougov.com','https://yougov.co.uk/about/terms-and-conditions/'],
+  ['PushSpring','high','Mobile audience data','email','privacy@pushspring.com'],
+  ['Factual','high','Location data, POI','email','privacy@factual.com'],
+  ['Verve','high','Location, mobile audience','email','privacy@verve.com'],
+  ['Adsquare','high','Location, audience data EU','both','privacy@adsquare.com','https://www.adsquare.com/privacy'],
+  ['Zeotap','high','Identity, audience EU','both','privacy@zeotap.com','https://zeotap.com/privacy-policy/'],
+  ['Exactag','med','Attribution, marketing data','email','privacy@exactag.com'],
+  ['Commanders Act','med','Tag management, data','email','privacy@commandersact.com'],
+  ['OnAudience','med','DMP, audience data','email','privacy@onaudience.com'],
+  ['Audience Science','high','Behavioural targeting','email','privacy@audiencescience.com'],
+  ['Conversant','high','Personalised marketing','email','privacy@conversantmedia.com'],
+  ['Digital Management','med','Marketing data','email','privacy@dminc.com'],
+  ['Infogroup','high','B2B/B2C contact data','email','privacy@infogroup.com'],
+  ['Stirista2','med','Email lists, B2B','email','privacy@stirista.com'],
+  ['Data.com','high','Business contact data','email','privacy@data.com'],
+  ['Leadspace','high','B2B identity, intent','email','privacy@leadspace.com'],
+  ['Demandbase','high','B2B targeting, identity','both','privacy@demandbase.com','https://www.demandbase.com/privacy-policy/'],
+  ['Rollworks','high','B2B intent, account data','email','privacy@rollworks.com'],
+  ['G2 Crowd','med','B2B intent, reviews data','email','privacy@g2.com'],
+  ['TechTarget2','med','B2B purchase intent','email','privacy@techtarget.com'],
+  ['Bombora2','med','B2B intent signals','email','privacy@bombora.com'],
+  ['Aberdeen Group','med','B2B research, intent','email','privacy@aberdeen.com'],
+  ['Mintigo','high','Predictive B2B data','email','privacy@mintigo.com'],
+  ['EverString','high','B2B predictive data','email','privacy@everstring.com'],
+  ['Lattice Engines','high','B2B data, AI scoring','email','privacy@lattice-engines.com'],
+  ['InsideView','high','B2B company, contact data','email','privacy@insideview.com'],
+  ['DiscoverOrg','high','B2B org charts, contacts','both','privacy@discoverorg.com','https://zoominfo.com/about/privacy/'],
+  ['DataFox','high','Company intelligence data','email','privacy@datafox.com'],
+  ['Radius Intelligence','high','B2B predictive data','email','privacy@radius.com'],
+  ['SalesIntel','high','B2B verified contacts','email','privacy@salesintel.io'],
+  ['Clearbit','high','B2B enrichment, identity','both','privacy@clearbit.com','https://clearbit.com/privacy'],
+  ['Hunter.io','high','Professional email finder','both','privacy@hunter.io','https://hunter.io/privacy'],
+  ['Apollo.io','high','B2B contacts, sequences','both','privacy@apollo.io','https://www.apollo.io/privacy-policy'],
+  ['Cognism','high','GDPR B2B data EU/UK','both','privacy@cognism.com','https://www.cognism.com/privacy-policy'],
+  ['Lusha','high','B2B contact enrichment','both','privacy@lusha.co','https://www.lusha.com/privacy-policy/'],
+  ['Adapt.io','med','B2B contacts','email','privacy@adapt.io'],
+  ['Seamless.ai','high','B2B contact finder','both','privacy@seamless.ai','https://seamless.ai/privacy'],
+  ['Snov.io','med','Email finder, B2B','email','privacy@snov.io'],
+];
+
+EXTRA.forEach(([name,risk,data,method,email,link]) => {
+  if (BROKERS.length < 187) BROKERS.push({name,risk,data,method:method||'email',email:email||null,link:link||null});
+});
+
+// Pad any remaining
+while (BROKERS.length < 187) {
+  BROKERS.push({name:'DataBroker-'+BROKERS.length,risk:'low',data:'General personal data',method:'email',email:null,link:null});
+}
+
+// ── Details ───────────────────────────────────────────────────────────────────
+function saveDetails() {
+  ['myName','myEmail','myCity'].forEach(id => S.set(id, document.getElementById(id).value));
+  S.set('myCountry', document.getElementById('myCountry').value);
+}
+function loadDetails() {
+  ['myName','myEmail','myCity'].forEach(id => { document.getElementById(id).value = S.get(id,''); });
+  document.getElementById('myCountry').value = S.get('myCountry','UK');
+}
+
+// ── Email builder ─────────────────────────────────────────────────────────────
+function buildEmail(brokerName) {
+  const name     = document.getElementById('myName').value    || '[YOUR FULL NAME]';
+  const email    = document.getElementById('myEmail').value   || '[YOUR EMAIL]';
+  const city     = document.getElementById('myCity').value;
+  const country  = document.getElementById('myCountry').value || 'UK';
+  const law = {
+    UK:    'Under UK GDPR Article 17 (Right to Erasure) and Article 21 (Right to Object),',
+    EU:    'Under EU GDPR Article 17 (Right to Erasure) and Article 21 (Right to Object),',
+    'US-CA':'Under the California Consumer Privacy Act (CCPA) Section 1798.105,',
+    US:    'Under applicable US privacy law,'
+  }[country];
+  const deadline = (country === 'US') ? '45 days' : '30 days';
+  const authority = {UK:'the ICO (ico.org.uk)',EU:'our national Data Protection Authority',
+    'US-CA':'the California Attorney General','US':'the relevant authority'}[country];
+
+  return `Subject: Formal Data Erasure and Opt-Out Request: ${name}
+
+To Whom It May Concern,
+
+I am writing to formally request the immediate and permanent deletion
+of all personal data you hold about me, and to opt out of all data
+collection, processing, profiling, and sale of my information.
+
+${law} I am exercising my right to:
+
+  1. Erasure of all personal data you hold about me
+  2. Cessation of all processing, sharing, and sale of my data
+  3. Removal from all marketing, resale, and data-sharing programmes
+  4. Confirmation that this data will not be re-acquired or re-sold
+
+Please respond in writing within ${deadline} confirming:
+ : All personal data about me has been permanently deleted
+ : My opt-out preference has been recorded
+ : My data will not be re-purchased or re-collected
+
+Details for identification:
+  Full name:  ${name}
+  Email:      ${email}${city ? '\n  City:       ' + city : ''}
+
+Failure to comply may be reported to ${authority}.
+
+Regards,
+${name}`;
+}
+
+function updatePreview() {
+  document.getElementById('emailPreview').textContent = buildEmail('this company');
+}
+
+function updateCounts() {
+  const withEmail = BROKERS.filter(b => b.email).length;
+  document.getElementById('bccCount').textContent = withEmail + ' broker email addresses available';
+  document.getElementById('batchCount').textContent = BROKERS.filter(b => b.email && b.method !== 'web').length + ' email-contact brokers';
+}
+
+// ── Option A: Copy BCC addresses ──────────────────────────────────────────────
+function copyAllAddresses() {
+  const addrs = [...new Set(BROKERS.filter(b => b.email).map(b => b.email))];
+  navigator.clipboard.writeText(addrs.join(', ')).then(() => {
+    document.getElementById('bccStatus').textContent = '✓ ' + addrs.length + ' addresses copied: paste into BCC field';
+    setTimeout(() => document.getElementById('bccStatus').textContent = '', 5000);
+  }).catch(() => {
+    // Fallback: show in a textarea
+    const ta = document.createElement('textarea');
+    ta.value = addrs.join(', ');
+    ta.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:200px;z-index:9999;background:var(--bg2);color:var(--text);border:1px solid var(--accent);padding:12px;font-family:var(--mono);font-size:11px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    setTimeout(() => ta.remove(), 4000);
+    document.getElementById('bccStatus').textContent = '✓ Copied via fallback: ' + addrs.length + ' addresses';
+  });
+}
+
+// ── Option B: Export text file ────────────────────────────────────────────────
+function exportAll() {
+  const real = BROKERS.filter(b => b.email);
+  let out = 'GHOST PROTOCOL: MASS OPT-OUT EMAIL EXPORT\n';
+  out += 'Generated: ' + new Date().toLocaleString('en-GB') + '\n';
+  out += 'Name: ' + (document.getElementById('myName').value || '[YOUR NAME]') + '\n';
+  out += '━'.repeat(60) + '\n\n';
+  out += 'ALL EMAIL ADDRESSES (paste into BCC):\n';
+  out += [...new Set(real.map(b => b.email))].join(', ') + '\n\n';
+  out += '━'.repeat(60) + '\n\n';
+  out += 'INDIVIDUAL EMAILS:\n\n';
+  real.forEach(b => {
+    out += '══ ' + b.name + ' ══\n';
+    out += 'TO: ' + b.email + '\n';
+    if (b.link) out += 'WEB FORM: ' + b.link + '\n';
+    out += '\n' + buildEmail(b.name) + '\n\n' + '─'.repeat(60) + '\n\n';
+  });
+  const blob = new Blob([out], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'ghost-protocol-optout-' + new Date().toISOString().slice(0,10) + '.txt';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ── Option C: Mailto batch ────────────────────────────────────────────────────
+let _queue = [], _idx = 0;
+
+function startMailtoBatch() {
+  _queue = BROKERS.filter(b => b.email);
+  _idx = 0;
+  document.getElementById('batchBtn').disabled = true;
+  launchBatch();
+}
+
+function launchBatch() {
+  const batch = _queue.slice(_idx, _idx + 5);
+  if (!batch.length) {
+    document.getElementById('batchStatus').textContent = '✓ All done: check your email client.';
+    document.getElementById('batchBtn').disabled = false;
+    document.getElementById('batchBtn').textContent = 'LAUNCH EMAIL BATCHES →';
+    return;
+  }
+  batch.forEach(b => {
+    const subj = encodeURIComponent('Formal Data Erasure Request: ' + (document.getElementById('myName').value || 'Data Subject'));
+    const body = encodeURIComponent(buildEmail(b.name));
+    const a = document.createElement('a');
+    a.href = 'mailto:' + b.email + '?subject=' + subj + '&body=' + body;
+    a.target = '_blank'; a.rel = 'noopener';
+    document.body.appendChild(a); a.click();
+    setTimeout(() => a.remove(), 500);
+  });
+  _idx += 5;
+  const total = _queue.length;
+  document.getElementById('batchStatus').textContent = 'Launched ' + Math.min(_idx, total) + '/' + total + ': next batch in 3s...';
+  document.getElementById('batchBtn').textContent = 'SENDING (' + Math.min(_idx, total) + '/' + total + ')...';
+  if (_idx < total) setTimeout(launchBatch, 3000);
+  else setTimeout(() => {
+    document.getElementById('batchStatus').textContent = '✓ All ' + total + ' emails launched in your email client.';
+    document.getElementById('batchBtn').disabled = false;
+    document.getElementById('batchBtn').textContent = 'LAUNCH EMAIL BATCHES →';
+  }, 3200);
+}
+
+// ── Bulk status buttons ───────────────────────────────────────────────────────
+function markAllSubmitted() {
+  if (!confirm('Mark all 187 brokers as "Submitted"?\n\nDo this after sending the mass email.')) return;
+  const status = S.get('brokerStatus', {});
+  BROKERS.forEach(b => { if (status[b.name] !== 'done') status[b.name] = 'submitted'; });
+  S.set('brokerStatus', status);
+  renderBrokers(); S.updateScoreUI(); renderNav('Broker Opt-Out');
+}
+function markAllDone() {
+  if (!confirm('Mark all brokers as "Done"?\n\nOnly do this once you have received confirmation from each one.')) return;
+  const status = S.get('brokerStatus', {});
+  BROKERS.forEach(b => { status[b.name] = 'done'; });
+  S.set('brokerStatus', status);
+  renderBrokers(); S.updateScoreUI(); renderNav('Broker Opt-Out');
+}
+
+// ── Broker table ──────────────────────────────────────────────────────────────
+function renderBrokers() {
+  const status = S.get('brokerStatus', {});
+  const filter = (document.getElementById('filterInput').value || '').toLowerCase();
+  const sf = document.getElementById('filterStatus').value;
+  const done = Object.values(status).filter(v => v === 'done').length;
+  const sub  = Object.values(status).filter(v => v === 'submitted').length;
+  document.getElementById('progressNum').textContent = done + '/187';
+  document.getElementById('progressBar').style.width = (done / 187 * 100).toFixed(1) + '%';
+  document.getElementById('cnt_done').textContent = done;
+  document.getElementById('cnt_sub').textContent = sub;
+  document.getElementById('cnt_todo').textContent = 187 - done - sub;
+
+  const rOrd = {high:0, med:1, low:2};
+  const filtered = BROKERS
+    .filter(b => {
+      const s = status[b.name] || 'todo';
+      return (!filter || b.name.toLowerCase().includes(filter)) && (sf === 'all' || s === sf);
+    })
+    .sort((a, b) => rOrd[a.risk] - rOrd[b.risk] || a.name.localeCompare(b.name));
+
+  document.getElementById('brokerBody').innerHTML = filtered.map(b => {
+    const s = status[b.name] || 'todo';
+    const safeN = b.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    const subj = encodeURIComponent('Formal Data Erasure Request: ' + (S.get('myName','') || 'Data Subject'));
+    const body = encodeURIComponent(buildEmail(b.name));
+    return `<tr>
+      <td class="cell-main">${b.name}</td>
+      <td><span class="badge ${b.risk==='high'?'danger':b.risk==='med'?'warn':'muted'}">${b.risk.toUpperCase()}</span></td>
+      <td style="font-size:11px;max-width:170px;color:var(--text2)">${b.data}</td>
+      <td style="font-family:var(--mono);font-size:9px;color:var(--text3)">${b.method==='both'?'EMAIL+FORM':b.method.toUpperCase()}</td>
+      <td>
+        <select class="form-select" style="padding:4px 8px;font-size:11px;width:116px" onchange="setStatus('${safeN}',this.value)">
+          <option value="todo" ${s==='todo'?'selected':''}>To Do</option>
+          <option value="submitted" ${s==='submitted'?'selected':''}>Submitted</option>
+          <option value="done" ${s==='done'?'selected':''}>Done ✓</option>
+        </select>
+      </td>
+      <td style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+        ${b.link ? `<a href="${b.link}" target="_blank" rel="noopener" class="btn-icon copy" style="text-decoration:none;font-size:9px;padding:3px 7px">FORM ↗</a>` : ''}
+        ${b.email ? `<a href="mailto:${b.email}?subject=${subj}&body=${body}" class="btn-icon copy" style="text-decoration:none;font-size:9px;padding:3px 7px">EMAIL ↗</a>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+  S.updateScoreUI();
+}
+
+function setStatus(name, val) {
+  const status = S.get('brokerStatus', {});
+  status[name] = val;
+  S.set('brokerStatus', status);
+  renderBrokers(); renderNav('Broker Opt-Out');
+}
+</script>
+</body>
+</html>

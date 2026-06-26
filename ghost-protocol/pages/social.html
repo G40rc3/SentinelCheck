@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Social Media Audit</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 08</div>
+      <h1>Social Media Audit</h1>
+      <p class="page-sub">Social platforms are the biggest data broker feeders. Lock them down.</p>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text2)"><span id="sm_done">0</span>/<span id="sm_total">0</span> steps completed</div>
+  </header>
+
+  <div class="alert-banner" style="background:var(--red-dim);border-color:rgba(255,61,61,.25)">
+    <span>⚠</span>
+    <span>Facebook, Google, and LinkedIn scrape your public profile data and sell it to data brokers automatically. These settings exist: they're just buried deliberately.</span>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+    <button class="btn-ghost" onclick="setTab('google')" id="tab_google">Google / YouTube</button>
+    <button class="btn-ghost" onclick="setTab('facebook')" id="tab_facebook">Facebook / Meta</button>
+    <button class="btn-ghost" onclick="setTab('instagram')" id="tab_instagram">Instagram</button>
+    <button class="btn-ghost" onclick="setTab('linkedin')" id="tab_linkedin">LinkedIn</button>
+    <button class="btn-ghost" onclick="setTab('twitter')" id="tab_twitter">X / Twitter</button>
+    <button class="btn-ghost" onclick="setTab('tiktok')" id="tab_tiktok">TikTok</button>
+  </div>
+
+  <div id="checklistArea"></div>
+
+  <div class="page-section">
+    <h2>Overall Progress</h2>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="sm_bar" style="background:var(--green);width:0%"></div></div>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px" id="sm_summary"></div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Social Media Audit'); setTab('google'); updateSummary(); });
+
+const CHECKLISTS = {
+  google: {
+    label: 'Google / YouTube', color: 'var(--red)',
+    link: 'https://myaccount.google.com/privacy',
+    items: [
+      {id:'g01',title:'Turn off Web & App Activity',desc:'Google records every search, YouTube watch, Maps query, and Assistant interaction. This data is sold to advertisers.',fix:'myaccount.google.com/activitycontrols → Web & App Activity → Pause'},
+      {id:'g02',title:'Turn off Location History',desc:'Google tracks your physical location even when apps are closed if Location History is on.',fix:'myaccount.google.com/activitycontrols → Location History → Pause'},
+      {id:'g03',title:'Turn off YouTube History',desc:'Your watch and search history on YouTube feeds Google\'s interest profiling.',fix:'myaccount.google.com/activitycontrols → YouTube History → Pause'},
+      {id:'g04',title:'Delete existing activity data',desc:'Past data still exists even after pausing. Delete it too.',fix:'myaccount.google.com/delete-services → Delete activity by → All time → Delete'},
+      {id:'g05',title:'Turn off personalised ads',desc:'Google uses your data across the web for ad targeting. You can opt out.',fix:'myadcenter.google.com → Turn off Ad Personalisation'},
+      {id:'g06',title:'Review third-party app access',desc:'Apps you\'ve signed into with Google have access to your account data.',fix:'myaccount.google.com/permissions → Remove any apps you don\'t use'},
+      {id:'g07',title:'Set auto-delete to 3 months',desc:'Any data that is collected gets automatically deleted after 3 months.',fix:'myaccount.google.com/activitycontrols → each control → Auto-delete → 3 months'},
+      {id:'g08',title:'Check Google Dashboard',desc:'See everything Google knows about you across all their services.',fix:'myaccount.google.com/dashboard: review and delete anything unexpected'},
+      {id:'g09',title:'Download your data (know what they have)',desc:'Google Takeout lets you download everything Google has on you.',fix:'takeout.google.com → select all → Download: know your enemy'},
+    ]
+  },
+  facebook: {
+    label: 'Facebook / Meta', color: '#1877f2',
+    link: 'https://www.facebook.com/settings/?tab=privacy',
+    items: [
+      {id:'f01',title:'Set profile visibility to Friends only',desc:'Public profiles are scraped by data brokers automatically.',fix:'Settings → Privacy → Who can see your future posts → Friends'},
+      {id:'f02',title:'Turn off Off-Facebook Activity tracking',desc:'Facebook tracks you on other websites via the Facebook Pixel even when you\'re not on Facebook.',fix:'Settings → Your Facebook Information → Off-Facebook Activity → Clear History → Manage Future Activity → Disconnect'},
+      {id:'f03',title:'Turn off personalised ads',desc:'Limits how Facebook uses your data for ad targeting.',fix:'Settings → Ads → Ad Settings → turn off all personalisation options'},
+      {id:'f04',title:'Limit past posts visibility',desc:'Old public posts are scraped. Limit their visibility retroactively.',fix:'Settings → Privacy → Limit Past Posts → Limit Past Posts'},
+      {id:'f05',title:'Disable facial recognition',desc:'Facebook\'s facial recognition system identifies you in photos uploaded by others.',fix:'Settings → Face Recognition → Do you want Facebook to be able to recognise you? → No'},
+      {id:'f06',title:'Remove phone number',desc:'Your phone number is used to link your Facebook identity to your real-world identity in data broker databases.',fix:'Settings → Mobile → Remove your phone number if not needed for 2FA'},
+      {id:'f07',title:'Audit app permissions',desc:'Third-party apps connected to Facebook can read your profile, friends list, and activity.',fix:'Settings → Apps and Websites → remove anything you don\'t actively use'},
+      {id:'f08',title:'Turn off location sharing',desc:'Facebook apps track your location in the background.',fix:'Phone Settings → Facebook → Location → Never (or While Using on iOS)'},
+      {id:'f09',title:'Download your data',desc:'See everything Facebook has collected about you.',fix:'Settings → Your Facebook Information → Download Your Information → Request a Download'},
+    ]
+  },
+  instagram: {
+    label: 'Instagram', color: '#e1306c',
+    link: 'https://www.instagram.com/accounts/privacy_and_security/',
+    items: [
+      {id:'i01',title:'Set account to Private',desc:'Public Instagram accounts are scraped by data brokers and facial recognition companies.',fix:'Settings → Account Privacy → Private Account → On'},
+      {id:'i02',title:'Turn off activity status',desc:'Your online status and activity is visible to others by default.',fix:'Settings → Messages and Story Replies → Show Activity Status → Off'},
+      {id:'i03',title:'Turn off personalised ads',desc:'Limits how Meta uses your Instagram data for ad targeting.',fix:'Settings → Ads → Ad Preferences → turn off personalisation'},
+      {id:'i04',title:'Disconnect Facebook account',desc:'Linking Instagram and Facebook doubles the data Meta can build on you.',fix:'Settings → Account → Linked Accounts → Facebook → Unlink'},
+      {id:'i05',title:'Audit connected apps',desc:'Third-party apps with Instagram access can read your posts and followers.',fix:'Settings → Security → Apps and Websites → remove unused apps'},
+      {id:'i06',title:'Disable location tagging',desc:'Geotagged posts reveal your home, work, and movement patterns.',fix:'When posting: don\'t add location. For existing posts: edit → location → remove'},
+      {id:'i07',title:'Turn off story sharing to Facebook',desc:'Instagram stories shared to Facebook double your exposure.',fix:'Settings → Privacy → Story → Share Your Story to Facebook → Off'},
+    ]
+  },
+  linkedin: {
+    label: 'LinkedIn', color: '#0077b5',
+    link: 'https://www.linkedin.com/psettings/',
+    items: [
+      {id:'l01',title:'Turn off data sharing with third parties',desc:'LinkedIn sells your professional data to recruiters, marketers, and data brokers.',fix:'Settings → Data Privacy → Data for Generative AI Improvement → Off; Third-party research → Off'},
+      {id:'l02',title:'Opt out of partner data sharing',desc:'LinkedIn shares profile data with "partners": a broad category of data brokers.',fix:'Settings → Ads → General advertising data → opt out of all'},
+      {id:'l03',title:'Make profile less findable',desc:'LinkedIn profiles appear in Google searches with your full name, employer, and photo.',fix:'Settings → Visibility → Edit your public profile → turn off public visibility or minimise what\'s shown'},
+      {id:'l04',title:'Turn off profile viewing notifications',desc:'Every time you view a profile, LinkedIn notifies them. This reveals your research behaviour.',fix:'Settings → Visibility → Profile viewing options → Private mode'},
+      {id:'l05',title:'Limit who can find you by email/phone',desc:'Allows LinkedIn to be used to look up your profile from your phone number or email.',fix:'Settings → Visibility → Who can find you by email/phone → Only you'},
+      {id:'l06',title:'Turn off salary data sharing',desc:'If you\'ve entered salary info, LinkedIn uses this for profiling and shares it.',fix:'Settings → Data Privacy → Salary data and insights → opt out'},
+      {id:'l07',title:'Audit connected apps',desc:'Third-party apps with LinkedIn access can read your full profile and connections.',fix:'Settings → Data Privacy → Permitted services → remove unused apps'},
+    ]
+  },
+  twitter: {
+    label: 'X / Twitter', color: 'var(--text)',
+    link: 'https://twitter.com/settings/privacy_and_safety',
+    items: [
+      {id:'t01',title:'Protect your tweets (private account)',desc:'Public tweets are scraped, archived, and sold. Protecting your account limits this significantly.',fix:'Settings → Privacy and Safety → Audience and Tagging → Protect your Tweets'},
+      {id:'t02',title:'Turn off personalised ads',desc:'X/Twitter uses your browsing data for ad targeting via tracking pixels on other sites.',fix:'Settings → Privacy and Safety → Ads Preferences → Personalised Ads → Off'},
+      {id:'t03',title:'Turn off data sharing with business partners',desc:'X shares your data with advertising partners.',fix:'Settings → Privacy and Safety → Data Sharing with Business Partners → Off'},
+      {id:'t04',title:'Disable location data',desc:'Twitter records your approximate location from your IP and can use GPS.',fix:'Settings → Privacy and Safety → Location Information → Remove all location data → and turn off future collection'},
+      {id:'t05',title:'Turn off discoverability by email/phone',desc:'Allows others to find your account from your contact info.',fix:'Settings → Privacy and Safety → Discoverability → untick both options'},
+      {id:'t06',title:'Audit connected apps',desc:'Apps connected to your Twitter account can read your tweets and DMs.',fix:'Settings → Security and Account Access → Apps and Sessions → review and revoke'},
+    ]
+  },
+  tiktok: {
+    label: 'TikTok', color: 'var(--accent)',
+    link: 'https://www.tiktok.com/setting/',
+    items: [
+      {id:'tt01',title:'Set account to Private',desc:'Public TikTok accounts are scraped for data including your face, voice, and interests.',fix:'Profile → Settings → Privacy → Private Account → On'},
+      {id:'tt02',title:'Turn off personalised ads',desc:'TikTok profiles your interests extensively for ad targeting.',fix:'Settings → Privacy → Ads → Turn off "Use of off-TikTok activity for ad targeting"'},
+      {id:'tt03',title:'Turn off activity status',desc:'Your online activity visible to others by default.',fix:'Settings → Privacy → Activity Status → Off'},
+      {id:'tt04',title:'Limit who can find you',desc:'TikTok allows lookup by phone number and email by default.',fix:'Settings → Privacy → Sync contacts and Facebook friends → Off; Phone number discoverability → No one'},
+      {id:'tt05',title:'Download your data',desc:'See what TikTok has collected, including your location history and browsing data.',fix:'Settings → Privacy → Personalisation and Data → Download your data'},
+      {id:'tt06',title:'Consider not using TikTok',desc:'TikTok collects an unusually broad set of data including clipboard content, device fingerprint, and keystrokes on some versions.',fix:'If you must use it, use a separate device or the web version at tiktok.com rather than the app'},
+    ]
+  }
+};
+
+let currentTab = 'google';
+
+function setTab(tab) {
+  currentTab = tab;
+  Object.keys(CHECKLISTS).forEach(k => {
+    const btn = document.getElementById('tab_' + k);
+    if (btn) btn.style.borderColor = k === tab ? 'var(--accent)' : '';
+    if (btn) btn.style.color = k === tab ? 'var(--accent)' : '';
+  });
+  renderChecklist();
+}
+
+function renderChecklist() {
+  const cl = CHECKLISTS[currentTab];
+  const done = S.get('smDone', []);
+  const clDone = cl.items.filter(i => done.includes(i.id)).length;
+
+  document.getElementById('checklistArea').innerHTML = `
+    <div class="page-section">
+      <h2>${cl.label}: ${clDone}/${cl.items.length} steps done
+        <a href="${cl.link}" target="_blank" rel="noopener" class="btn-ghost" style="font-size:9px;padding:5px 10px">OPEN SETTINGS ↗</a>
+      </h2>
+      ${cl.items.map(item => {
+        const isDone = done.includes(item.id);
+        return `<div style="display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)">
+          <button onclick="toggleSM('${item.id}')" style="width:22px;height:22px;flex-shrink:0;margin-top:2px;
+            background:${isDone?'var(--green)':'transparent'};border:1px solid ${isDone?'var(--green)':'var(--border2)'};
+            color:${isDone?'#03110f':'var(--text3)'};font-size:11px;cursor:pointer;border-radius:2px;transition:all .15s">
+            ${isDone?'✓':''}
+          </button>
+          <div>
+            <div style="font-size:13px;font-weight:500;margin-bottom:2px;${isDone?'text-decoration:line-through;color:var(--text3)':''}">${item.title}</div>
+            <div style="font-size:12px;color:var(--text2);margin-bottom:4px">${item.desc}</div>
+            <div style="font-size:11px;font-family:var(--mono);color:var(--accent)">HOW: ${item.fix}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  updateSummary();
+}
+
+function toggleSM(id) {
+  const done = S.get('smDone', []);
+  const idx = done.indexOf(id);
+  if (idx === -1) done.push(id); else done.splice(idx, 1);
+  S.set('smDone', done);
+  renderChecklist();
+  S.updateScoreUI();
+  renderNav('Social Media Audit');
+}
+
+function updateSummary() {
+  const done = S.get('smDone', []);
+  const allItems = Object.values(CHECKLISTS).flatMap(c => c.items);
+  const totalDone = allItems.filter(i => done.includes(i.id)).length;
+  const total = allItems.length;
+  document.getElementById('sm_done').textContent = totalDone;
+  document.getElementById('sm_total').textContent = total;
+  document.getElementById('sm_bar').style.width = (totalDone / total * 100).toFixed(0) + '%';
+
+  document.getElementById('sm_summary').innerHTML = Object.entries(CHECKLISTS).map(([k, cl]) => {
+    const clDone = cl.items.filter(i => done.includes(i.id)).length;
+    const pct = Math.round(clDone / cl.items.length * 100);
+    return `<div style="background:var(--bg3);border:1px solid var(--border);padding:10px;border-radius:2px;cursor:pointer" onclick="setTab('${k}')">
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:4px">${cl.label}</div>
+      <div style="font-family:var(--mono);font-size:16px;color:${pct===100?'var(--green)':pct>50?'var(--amber)':'var(--text)'}">${pct}%</div>
+      <div class="prog-bar-wrap" style="margin-top:6px"><div class="prog-bar" style="width:${pct}%;background:${pct===100?'var(--green)':pct>50?'var(--amber)':'var(--accent)'}"></div></div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

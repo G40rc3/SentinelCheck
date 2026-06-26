@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Breach Monitor</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 07</div>
+      <h1>Breach Monitor</h1>
+      <p class="page-sub">Check which accounts may have appeared in data breaches and close the ones you no longer use.</p>
+    </div>
+  </header>
+
+  <div class="page-section">
+    <h2>Check Your Email Addresses for Breaches</h2>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
+      Data from breaches can end up in broker databases, scam lists, or be reused by attackers. A leaked email and password from an old breach can still create risk today. Check every address you use.
+    </p>
+    <div style="display:flex;gap:10px;margin-bottom:14px">
+      <input class="form-input" id="emailToCheck" placeholder="yourname@email.com" style="flex:1" onkeydown="if(event.key==='Enter')addEmail()">
+      <button class="btn-primary" onclick="addEmail()">ADD ADDRESS</button>
+    </div>
+    <div id="emailList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
+    <div style="padding:14px;background:var(--bg3);border:1px solid var(--border);border-radius:2px">
+      <div style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-bottom:8px">HOW TO CHECK</div>
+      <ol style="font-size:12px;color:var(--text2);padding-left:18px;line-height:2">
+        <li>Add your email addresses above to keep track</li>
+        <li>Click <strong style="color:var(--text)">CHECK ON HIBP</strong> next to each one: opens HaveIBeenPwned.com</li>
+        <li>HIBP shows every breach your address appears in</li>
+        <li>For each breach: change that account's password, use a unique one via Bitwarden</li>
+        <li>If you don't use the account anymore: delete it (see Account Graveyard below)</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Key Breach Resources</h2>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">HaveIBeenPwned</div><span class="badge ok">AUTHORITATIVE</span></div>
+        <p class="tool-desc">The definitive breach database by Troy Hunt. 14+ billion breached accounts indexed. Free, trustworthy, used by governments and security teams worldwide.</p>
+        <div class="tool-actions"><a href="https://haveibeenpwned.com" target="_blank" rel="noopener" class="btn-ghost">CHECK NOW ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">HIBP Password Check</div><span class="badge warn">PASSWORDS</span></div>
+        <p class="tool-desc">Check if a specific password has appeared in a breach. Uses k-anonymity: your actual password never leaves your browser. Check all your common passwords.</p>
+        <div class="tool-actions"><a href="https://haveibeenpwned.com/Passwords" target="_blank" rel="noopener" class="btn-ghost">CHECK PASSWORDS ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Firefox Monitor</div><span class="badge info">ONGOING</span></div>
+        <p class="tool-desc">Mozilla's breach monitoring service powered by HIBP. Sign up for ongoing alerts: get notified automatically when your email appears in a new breach.</p>
+        <div class="tool-actions"><a href="https://monitor.firefox.com" target="_blank" rel="noopener" class="btn-ghost">SIGN UP ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Bitwarden (Password Manager)</div><span class="badge ok">ESSENTIAL</span></div>
+        <p class="tool-desc">The solution to breach exposure: unique passwords for every account. Bitwarden generates and stores them. One breached password should not unlock the rest of your accounts.</p>
+        <div class="tool-actions"><a href="https://bitwarden.com" target="_blank" rel="noopener" class="btn-ghost">GET BITWARDEN ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Account Graveyard: Old Accounts to Delete</h2>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">
+      Every old account you forgot about is a data breach waiting to happen. Track the ones you need to delete. <strong style="color:var(--text)">JustDeleteMe</strong> rates how hard sites make account deletion.
+    </p>
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <input class="form-input" id="graveName" placeholder="Service name (e.g. MySpace, old forum)" style="flex:1">
+      <input class="form-input" id="graveEmail" placeholder="Email used to sign up" style="flex:1">
+      <select class="form-select" id="graveDiff" style="width:160px">
+        <option value="easy">Easy to delete</option>
+        <option value="medium">Medium difficulty</option>
+        <option value="hard">Hard to delete</option>
+        <option value="impossible">Impossible / no option</option>
+      </select>
+      <button class="btn-primary" onclick="addGrave()">ADD</button>
+    </div>
+    <div style="margin-bottom:14px;display:flex;gap:10px;align-items:center">
+      <a href="https://justdeleteme.xyz" target="_blank" rel="noopener" class="btn-ghost" style="font-size:10px">CHECK JUSTDELETEME.XYZ ↗</a>
+      <span style="font-size:12px;color:var(--text3)">rates how hard it is to delete accounts on 500+ services</span>
+    </div>
+    <div id="graveList"></div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav('Breach Monitor');
+  renderEmails();
+  renderGrave();
+});
+
+function addEmail() {
+  const val = document.getElementById('emailToCheck').value.trim();
+  if (!val || !val.includes('@')) { alert('Enter a valid email address.'); return; }
+  const list = S.get('watchEmails', []);
+  if (list.find(e => e.email === val)) { alert('Already added.'); return; }
+  list.unshift({email: val, id: Date.now(), notes: ''});
+  S.set('watchEmails', list);
+  document.getElementById('emailToCheck').value = '';
+  renderEmails();
+}
+
+function removeEmail(id) {
+  S.set('watchEmails', S.get('watchEmails', []).filter(e => e.id !== id));
+  renderEmails();
+}
+
+function renderEmails() {
+  const list = S.get('watchEmails', []);
+  if (!list.length) {
+    document.getElementById('emailList').innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">No addresses added yet.</div>';
+    return;
+  }
+  document.getElementById('emailList').innerHTML = list.map(e => `
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:2px">
+      <span style="font-family:var(--mono);font-size:12px;color:var(--accent);flex:1">${e.email}</span>
+      <a href="https://haveibeenpwned.com/account/${encodeURIComponent(e.email)}" target="_blank" rel="noopener" class="btn-ghost" style="font-size:10px;padding:5px 10px">CHECK ON HIBP ↗</a>
+      <a href="https://monitor.firefox.com/?email=${encodeURIComponent(e.email)}" target="_blank" rel="noopener" class="btn-ghost" style="font-size:10px;padding:5px 10px">FIREFOX MONITOR ↗</a>
+      <button class="btn-icon" onclick="removeEmail(${e.id})">✕</button>
+    </div>`).join('');
+}
+
+function addGrave() {
+  const name = document.getElementById('graveName').value.trim();
+  const email = document.getElementById('graveEmail').value.trim();
+  if (!name) { alert('Enter a service name.'); return; }
+  const list = S.get('graveyard', []);
+  list.unshift({
+    id: Date.now(), name, email,
+    diff: document.getElementById('graveDiff').value,
+    status: 'todo', added: new Date().toLocaleDateString('en-GB')
+  });
+  S.set('graveyard', list);
+  document.getElementById('graveName').value = '';
+  document.getElementById('graveEmail').value = '';
+  renderGrave();
+}
+
+function setGraveStatus(id, val) {
+  const list = S.get('graveyard', []);
+  const item = list.find(g => g.id === id);
+  if (item) item.status = val;
+  S.set('graveyard', list);
+  renderGrave();
+}
+
+function removeGrave(id) {
+  S.set('graveyard', S.get('graveyard', []).filter(g => g.id !== id));
+  renderGrave();
+}
+
+function renderGrave() {
+  const list = S.get('graveyard', []);
+  const diffColor = {easy:'var(--green)',medium:'var(--amber)',hard:'var(--red)',impossible:'var(--red)'};
+  const diffLabel = {easy:'EASY',medium:'MEDIUM',hard:'HARD',impossible:'IMPOSSIBLE'};
+  if (!list.length) {
+    document.getElementById('graveList').innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">No old accounts tracked yet. Add the services you want to delete.</div>';
+    return;
+  }
+  document.getElementById('graveList').innerHTML = `
+    <table class="data-table">
+      <thead><tr><th>SERVICE</th><th>EMAIL USED</th><th>DIFFICULTY</th><th>ADDED</th><th>STATUS</th><th></th></tr></thead>
+      <tbody>${list.map(g => `
+        <tr>
+          <td class="cell-main">${g.name}</td>
+          <td style="font-family:var(--mono);font-size:11px;color:var(--text2)">${g.email||'-'}</td>
+          <td><span style="font-family:var(--mono);font-size:9px;color:${diffColor[g.diff]}">${diffLabel[g.diff]}</span></td>
+          <td style="font-size:11px;color:var(--text3);font-family:var(--mono)">${g.added}</td>
+          <td>
+            <select class="form-select" style="padding:4px 8px;font-size:11px;width:120px" onchange="setGraveStatus(${g.id},this.value)">
+              <option value="todo" ${g.status==='todo'?'selected':''}>To Delete</option>
+              <option value="requested" ${g.status==='requested'?'selected':''}>Requested</option>
+              <option value="deleted" ${g.status==='deleted'?'selected':''}>Deleted ✓</option>
+            </select>
+          </td>
+          <td>
+            <a href="https://justdeleteme.xyz/#${encodeURIComponent(g.name.toLowerCase())}" target="_blank" rel="noopener" class="btn-icon copy" style="text-decoration:none;font-size:9px;padding:3px 7px">HOW TO DELETE ↗</a>
+            <button class="btn-icon" onclick="removeGrave(${g.id})" style="margin-left:4px">✕</button>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+</script>
+</body>
+</html>

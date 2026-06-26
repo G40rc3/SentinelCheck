@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Cookie & Consent</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 13</div>
+      <h1>Cookie & Consent Audit</h1>
+      <p class="page-sub">Cookie banners are designed to trick you into accepting. Here's how to reject everything automatically.</p>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text2)"><span id="ck_done">0</span>/12 done</div>
+  </header>
+
+  <div class="alert-banner" style="background:var(--red-dim);border-color:rgba(255,61,61,.25)">
+    <span>⚠</span>
+    <span>"Accept All" loads 30 to 150 tracking scripts per page. Dark patterns make the reject option deliberately hard to find. You have the right to reject all non-essential cookies under UK GDPR: and it must be as easy as accepting.</span>
+  </div>
+
+  <div class="page-section">
+    <h2>What Cookie Banners Actually Do</h2>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--red);margin-bottom:6px">ACCEPT ALL</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8">Typically loads 30 to 150 trackers. Google Analytics, Meta Pixel, dozens of ad networks. Your behaviour on that page is now sold to hundreds of companies. This is what they want you to click.</p>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--amber);margin-bottom:6px">LEGITIMATE INTEREST</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8">The sneakiest category. Companies claim a "legitimate interest" in tracking you without consent. Under GDPR you can object: but most banners bury this behind 5+ extra screens. Tools below handle it automatically.</p>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);padding:14px;border-radius:2px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--green);margin-bottom:6px">REJECT ALL / ESSENTIAL ONLY</div>
+        <p style="font-size:12px;color:var(--text2);line-height:1.8">Only loads cookies needed for the site to function. No trackers. Under UK GDPR, refusing must be as easy as accepting: so this button must exist. Extensions below find and click it for you.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Tools That Automatically Reject Cookies</h2>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">uBlock Origin (with cookie filter lists)</div><span class="badge ok">BEST</span></div>
+        <p class="tool-desc">Add the "EasyList Cookie List" and "I don't care about cookies" filter lists to uBlock. It blocks most cookie banners entirely: they never appear. Cleanest solution.</p>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin:8px 0">HOW: uBlock dashboard → Filter Lists → Annoyances → enable "EasyList Cookie" and "uBlock filters - Annoyances"</div>
+        <div class="tool-actions"><a href="https://ublockorigin.com" target="_blank" rel="noopener" class="btn-ghost">GET UBLOCK ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Consent-O-Matic</div><span class="badge info">AUTO-REJECT</span></div>
+        <p class="tool-desc">Browser extension that recognises cookie consent platforms (OneTrust, CookieBot, etc.) and automatically selects the minimum consent option: rejecting all non-essential cookies.</p>
+        <div class="tool-actions"><a href="https://consentomatic.au.dk" target="_blank" rel="noopener" class="btn-ghost">GET EXTENSION ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Cookie AutoDelete</div><span class="badge info">CLEANUP</span></div>
+        <p class="tool-desc">Automatically deletes cookies from sites you've closed. Whitelist sites you trust. Stops long-term tracking cookies accumulating even when you do accidentally accept.</p>
+        <div class="tool-actions"><a href="https://addons.mozilla.org/en-GB/firefox/addon/cookie-autodelete/" target="_blank" rel="noopener" class="btn-ghost">GET EXTENSION ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Firefox Total Cookie Protection</div><span class="badge ok">BUILT-IN</span></div>
+        <p class="tool-desc">Firefox's built-in "Total Cookie Protection" puts each website's cookies in a separate jar: so tracking cookies can't follow you between sites even if you accept them.</p>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--accent);margin:8px 0">HOW: Firefox Settings → Privacy → Enhanced Tracking Protection → Strict mode enables this automatically</div>
+        <div class="tool-actions"><a href="https://www.mozilla.org/en-GB/firefox/" target="_blank" rel="noopener" class="btn-ghost">GET FIREFOX ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Consent & Cookie Checklist</h2>
+    <div id="ckChecklist"></div>
+  </div>
+
+  <div class="page-section">
+    <h2>Your GDPR Rights on Cookie Consent</h2>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="background:var(--bg3);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 2px 2px 0">
+        <div style="font-size:13px;font-weight:500;margin-bottom:3px">Refusing must be as easy as accepting</div>
+        <div style="font-size:12px;color:var(--text2)">Under UK GDPR, if a site has an "Accept All" button, it must have an equally prominent "Reject All" button. A site that hides the reject option is violating the law. Report to: ico.org.uk/make-a-complaint</div>
+      </div>
+      <div style="background:var(--bg3);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 2px 2px 0">
+        <div style="font-size:13px;font-weight:500;margin-bottom:3px">Legitimate interest can be objected to</div>
+        <div style="font-size:12px;color:var(--text2)">Sites claiming "legitimate interest" for tracking must provide a way to object. If the reject option is missing or hard to find, consider reporting the issue to the ICO. Consent-O-Matic handles this automatically.</div>
+      </div>
+      <div style="background:var(--bg3);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 2px 2px 0">
+        <div style="font-size:13px;font-weight:500;margin-bottom:3px">Pre-ticked boxes are illegal</div>
+        <div style="font-size:12px;color:var(--text2)">Consent must be a positive opt-in action. Pre-ticked "I agree to share my data" boxes are illegal under UK GDPR. Untick and report.</div>
+      </div>
+      <div style="background:var(--bg3);border-left:3px solid var(--green);padding:12px 16px;border-radius:0 2px 2px 0">
+        <div style="font-size:13px;font-weight:500;margin-bottom:3px">You can withdraw consent at any time</div>
+        <div style="font-size:12px;color:var(--text2)">Any consent you've given can be withdrawn. The site must make this as easy as giving it. Cookie settings are usually accessible via the footer of a site.</div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener" class="btn-ghost">REPORT TO ICO ↗</a>
+    </div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Cookie & Consent'); renderCk(); });
+
+const CK = [
+  {id:'ck01',impact:'high',title:'Add cookie filter lists to uBlock Origin',desc:'EasyList Cookie and uBlock Annoyances filter lists block most cookie banners before they even appear.',fix:'uBlock dashboard → Filter Lists → scroll to Annoyances section → enable both cookie lists → Apply changes'},
+  {id:'ck02',impact:'high',title:'Install Consent-O-Matic',desc:'Automatically handles cookie banners on sites that slip through uBlock: sets minimum consent on over 60 consent management platforms.',fix:'Install from consentomatic.au.dk: available for Firefox and Chrome',link:'https://consentomatic.au.dk'},
+  {id:'ck03',impact:'high',title:'Enable Firefox Strict Tracking Protection',desc:'Activates Total Cookie Protection: puts each site\'s cookies in an isolated jar so they can\'t track you cross-site.',fix:'Firefox Settings → Privacy & Security → Enhanced Tracking Protection → Strict'},
+  {id:'ck04',impact:'high',title:'Install Cookie AutoDelete',desc:'Automatically deletes cookies from closed tabs. Stops tracking cookies accumulating over time.',fix:'Install Cookie AutoDelete from Firefox Add-ons. Whitelist trusted sites (like your email or bank).',link:'https://addons.mozilla.org/en-GB/firefox/addon/cookie-autodelete/'},
+  {id:'ck05',impact:'med',title:'Clear all existing cookies',desc:'You may have years of accumulated tracking cookies. Start fresh.',fix:'Firefox: Settings → Privacy → Clear Data → Cookies and Site Data → Clear. Or Cookie AutoDelete → Clean All.'},
+  {id:'ck06',impact:'med',title:'Never click "Accept All" without reading',desc:'The default should always be to reject or minimise consent. Only accept if you understand what you\'re agreeing to.',fix:'Habit change: look for "Reject All", "Essential Only", or "Manage Preferences" before accepting anything.'},
+  {id:'ck07',impact:'med',title:'Audit Google consent settings',desc:'Google has its own consent framework separate from cookie banners that controls how your data is used across all Google services.',fix:'Visit myadcenter.google.com → review and disable all personalisation options'},
+  {id:'ck08',impact:'med',title:'Opt out of IAB Transparency & Consent Framework',desc:'The advertising industry\'s consent system used by thousands of sites. You can opt out globally.',fix:'Visit optout.iabeurope.eu: sets an opt-out cookie (use Cookie AutoDelete whitelist to keep this one).',link:'https://optout.iabeurope.eu'},
+  {id:'ck09',impact:'low',title:'Use Firefox Multi-Account Containers per site category',desc:'Keeps cookies from social media, shopping, and news sites completely isolated from each other.',fix:'Install Firefox Multi-Account Containers → create containers for Social, Shopping, News → assign sites to containers'},
+  {id:'ck10',impact:'low',title:'Opt out of Network Advertising Initiative',desc:'Opt-out from dozens of advertising networks at once.',fix:'Visit optout.networkadvertising.org: opt out of all listed networks',link:'https://optout.networkadvertising.org'},
+  {id:'ck11',impact:'low',title:'Opt out of Digital Advertising Alliance',desc:'Another industry opt-out covering US-based ad networks.',fix:'Visit youradchoices.com/control: opt out of personalised advertising',link:'https://youradchoices.com/control'},
+  {id:'ck12',impact:'low',title:'Report illegal cookie practices to the ICO',desc:'Sites that make rejection harder than acceptance, use pre-ticked boxes, or have no reject option are breaking UK law.',fix:'ico.org.uk/make-a-complaint → Online and social media → Cookies. Takes 5 minutes.',link:'https://ico.org.uk/make-a-complaint/'},
+];
+
+function renderCk() {
+  const done = S.get('ckDone', []);
+  document.getElementById('ck_done').textContent = done.length;
+  document.getElementById('ckChecklist').innerHTML = CK.map(item => {
+    const isDone = done.includes(item.id);
+    return `<div style="display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);align-items:flex-start">
+      <button onclick="toggle('${item.id}')" style="width:22px;height:22px;flex-shrink:0;margin-top:2px;background:${isDone?'var(--green)':'transparent'};border:1px solid ${isDone?'var(--green)':'var(--border2)'};color:${isDone?'#03110f':'var(--text3)'};font-size:11px;cursor:pointer;border-radius:2px;transition:all .15s">${isDone?'✓':''}</button>
+      <div style="flex:1">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:3px">
+          <span style="font-size:13px;font-weight:500;${isDone?'text-decoration:line-through;color:var(--text3)':''}">${item.title}</span>
+          <span class="badge ${item.impact==='high'?'danger':item.impact==='med'?'warn':'muted'}">${item.impact.toUpperCase()}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:4px">${item.desc}</div>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--accent)">FIX: ${item.fix}${item.link?` <a href="${item.link}" target="_blank" rel="noopener" style="color:var(--accent)">[link ↗]</a>`:''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggle(id) {
+  const done = S.get('ckDone', []);
+  const i = done.indexOf(id); if (i===-1) done.push(id); else done.splice(i,1);
+  S.set('ckDone', done); renderCk(); S.updateScoreUI(); renderNav('Cookie & Consent');
+}
+</script>
+</body>
+</html>

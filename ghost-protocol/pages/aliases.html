@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Email Aliases</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 04</div>
+      <h1>Email Aliases</h1>
+      <p class="page-sub">One alias per service. When spam arrives you know exactly who sold you.</p>
+    </div>
+    <button class="btn-primary" onclick="showAddForm()">+ ADD ALIAS</button>
+  </header>
+
+  <div class="page-section" id="addForm" style="display:none">
+    <h2>Add New Alias</h2>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="form-group">
+        <label class="form-label">ALIAS ADDRESS</label>
+        <input class="form-input" id="newAlias" placeholder="netflix-2024@simplelogin.io">
+      </div>
+      <div class="form-group">
+        <label class="form-label">SERVICE / SITE</label>
+        <input class="form-input" id="newService" placeholder="Netflix">
+      </div>
+      <div class="form-group">
+        <label class="form-label">NOTES (OPTIONAL)</label>
+        <input class="form-input" id="newNotes" placeholder="Signed up Jan 2025">
+      </div>
+      <div class="form-group">
+        <label class="form-label">STATUS</label>
+        <select class="form-select" id="newStatus">
+          <option value="clean">Clean: no spam yet</option>
+          <option value="spam">Getting spam: compromised</option>
+          <option value="blocked">Blocked / Deactivated</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn-primary" onclick="addAlias()">SAVE ALIAS</button>
+      <button class="btn-ghost" onclick="hideAddForm()">CANCEL</button>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Why Aliases Work
+      <span style="font-size:11px;font-weight:400;color:var(--text2);font-family:var(--sans)">The isolation principle</span>
+    </h2>
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:0">
+      <div style="background:var(--bg3);padding:14px;border-radius:2px;border:1px solid var(--border)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-bottom:6px">ISOLATION</div>
+        <p style="font-size:12px;color:var(--text2)">Each service gets a unique address. Data brokers can't link your accounts across services: they see completely different identities.</p>
+      </div>
+      <div style="background:var(--bg3);padding:14px;border-radius:2px;border:1px solid var(--border)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-bottom:6px">DETECTION</div>
+        <p style="font-size:12px;color:var(--text2)">Spam to <span style="font-family:var(--mono);font-size:11px;color:var(--amber)">netflix@alias.io</span> means Netflix sold your data. You know instantly. You cut the alias and move on.</p>
+      </div>
+      <div style="background:var(--bg3);padding:14px;border-radius:2px;border:1px solid var(--border)">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-bottom:6px">CONTROL</div>
+        <p style="font-size:12px;color:var(--text2)">Deactivate any alias instantly. The spam stops. Your real inbox is never touched. You're always in control.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Recommended Alias Services</h2>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">SimpleLogin</div><span class="badge ok">BEST</span></div>
+        <p class="tool-desc">Open source, acquired by Proton. Free tier: 10 aliases. Paid: unlimited. Integrates with ProtonMail perfectly.</p>
+        <div class="tool-actions"><a href="https://simplelogin.io" target="_blank" rel="noopener" class="btn-ghost">GET SIMPLELOGIN ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">AnonAddy</div><span class="badge info">OPEN SOURCE</span></div>
+        <p class="tool-desc">Fully open source. Self-hostable. Free tier includes unlimited aliases. UK-based.</p>
+        <div class="tool-actions"><a href="https://addy.io" target="_blank" rel="noopener" class="btn-ghost">GET ANONADDR ↗</a></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Apple Hide My Email</div><span class="badge muted">APPLE ONLY</span></div>
+        <p class="tool-desc">Built into iOS/macOS with iCloud+. Generates per-site aliases automatically. Convenient if you're in the Apple ecosystem.</p>
+        <div class="tool-actions"><span style="font-size:12px;color:var(--text3)">Available in iCloud+ settings</span></div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-header"><div class="tool-name">Firefox Relay</div><span class="badge muted">FIREFOX</span></div>
+        <p class="tool-desc">Mozilla's alias service. Free tier: 5 aliases. Integrates directly into Firefox browser for one-click alias generation on signup forms.</p>
+        <div class="tool-actions"><a href="https://relay.firefox.com" target="_blank" rel="noopener" class="btn-ghost">GET RELAY ↗</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>Your Aliases <span id="aliasCount" style="font-family:var(--mono);font-size:12px;color:var(--text3)">0 saved</span></h2>
+    <div id="aliasList">
+      <div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">No aliases logged yet. Add your first one above.</div>
+    </div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Email Aliases'); renderAliases(); });
+
+function showAddForm() { document.getElementById('addForm').style.display='block'; document.getElementById('newAlias').focus(); }
+function hideAddForm() { document.getElementById('addForm').style.display='none'; }
+
+function addAlias() {
+  const alias = document.getElementById('newAlias').value.trim();
+  const service = document.getElementById('newService').value.trim();
+  if (!alias || !service) { alert('Alias address and service name are required.'); return; }
+  const aliases = S.get('aliases', []);
+  aliases.unshift({
+    id: Date.now(),
+    alias, service,
+    notes: document.getElementById('newNotes').value.trim(),
+    status: document.getElementById('newStatus').value,
+    created: new Date().toLocaleDateString('en-GB')
+  });
+  S.set('aliases', aliases);
+  hideAddForm();
+  document.getElementById('newAlias').value = '';
+  document.getElementById('newService').value = '';
+  document.getElementById('newNotes').value = '';
+  renderAliases();
+  S.updateScoreUI();
+  renderNav('Email Aliases');
+}
+
+function deleteAlias(id) {
+  if (!confirm('Delete this alias?')) return;
+  S.set('aliases', S.get('aliases', []).filter(a => a.id !== id));
+  renderAliases();
+  S.updateScoreUI();
+  renderNav('Email Aliases');
+}
+
+function setAliasStatus(id, status) {
+  const aliases = S.get('aliases', []);
+  const a = aliases.find(a => a.id === id);
+  if (a) a.status = status;
+  S.set('aliases', aliases);
+  renderAliases();
+}
+
+function copyAlias(text) {
+  navigator.clipboard.writeText(text);
+}
+
+function renderAliases() {
+  const aliases = S.get('aliases', []);
+  document.getElementById('aliasCount').textContent = aliases.length + ' saved';
+  if (aliases.length === 0) {
+    document.getElementById('aliasList').innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">No aliases logged yet. Add your first one above.</div>';
+    return;
+  }
+  const statusColor = {clean:'var(--green)',spam:'var(--red)',blocked:'var(--text3)'};
+  const statusLabel = {clean:'CLEAN',spam:'COMPROMISED',blocked:'BLOCKED'};
+  document.getElementById('aliasList').innerHTML = `
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.2fr auto;gap:12px;padding:8px 0;font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;border-bottom:1px solid var(--border)">
+      <span>ALIAS</span><span>SERVICE</span><span>CREATED</span><span>STATUS</span><span></span>
+    </div>
+    ${aliases.map(a => `
+    <div  class="responsive-grid" style="display:grid;grid-template-columns:2fr 1.2fr 1fr 1.2fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center">
+      <span style="font-family:var(--mono);font-size:11px;color:var(--accent);word-break:break-all">${a.alias}
+        <button class="btn-icon copy" onclick="copyAlias('${a.alias}')" style="margin-left:4px;font-size:9px;padding:2px 6px">COPY</button>
+      </span>
+      <span style="font-size:13px">${a.service}${a.notes?`<div style="font-size:10px;color:var(--text3)">${a.notes}</div>`:''}</span>
+      <span style="font-family:var(--mono);font-size:10px;color:var(--text3)">${a.created}</span>
+      <span>
+        <select class="form-select" style="padding:4px 8px;font-size:10px" onchange="setAliasStatus(${a.id},this.value)">
+          <option value="clean" ${a.status==='clean'?'selected':''}>✓ Clean</option>
+          <option value="spam" ${a.status==='spam'?'selected':''}>⚠ Compromised</option>
+          <option value="blocked" ${a.status==='blocked'?'selected':''}>✗ Blocked</option>
+        </select>
+      </span>
+      <button class="btn-icon" onclick="deleteAlias(${a.id})">✕</button>
+    </div>`).join('')}`;
+}
+</script>
+</body>
+</html>

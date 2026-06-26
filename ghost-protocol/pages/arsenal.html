@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost Protocol: Tool Arsenal</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="scanline"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-bridge" aria-label="Sentinel Check navigation">
+  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
+    <span class="site-name">Sentinel Check</span>
+    <span class="site-divider">/</span>
+    <span class="site-product">Ghost Protocol</span>
+  </a>
+  <nav class="site-bridge-nav" aria-label="Main website links">
+    <a href="/">Home</a>
+    <a href="/learning-hub.html">Learning Hub</a>
+    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
+  </nav>
+</header>
+<aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
+<main id="main-content" class="main" tabindex="-1">
+  <header class="topbar">
+    <div>
+      <div class="page-tag">MODULE 02</div>
+      <h1>Tool Arsenal</h1>
+      <p class="page-sub">Every tool you need, ordered by impact. Tick them off as you install.</p>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text2)"><span id="doneCount">0</span>/12 installed</div>
+  </header>
+
+  <div class="page-section">
+    <h2>🔴 Critical: Install These First</h2>
+    <div class="tool-grid" id="critical"></div>
+  </div>
+  <div class="page-section">
+    <h2>🟡 High Impact</h2>
+    <div class="tool-grid" id="high"></div>
+  </div>
+  <div class="page-section">
+    <h2>🟢 Next Level</h2>
+    <div class="tool-grid" id="next"></div>
+  </div>
+</main>
+<script src="../js/state.js"></script>
+<script src="../js/nav.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => { renderNav('Tool Arsenal'); renderTools(); });
+
+const TOOLS = [
+  {
+    id:'ublock', tier:'critical', name:'uBlock Origin', impact:'CRITICAL',
+    desc:'The most effective ad and tracker blocker. Kills Google Analytics, Facebook Pixel, and thousands of other trackers dead. Works on every site. Free and open source.',
+    why:'Without this, every site you visit sends your behaviour to dozens of third parties. This is the single most impactful thing you can do.',
+    link:'https://ublockorigin.com', linkLabel:'Install (Firefox)', tags:['Browser Extension','Free','Open Source']
+  },
+  {
+    id:'firefox', tier:'critical', name:'Firefox + Strict Mode', impact:'CRITICAL',
+    desc:'Switch your default browser. Then go to Settings → Privacy → Strict mode. This enables built-in tracker isolation that Chrome doesn\'t have.',
+    why:'Chrome is Google\'s product. Firefox is built by a non-profit with privacy as a core mission. It also supports uBlock Origin better.',
+    link:'https://www.mozilla.org/en-GB/firefox/', linkLabel:'Download Firefox', tags:['Browser','Free','Open Source']
+  },
+  {
+    id:'containers', tier:'critical', name:'Firefox Multi-Account Containers', impact:'CRITICAL',
+    desc:'Puts each website in its own isolated container. Facebook can\'t see what you do on Google. Google can\'t see what you do on Amazon. Total cross-site isolation.',
+    why:'Third-party cookies and pixels work by sharing your identity across sites. Containers make each site think you\'re a different person.',
+    link:'https://addons.mozilla.org/en-GB/firefox/addon/multi-account-containers/', linkLabel:'Install Extension', tags:['Firefox Extension','Free','Mozilla']
+  },
+  {
+    id:'simplelogin', tier:'critical', name:'SimpleLogin (Email Aliases)', impact:'CRITICAL',
+    desc:'Generates a unique email alias for every site you sign up to. Your real inbox is never exposed. When spam arrives you know exactly who sold it.',
+    why:'Your email address is the primary key data brokers use to link your accounts. One alias per site breaks this completely.',
+    link:'https://simplelogin.io', linkLabel:'Get SimpleLogin', tags:['Email','Free tier','Open Source']
+  },
+  {
+    id:'adnauseam', tier:'high', name:'AdNauseam', impact:'HIGH',
+    desc:'Built on uBlock Origin. Blocks ads AND clicks every blocked ad in the background: making your ad profile useless. Based on academic research in obfuscation.',
+    why:'Blocking alone means no profile is built. AdNauseam goes further: it actively pollutes the profile so even blocked data becomes worthless noise.',
+    link:'https://adnauseam.io', linkLabel:'Get AdNauseam', tags:['Browser Extension','Free','Obfuscation']
+  },
+  {
+    id:'mullvad', tier:'high', name:'Mullvad VPN', impact:'HIGH',
+    desc:'The most privacy-focused paid VPN. Accepts cash, doesn\'t require an email to sign up, is independently audited, and keeps zero logs. €5/month.',
+    why:'Hides your IP address and location from every site you visit. Your ISP can\'t see what you\'re doing either.',
+    link:'https://mullvad.net', linkLabel:'Get Mullvad', tags:['VPN','Paid €5/mo','Audited']
+  },
+  {
+    id:'bitwarden', tier:'high', name:'Bitwarden', impact:'HIGH',
+    desc:'Open source password manager. Lets you use unique, random passwords for every site: so a breach on one site doesn\'t expose all your others.',
+    why:'Password reuse is how accounts get chain-compromised. With Bitwarden you generate one strong password per site and never type it.',
+    link:'https://bitwarden.com', linkLabel:'Get Bitwarden', tags:['Password Manager','Free','Open Source']
+  },
+  {
+    id:'trackmenot', tier:'high', name:'TrackMeNot', impact:'HIGH',
+    desc:'Fires randomised search queries in the background to pollute your search profile. Based on NYU research: similar philosophy to AdNauseam but for search engines.',
+    why:'Search engines build extremely detailed profiles from your queries. Flooding them with noise makes your real interests invisible.',
+    link:'https://cs.nyu.edu/trackmenot/', linkLabel:'Get TrackMeNot', tags:['Browser Extension','Free','Research-backed']
+  },
+  {
+    id:'privacybadger', tier:'next', name:'Privacy Badger (EFF)', impact:'MEDIUM',
+    desc:'Made by the Electronic Frontier Foundation. Learns which trackers follow you across sites and blocks them automatically. Complements uBlock Origin.',
+    why:'Uses a heuristic approach that catches trackers uBlock might miss. The EFF is the most respected digital rights organisation.',
+    link:'https://privacybadger.org', linkLabel:'Get Privacy Badger', tags:['Browser Extension','Free','EFF']
+  },
+  {
+    id:'protonmail', tier:'next', name:'ProtonMail', impact:'MEDIUM',
+    desc:'End-to-end encrypted email. Based in Switzerland, outside EU and US jurisdiction, open source. Your email content is invisible even to Proton\'s servers.',
+    why:'Standard email is readable by your provider, governments, and anyone who gets access. ProtonMail solves this technically.',
+    link:'https://proton.me', linkLabel:'Get ProtonMail', tags:['Email','Free tier','E2E Encrypted']
+  },
+  {
+    id:'duckduckgo', tier:'next', name:'DuckDuckGo Search', impact:'MEDIUM',
+    desc:'Search engine that doesn\'t track you, build profiles, or personalise results. Set it as your default search engine today.',
+    why:'Google\'s search results are personalised based on your profile. DuckDuckGo shows the same results to everyone.',
+    link:'https://duckduckgo.com', linkLabel:'Set as Default', tags:['Search Engine','Free']
+  },
+  {
+    id:'portmaster', tier:'next', name:'Portmaster (DNS Firewall)', impact:'MEDIUM',
+    desc:'System-level DNS firewall that blocks trackers and ads at the OS level: affecting every app on your computer, not just your browser.',
+    why:'Many apps phone home even without a browser. Portmaster intercepts these connections and blocks known tracking domains.',
+    link:'https://safing.io/portmaster/', linkLabel:'Get Portmaster', tags:['Desktop App','Free','Open Source']
+  },
+];
+
+function renderTools() {
+  const done = S.get('toolsDone', []);
+  document.getElementById('doneCount').textContent = done.length;
+  ['critical','high','next'].forEach(tier => {
+    const container = document.getElementById(tier);
+    const tools = TOOLS.filter(t => t.tier === tier);
+    container.innerHTML = tools.map(t => {
+      const isDone = done.includes(t.id);
+      return `<div class="tool-card${isDone?' tool-done':''}" id="tc_${t.id}" style="${isDone?'border-color:rgba(0,227,208,.2);background:rgba(0,227,208,.04)':''}">
+        <div class="tool-header">
+          <div class="tool-name">${t.name}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="badge ${t.impact==='CRITICAL'?'danger':t.impact==='HIGH'?'warn':'muted'}">${t.impact}</span>
+          </div>
+        </div>
+        <p class="tool-desc">${t.desc}</p>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:10px;padding:8px;background:var(--bg2);border-radius:2px">WHY: ${t.why}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${t.tags.map(tag=>`<span class="tool-tag">${tag}</span>`).join('')}</div>
+        <div class="tool-actions">
+          <a href="${t.link}" target="_blank" rel="noopener" class="btn-ghost" style="font-size:10px;padding:6px 12px">${t.linkLabel} ↗</a>
+          <button onclick="toggleDone('${t.id}')" class="btn-icon ${isDone?'':'copy'}" style="${isDone?'border-color:var(--green);color:var(--green)':''}">
+            ${isDone?'✓ INSTALLED':'MARK INSTALLED'}
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+  });
+}
+
+function toggleDone(id) {
+  const done = S.get('toolsDone', []);
+  const idx = done.indexOf(id);
+  if (idx === -1) done.push(id); else done.splice(idx, 1);
+  S.set('toolsDone', done);
+  renderTools();
+  S.updateScoreUI();
+  renderNav('Tool Arsenal');
+}
+</script>
+</body>
+</html>
