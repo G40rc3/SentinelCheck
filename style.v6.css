@@ -598,6 +598,52 @@ footer {
 
 .footer-copy { color: rgba(143, 163, 184, 0.55); font-size: 0.82rem; }
 
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: rgba(143, 163, 184, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.footer-social span:first-child {
+  color: rgba(234, 242, 239, 0.74);
+}
+
+.footer-social a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+
+.footer-ico {
+  color: rgba(143, 163, 184, 0.72);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  max-width: 780px;
+  margin: 2px auto 0;
+}
+
+@media (max-width: 540px) {
+  .footer-social {
+    gap: 7px;
+    font-size: 0.8rem;
+  }
+
+  .footer-ico {
+    font-size: 0.74rem;
+  }
+}
+
 
 section { scroll-margin-top: 80px; }
 
@@ -1645,7 +1691,6 @@ section { scroll-margin-top: 80px; }
 }
 
 
-
 /* Keep Ghost Protocol action column aligned to the same start line as Learning Hub. */
 .ghost-home-card {
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
@@ -1684,7 +1729,6 @@ section { scroll-margin-top: 80px; }
     white-space: normal;
   }
 }
-
 
 
 @media (max-width: 760px) {
