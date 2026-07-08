@@ -156,7 +156,15 @@
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.03;
+    controls.enablePan = false;
     controls.enableZoom = false;
+
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(hover: none)").matches;
+    if (isTouchDevice) {
+        controls.enableRotate = false;
+        renderer.domElement.style.touchAction = "pan-y";
+        document.body.style.touchAction = "pan-y";
+    }
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
 
