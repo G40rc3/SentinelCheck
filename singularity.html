@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;" />
+  <title>Sentinel Check Shared Digital System Visual</title>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #05090D;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #EAF2EF;
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+    #overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 56px;
+        padding: clamp(32px, 4vw, 46px);
+        background: radial-gradient(circle at center, transparent 35%, rgba(5,9,13,0.55) 100%);
+        z-index: 10;
+    }
+    .header { text-align: center; }
+    .eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #6E8B84;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    .title {
+        font-size: 1.3rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #EAF2EF;
+        margin-bottom: 14px;
+        font-weight: 300;
+    }
+    .status-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: min(760px, 86vw);
+        padding: 8px 22px;
+        background: rgba(29, 158, 117, 0.06);
+        border: 1px solid rgba(29, 158, 117, 0.35);
+        border-radius: 30px;
+        font-size: 0.65rem;
+        line-height: 1.45;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        white-space: normal;
+        transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .method {
+        margin-top: 20px;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #4C6B64;
+    }
+    .method b { color: #1D9E75; font-weight: 600; }
+    .hud-bottom {
+        display: flex;
+        padding-top: 18px;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+        font-size: 0.68rem;
+        opacity: 0.75;
+        letter-spacing: 0.5px;
+    }
+    .metric { margin-bottom: 6px; color: #6E8B84; }
+    .val { color: #1D9E75; font-weight: 600; transition: color 1.5s ease; }
+    #vignette {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle, transparent 45%, #05090D 145%);
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    @media (max-width: 700px) {
+        #overlay { padding: 28px; }
+        .status-pill { max-width: 90vw; letter-spacing: 0.12em; }
+        .hud-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
+        .hud-bottom > div:last-child { text-align: left !important; }
+    }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+            "gsap": "https://unpkg.com/gsap@3.12.5/index.js"
+        }
+    }
+</script>
+</head>
+<body>
+<div id="vignette"></div>
+<div id="overlay">
+    <div class="header">
+        <div class="eyebrow">Sentinel Check</div>
+        <div class="title" id="main-title">Shared System</div>
+        <div class="status-pill" id="status-text" style="color:#C99B47;border-color:#C99B47;">One Exposed Node Can Affect the Whole Field</div>
+        <div class="method">Pause <b>·</b> Check <b>·</b> Protect</div>
+    </div>
+    <div class="hud-bottom">
+        <div>
+            <div class="metric">SYSTEM: <span class="val" id="system-val">Connected Lives, Shared Exposure</span></div>
+            <div class="metric">DUTY: <span class="val" id="duty-val">Protect Yourself, Protect Others</span></div>
+        </div>
+        <div style="text-align: right">
+            <div class="metric">ORBIT: <span class="val" id="orbit-val">Central Access Point</span></div>
+            <div class="metric">SIGNAL: <span class="val" id="signal-val">Scattered</span></div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import gsap from 'gsap';
+
+    const scene = new THREE.Scene();
+    const viewport = () => ({ width: Math.max(320, document.documentElement.clientWidth || window.innerWidth), height: Math.max(320, document.documentElement.clientHeight || window.innerHeight) });
+    const initialSize = viewport();
+    const camera = new THREE.PerspectiveCamera(40, initialSize.width / initialSize.height, 0.1, 1000);
+    camera.position.set(60, 30, 60);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    renderer.setSize(initialSize.width, initialSize.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.3;
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.03;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
+
+    const noiseChunk = `
+        vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+        vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+        vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+        float snoise(vec3 v) {
+            const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+            const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+            vec3 i  = floor(v + dot(v, C.yyy) );
+            vec3 x0 = v - i + dot(i, C.xxx) ;
+            vec3 g = step(x0.yzx, x0.xyz);
+            vec3 l = 1.0 - g;
+            vec3 i1 = min( g.xyz, l.zxy );
+            vec3 i2 = max( g.xyz, l.zxy );
+            vec3 x1 = x0 - i1 + C.xxx;
+            vec3 x2 = x0 - i2 + C.yyy;
+            vec3 x3 = x0 - D.yyy;
+            i = mod289(i);
+            vec4 p = permute( permute( permute( i.z + vec4(0.0, i1.z, i2.z, 1.0 )) + i.y + vec4(0.0, i1.y, i2.y, 1.0 )) + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+            float n_ = 0.142857142857;
+            vec3  ns = n_ * D.wyz - D.xzx;
+            vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+            vec4 x_ = floor(j * ns.z);
+            vec4 y_ = floor(j - 7.0 * x_ );
+            vec4 x = x_ *ns.x + ns.yyyy;
+            vec4 y = y_ *ns.x + ns.yyyy;
+            vec4 h = 1.0 - abs(x) - abs(y);
+            vec4 b0 = vec4( x.xy, y.xy );
+            vec4 b1 = vec4( x.zw, y.zw );
+            vec4 s0 = floor(b0)*2.0 + 1.0;
+            vec4 s1 = floor(b1)*2.0 + 1.0;
+            vec4 sh = -step(h, vec4(0.0));
+            vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+            vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+            vec3 p0 = vec3(a0.xy,h.x);
+            vec3 p1 = vec3(a0.zw,h.y);
+            vec3 p2 = vec3(a1.xy,h.z);
+            vec3 p3 = vec3(a1.zw,h.w);
+            vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+            p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+            vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+            m = m * m;
+            return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+        }
+    `;
+
+    // ---- Core: the business, not a void. A solid navy sphere with a calm teal rim. ----
+    const coreGroup = new THREE.Group();
+    scene.add(coreGroup);
+
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0x0D1B2A });
+    const coreGeo = new THREE.SphereGeometry(4, 64, 64);
+    coreGroup.add(new THREE.Mesh(coreGeo, coreMat));
+
+    const auraMat = new THREE.ShaderMaterial({
+        uniforms: { uTime: { value: 0 }, uIntensity: { value: 0.5 } },
+        vertexShader: `
+            varying vec3 vNormal;
+            varying vec3 vView;
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vView = normalize(-(modelViewMatrix * vec4(position, 1.0)).xyz);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+        fragmentShader: `
+            uniform float uIntensity;
+            varying vec3 vNormal;
+            varying vec3 vView;
+            void main() {
+                float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 4.0);
+                gl_FragColor = vec4(vec3(0.11, 0.62, 0.46) * rim * uIntensity * 5.0, 1.0);
+            }
+        `,
+        side: THREE.BackSide, transparent: true, blending: THREE.AdditiveBlending
+    });
+    coreGroup.add(new THREE.Mesh(new THREE.SphereGeometry(4.25, 64, 64), auraMat));
+
+    // ---- Signal field: scattered risk points that resolve into an ordered, calm ring ----
+    const instanceCount = 5000;
+    const streakGeo = new THREE.CylinderGeometry(0.01, 0.1, 2.0, 3);
+    streakGeo.rotateX(Math.PI / 2);
+
+    const fieldMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            uTime: { value: 0 },
+            uMorph: { value: 4.5 },
+            uCompression: { value: 1.4 },
+            uIntensity: { value: 0.55 },
+            uOrbitScale: { value: 1.6 },
+            uCalm: { value: 0.0 }
+        },
+        vertexShader: `
+            ${noiseChunk}
+            uniform float uTime;
+            uniform float uMorph;
+            uniform float uCompression;
+            uniform float uIntensity;
+            uniform float uOrbitScale;
+            uniform float uCalm;
+            varying vec3 vColor;
+            varying float vOpacity;
+            void main() {
+                vec4 instPos = instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);
+                float rOriginal = length(instPos.xz);
+                float r = rOriginal * uCompression;
+                float initialAngle = atan(instPos.z, instPos.x);
+                float orbitalVelocity = (1.5 / sqrt(rOriginal)) * uOrbitScale;
+                float currentAngle = initialAngle + (uTime * orbitalVelocity);
+                vec3 morphedWorldPos = vec3(cos(currentAngle) * r, instPos.y, sin(currentAngle) * r);
+                float noise = snoise(vec3(morphedWorldPos.x * 0.08, morphedWorldPos.z * 0.08, uTime * 0.3));
+                morphedWorldPos.y += noise * uMorph * 4.0;
+                vec3 viewDir = normalize(cameraPosition - morphedWorldPos);
+                vec3 orbitDir = normalize(vec3(-sin(currentAngle), 0.0, cos(currentAngle)));
+                float doppler = dot(orbitDir, viewDir);
+
+                // Muted grey-amber (unchecked risk) resolving into calm teal (protected)
+                vec3 muted = vec3(0.42, 0.40, 0.34);
+                vec3 caution = vec3(0.78, 0.62, 0.28);
+                vec3 calmTeal = vec3(0.13, 0.72, 0.53);
+                vec3 brightTeal = vec3(0.30, 0.86, 0.66);
+
+                vec3 riskColor = mix(muted, caution, smoothstep(45.0, 15.0, r));
+                vec3 protectedColor = mix(calmTeal, brightTeal, smoothstep(30.0, 5.0, r));
+                vec3 color = mix(riskColor, protectedColor, uCalm);
+
+                vColor = color * (1.1 + doppler * 0.5) * uIntensity;
+                vOpacity = (smoothstep(3.8, 5.5, r) * (1.0 - smoothstep(38.0, 48.0, r))) * 0.75;
+
+                float deltaAngle = currentAngle - initialAngle;
+                float c = cos(deltaAngle);
+                float s = sin(deltaAngle);
+                mat3 rotY = mat3(
+                    c, 0, s,
+                    0, 1, 0,
+                   -s, 0, c
+                );
+                vec3 localPos = (instanceMatrix * vec4(position, 0.0)).xyz;
+                vec3 rotatedLocalPos = rotY * localPos;
+                gl_Position = projectionMatrix * viewMatrix * vec4(morphedWorldPos + rotatedLocalPos, 1.0);
+            }
+        `,
+        fragmentShader: `
+            varying vec3 vColor;
+            varying float vOpacity;
+            void main() {
+                gl_FragColor = vec4(vColor, vOpacity);
+            }
+        `,
+        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
+    });
+
+    const instancedField = new THREE.InstancedMesh(streakGeo, fieldMaterial, instanceCount);
+    const dummy = new THREE.Object3D();
+
+    for (let i = 0; i < instanceCount; i++) {
+        const r = 5 + Math.pow(Math.random(), 1.3) * 40;
+        const angle = Math.random() * Math.PI * 2;
+        dummy.position.set(Math.cos(angle) * r, (Math.random() - 0.5) * (8 / r), Math.sin(angle) * r);
+        dummy.lookAt(dummy.position.x + Math.sin(angle), dummy.position.y, dummy.position.z - Math.cos(angle));
+        dummy.updateMatrix();
+        instancedField.setMatrixAt(i, dummy.matrix);
+    }
+    scene.add(instancedField);
+
+    // ---- Three calm states: exposure resolving into shared protection ----
+    const config = [
+        {
+            title: "Shared System", status: "One Exposed Node Can Affect the Whole Field",
+            morph: 4.5, compress: 1.4, intensity: 0.55, rotate: 0.9, camY: 30, camDist: 90, orbit: 1.6, calm: 0.0,
+            color: "#C99B47", system: "Connected Lives, Shared Exposure", duty: "Weak Points Create Ripples", orbitLabel: "Central Access Point", signal: "Scattered"
+        },
+        {
+            title: "Sense Check", status: "Pause, Check, Protect the People Around You",
+            morph: 2.0, compress: 1.05, intensity: 0.85, rotate: 0.6, camY: 24, camDist: 78, orbit: 1.1, calm: 0.5,
+            color: "#1D9E75", system: "Connections Being Checked", duty: "Protect Yourself, Protect Others", orbitLabel: "Access Paths Reviewed", signal: "Aligning"
+        },
+        {
+            title: "Protected Orbit", status: "Protect Yourself, Strengthen the Shared System",
+            morph: 0.35, compress: 0.85, intensity: 1.15, rotate: 0.3, camY: 18, camDist: 68, orbit: 0.6, calm: 1.0,
+            color: "#2EDBA0", system: "Protected Nodes, Safer Network", duty: "Personal Safety Becomes Shared Safety", orbitLabel: "Stable Access Point", signal: "Steady"
+        }
+    ];
+
+    let stateIdx = 0;
+    const mainTitle = document.getElementById('main-title');
+    const statusText = document.getElementById('status-text');
+    const systemVal = document.getElementById('system-val');
+    const dutyVal = document.getElementById('duty-val');
+    const orbitVal = document.getElementById('orbit-val');
+    const signalVal = document.getElementById('signal-val');
+    const camControl = { distance: 90 };
+
+    function transition() {
+        stateIdx = (stateIdx + 1) % config.length;
+        const s = config[stateIdx];
+        const tl = gsap.timeline({ defaults: { duration: 4.5, ease: "power2.inOut" } });
+        tl.to(fieldMaterial.uniforms.uMorph, { value: s.morph }, 0);
+        tl.to(fieldMaterial.uniforms.uCompression, { value: s.compress }, 0);
+        tl.to(fieldMaterial.uniforms.uIntensity, { value: s.intensity }, 0);
+        tl.to(fieldMaterial.uniforms.uOrbitScale, { value: s.orbit }, 0);
+        tl.to(fieldMaterial.uniforms.uCalm, { value: s.calm }, 0);
+        tl.to(auraMat.uniforms.uIntensity, { value: s.intensity }, 0);
+        tl.to(controls, { autoRotateSpeed: s.rotate }, 0);
+        tl.to(camera.position, { y: s.camY }, 0);
+        tl.to(camControl, { distance: s.camDist }, 0);
+        gsap.to([mainTitle, statusText, '.val'], { opacity: 0, duration: 0.8, onComplete: () => {
+            mainTitle.innerText = s.title;
+            statusText.innerText = s.status;
+            statusText.style.color = s.color;
+            statusText.style.borderColor = s.color;
+            systemVal.innerText = s.system;
+            dutyVal.innerText = s.duty;
+            orbitVal.innerText = s.orbitLabel;
+            signalVal.innerText = s.signal;
+            gsap.to([mainTitle, statusText, '.val'], { opacity: 1, duration: 1.2 });
+        }});
+    }
+
+    setInterval(transition, 11000);
+
+    const clock = new THREE.Clock();
+    function animate() {
+        const time = clock.getElapsedTime();
+        fieldMaterial.uniforms.uTime.value = time;
+        auraMat.uniforms.uTime.value = time;
+        instancedField.rotation.y += 0.0004;
+        const currentDir = new THREE.Vector3().subVectors(camera.position, controls.target).normalize();
+        camera.position.x = controls.target.x + currentDir.x * camControl.distance;
+        camera.position.z = controls.target.z + currentDir.z * camControl.distance;
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+        const nextSize = viewport();
+        camera.aspect = nextSize.width / nextSize.height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(nextSize.width, nextSize.height);
+    });
+
+    animate();
+</script>
+</body>
+</html>

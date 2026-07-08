@@ -12,14 +12,14 @@
 <IfModule mod_headers.c>
 
   # ── CONTENT SECURITY POLICY ─────────────────────────────────
-  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;"
+  Header always set Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;"
 
   # ── HSTS ────────────────────────────────────────────────────
   # Only set over HTTPS. Apache will only send this if connection is HTTPS.
   Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS
 
   # ── CLICKJACKING ────────────────────────────────────────────
-  Header always set X-Frame-Options "DENY"
+  Header always set X-Frame-Options "SAMEORIGIN"
 
   # ── MIME SNIFFING ───────────────────────────────────────────
   Header always set X-Content-Type-Options "nosniff"
@@ -39,6 +39,15 @@
   Header always unset X-Powered-By
   Header always unset Server
 
+
+  # ── STANDALONE SINGULARITY VISUAL ───────────────────────────
+  # Same-origin embedded visual. Keeps the main page strict while allowing this
+  # one visual page to load the Three.js module code it was originally written for.
+  <Files "singularity.html">
+    Header always set Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Cross-Origin-Embedder-Policy "unsafe-none"
+  </Files>
 </IfModule>
 
 # ── FORCE HTTPS ───────────────────────────────────────────────
