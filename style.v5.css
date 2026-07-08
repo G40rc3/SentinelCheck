@@ -393,6 +393,19 @@ h2 {
   display: block;
 }
 
+.service-grid .card h3 {
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+.service-grid .card h3 .card-icon {
+  display: inline;
+  margin: 0 0.45rem 0 0;
+  font-size: 1.25em;
+  line-height: 1;
+  vertical-align: -0.08em;
+}
+
 
 .audience { text-align: center; }
 .audience h2 { margin-bottom: 16px; }
