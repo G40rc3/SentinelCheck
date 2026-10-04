@@ -1,0 +1,5 @@
+/* Only the Learning Hub loads this additional stylesheet. */
+.learning-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.learning-tools-grid .featured-toolkit-card{grid-template-columns:1fr;align-content:start;gap:24px;padding:clamp(24px,3vw,40px)}
+.learning-tools-grid .featured-toolkit-copy{min-width:0}
+@media(max-width:900px){.learning-tools-grid{grid-template-columns:1fr}}

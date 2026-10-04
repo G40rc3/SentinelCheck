@@ -82,7 +82,7 @@
 # The main site remains under the strict default CSP above.
 # This self-contained toolkit uses inline handlers/styles, so it receives a narrow folder-specific policy.
 /ghost-protocol/*
-  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests;
   Cross-Origin-Embedder-Policy: unsafe-none
   Cache-Control: no-cache, must-revalidate
 

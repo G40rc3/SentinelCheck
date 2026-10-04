@@ -35,7 +35,7 @@ function renderNav(active) {
         <circle cx="40" cy="40" r="34" fill="none" stroke="${stats.stroke}" stroke-width="5"
           stroke-dasharray="${circ}" stroke-dashoffset="${offset}" id="scoreCircle"
           stroke-linecap="round" transform="rotate(-90 40 40)" style="transition:stroke-dashoffset 1.2s ease,stroke 0.5s"/>
-        <text x="40" y="44" text-anchor="middle" font-family="'Segoe UI', Roboto, monospace" font-size="13" fill="var(--text)" id="scoreText">${stats.current}/${stats.total}</text>
+        <text x="40" y="44" text-anchor="middle" font-family="'Segoe UI', Roboto, monospace" font-size="13" fill="var(--text)" id="scoreText">${stats.auditDone ? stats.current + '/' + stats.total : '—/18'}</text>
       </svg>
       <div class="score-status" id="scoreStatus">${stats.level}</div>
       <div class="score-feedback" id="scoreFeedback">${stats.feedback + priorityText}</div>

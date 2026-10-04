@@ -1,0 +1,322 @@
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav('Exposure Audit');
+  restoreAuditAnswers();
+  bindAuditProgressEvents();
+  updateAuditControls();
+  updateAuditProgressUI();
+  if (S.get('auditDone', false)) renderAuditResults();
+});
+
+const auditQuestions = Array.from({ length: 18 }, (_, i) => 'q' + (i + 1));
+let auditValidationAttempted = false;
+
+function saveAuditAnswers() {
+  const answers = {};
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) answers[id] = el.value;
+  });
+  S.set('auditAnswers', answers);
+}
+
+function restoreAuditAnswers() {
+  const answers = S.get('auditAnswers', {});
+  Object.entries(answers).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  });
+}
+
+function finding(id, sev, title, desc, fix, link, short) {
+  return { id, sev, title, desc, fix, link: link || null, short: short || title };
+}
+
+function buildFindings() {
+  const q = id => document.getElementById(id).value;
+  const findings = [];
+
+  const browser = q('q1');
+  if (browser === 'chrome') findings.push(finding('browser-chrome','high','Google Chrome sends data to Google','Chrome reports usage, crashes, and browsing-related telemetry to Google by default. This can strengthen advertising and profiling signals.','Switch to Firefox or Brave. Then harden tracking protection and extensions.','https://www.mozilla.org/en-GB/firefox/','Browser choice'));
+  else if (browser === 'edge') findings.push(finding('browser-edge','high','Edge sends telemetry to Microsoft','Edge has extensive Microsoft telemetry and account integration. That can increase behavioural profiling.','Switch to Firefox or Brave, then review browser privacy settings.','https://www.mozilla.org/en-GB/firefox/','Browser choice'));
+
+  const blocker = q('q2');
+  if (blocker === 'none') findings.push(finding('no-tracker-blocker','high','No tracker blocker is installed','Without a blocker, websites can load trackers from advertising networks, analytics platforms, and data brokers.','Install uBlock Origin. This is one of the fastest high-impact privacy fixes.','https://github.com/gorhill/uBlock','Tracker blocker'));
+  else if (blocker === 'builtin') findings.push(finding('weak-tracker-blocker','med','Built-in blocking is limited','Browser built-in protections help, but they usually block fewer trackers than a dedicated blocker.','Install uBlock Origin alongside browser protections.','https://github.com/gorhill/uBlock','Tracker blocker'));
+
+  const incognito = q('q3');
+  if (incognito === 'always') findings.push(finding('incognito-misunderstood','med','Private browsing may be giving false confidence','Private or incognito windows do not make you anonymous. Sites, employers, ISPs, and fingerprinting scripts can still identify activity in many cases.','Use private windows only for local session separation. Use tracker blocking, DNS privacy, and account separation for stronger privacy.',null,'Private browsing'));
+
+  const containers = q('q4');
+  if (containers === 'no') findings.push(finding('no-site-isolation','med','No isolation between sites','Without containers or separate profiles, large platforms can connect activity across shopping, social media, search, and other browsing.','Use separate browser profiles or Firefox Multi-Account Containers.','https://addons.mozilla.org/en-GB/firefox/addon/multi-account-containers/','Site isolation'));
+
+  const vpn = q('q5');
+  if (vpn === 'no') findings.push(finding('ip-visible','med','Your IP address is visible to every site','Your IP can reveal approximate location, ISP, and repeated visits across websites.','Use a reputable paid VPN where appropriate, such as Mullvad or ProtonVPN.','https://mullvad.net','Network privacy'));
+  else if (vpn === 'free') findings.push(finding('free-vpn','high','Free VPNs may sell browsing data','Free VPNs still need a business model. Many log, monetise, or resell usage data.','Stop using free VPNs for privacy. Use a reputable paid provider or no VPN until you choose one carefully.','https://mullvad.net','VPN choice'));
+
+  const email = q('q6');
+  if (email === 'yes_main') findings.push(finding('one-email-everywhere','high','One email address links all accounts','Using one main address everywhere makes it easy to connect your accounts across breaches, brokers, shops, newsletters, and platforms.','Use SimpleLogin, Addy.io, or provider aliases so each service gets a different address.','https://simplelogin.io','Email aliases'));
+  else if (email === 'yes_few') findings.push(finding('few-email-addresses','med','A few email addresses still link too much','Rotating two or three addresses helps slightly, but accounts can still be clustered easily.','Use per-service aliases for new signups and important existing accounts.','https://simplelogin.io','Email aliases'));
+
+  const realName = q('q7');
+  if (realName === 'yes') findings.push(finding('real-identity-everywhere','high','Real identity details are used too widely','Real name, date of birth, and location across platforms can feed data brokers, profiling systems, and social engineering attempts.','Use the Persona Generator for low-trust signups and audit old profiles.','personas.html','Identity details'));
+  else if (realName === 'sometimes') findings.push(finding('real-identity-sometimes','med','Real identity details are used on some platforms','Using real details on mixed-trust services can still leak information into broker and marketing databases.','Separate high-trust accounts from throwaway accounts and reduce unnecessary real details.', 'personas.html','Identity details'));
+
+  const sso = q('q8');
+  if (sso === 'yes') findings.push(finding('sso-often','high','Login with Google or Facebook shares account activity','Using SSO lets the identity provider know which services you use and when you access them.','Use email aliases and a password manager instead of social login buttons.','https://bitwarden.com','Social login'));
+  else if (sso === 'sometimes') findings.push(finding('sso-sometimes','med','Occasional social login still creates tracking links','Even occasional SSO can connect services back to Google, Meta, or other identity providers.','Phase out SSO on important accounts. Use a password manager and aliases.','https://bitwarden.com','Social login'));
+
+  const selfSearch = q('q9');
+  if (selfSearch === 'yes_lots') findings.push(finding('search-results-lots','high','Your personal details are highly visible in search','Search results showing personal details often mean brokers or public profiles have already indexed you.','Work through Broker Opt-Out and remove or lock down public profiles.','brokers.html','Search exposure'));
+  else if (selfSearch === 'yes_some') findings.push(finding('search-results-some','med','Some personal details are visible in search','Some public results can still be used for profiling, scams, impersonation, or social engineering.','Document what appears, then remove or lock down the sources.','brokers.html','Search exposure'));
+  else if (selfSearch === 'no') findings.push(finding('never-self-searched','med','You have not checked your public exposure','You may have personal data indexed by search engines or brokers without knowing it.','Search your full name plus city, phone number, and email. Record what appears.','brokers.html','Search exposure'));
+
+  const brokerOptOut = q('q10');
+  if (brokerOptOut === 'no') findings.push(finding('no-broker-optout','high','No data broker opt-outs completed','Data brokers may publish or sell address, phone, relatives, work history, interests, or financial indicators.','Start Broker Opt-Out. Do a few removals per day and track completion.','brokers.html','Broker opt-outs'));
+  else if (brokerOptOut === 'one') findings.push(finding('low-broker-optout','med','Only a few broker opt-outs completed','Doing one or two removals helps, but broker exposure usually needs a systematic pass.','Use the Broker Opt-Out module and prioritise high-risk brokers first.','brokers.html','Broker opt-outs'));
+
+  const social = q('q11');
+  if (social === 'public') findings.push(finding('public-social-real-name','high','Public social profiles are easy to mine','Public profiles can reveal identity, workplace, relationships, location clues, routines, and photos.','Set profiles to private, remove unnecessary public details, and audit old posts.','social.html','Social profiles'));
+  else if (social === 'private') findings.push(finding('private-social-review','med','Private social profiles still need review','Private accounts can still leak through profile photos, usernames, old posts, followers, and app permissions.','Review visibility, old posts, tagged photos, and connected apps.','social.html','Social profiles'));
+
+  const reuse = q('q12');
+  if (reuse === 'yes') findings.push(finding('password-reuse','high','Password reuse creates account takeover risk','If one reused password is leaked, attackers can try it against email, shopping, cloud, social, and banking accounts.','Use a password manager and replace reused passwords with unique ones.','passwords.html','Password reuse'));
+  else if (reuse === 'some') findings.push(finding('password-reuse-some','med','Some password reuse remains','Lower-value accounts can still lead to identity clues, payment details, messages, or recovery paths.','Replace reused passwords when you touch each account. Start with email and finance.','passwords.html','Password reuse'));
+
+  const twofa = q('q13');
+  if (twofa === 'none') findings.push(finding('no-2fa','high','Important accounts do not have enough 2FA','Without 2FA, a stolen password is often enough to take over an account.','Enable authenticator app or hardware-key 2FA on email, banking, cloud, and social accounts.','passwords.html','2FA'));
+  else if (twofa === 'sms') findings.push(finding('sms-2fa','med','SMS 2FA is weaker than app or hardware-key 2FA','SMS codes are better than no 2FA, but they are more exposed to SIM swap and phone-number attacks.','Move important accounts to authenticator app or hardware key where possible.','passwords.html','2FA'));
+
+  const breaches = q('q14');
+  if (breaches === 'never') findings.push(finding('breaches-never-checked','high','Known breaches have not been checked','Old leaked passwords and emails can still be used in credential stuffing and phishing.','Check important emails in Have I Been Pwned and change exposed passwords.','breaches.html','Breach checks'));
+  else if (breaches === 'old') findings.push(finding('breaches-old-check','med','Breach checks are out of date','New breaches happen constantly. Old checks do not reflect current exposure.','Re-check emails and add them to the Breach Monitor.','breaches.html','Breach checks'));
+
+  const permissions = q('q15');
+  if (permissions === 'never') findings.push(finding('permissions-never-reviewed','high','App permissions have not been reviewed','Apps may have unnecessary access to location, microphone, camera, contacts, files, or photos.','Review app permissions and remove anything not required.','permissions.html','App permissions'));
+  else if (permissions === 'some') findings.push(finding('permissions-ad-hoc','med','App permissions are only reviewed occasionally','Permission creep builds up over time as apps update, add features, or request new access.','Schedule a quick monthly app-permission review.','permissions.html','App permissions'));
+
+  const cookies = q('q16');
+  if (cookies === 'accept') findings.push(finding('accept-all-cookies','med','Accepting all cookies increases tracking','Accept-all choices can enable advertising, analytics, and third-party tracking across websites.','Use a blocker or reject non-essential cookies where practical.','cookies.html','Cookie tracking'));
+
+  const radios = q('q17');
+  if (radios === 'always') findings.push(finding('wifi-bluetooth-always-on','med','WiFi and Bluetooth are often left broadcasting','Phones can broadcast network and Bluetooth signals that support location tracking in shops, transport hubs, and public spaces.','Turn off WiFi and Bluetooth when not needed. Enable MAC randomisation.','wifi.html','WiFi and Bluetooth'));
+
+  const device = q('q18');
+  if (device === 'no') findings.push(finding('no-encryption-backups','high','Device encryption or backups are missing','A lost, stolen, or failed device can expose personal data or permanently destroy important files.','Enable device encryption and create a simple backup routine.','physical.html','Device protection'));
+  else if (device === 'partial') findings.push(finding('partial-encryption-backups','med','Device protection is only partial','If only some devices are encrypted or backed up, the weakest device can still create exposure.','Finish encryption and backups for every device that stores important data.','physical.html','Device protection'));
+
+  return findings.slice(0, S.exposureMax);
+}
+
+function answeredAuditCount() {
+  return auditQuestions.filter(id => {
+    const el = document.getElementById(id);
+    return el && el.value;
+  }).length;
+}
+
+function auditRemainingCount() {
+  return Math.max(0, S.exposureMax - answeredAuditCount());
+}
+
+function bindAuditProgressEvents() {
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      saveAuditAnswers();
+      el.classList.remove('audit-missing');
+      const group = el.closest('.form-group');
+      if (group) group.classList.remove('audit-missing');
+      updateAuditProgressUI();
+    });
+  });
+}
+
+function updateAuditProgressUI() {
+  const answered = answeredAuditCount();
+  const remaining = Math.max(0, S.exposureMax - answered);
+  const complete = remaining === 0;
+  const percent = Math.round((answered / S.exposureMax) * 100);
+
+  const progressText = document.getElementById('auditProgressText');
+  const remainingText = document.getElementById('auditRemainingText');
+  const bottomProgressText = document.getElementById('auditBottomProgressText');
+  const bottomRemainingText = document.getElementById('auditBottomRemainingText');
+  const bar = document.getElementById('auditProgressBar');
+  const panel = document.getElementById('auditProgressPanel');
+
+  if (progressText) progressText.textContent = answered + '/' + S.exposureMax + ' answered';
+  if (bottomProgressText) bottomProgressText.textContent = answered + '/' + S.exposureMax + ' answered';
+
+  const message = complete
+    ? 'Ready to run audit'
+    : remaining + (remaining === 1 ? ' check remaining' : ' checks remaining');
+  if (remainingText) remainingText.textContent = message;
+  if (bottomRemainingText) {
+    bottomRemainingText.textContent = complete
+      ? 'Ready to run audit and show recommended fixes.'
+      : message + '. Complete the checks above, then run the audit.';
+  }
+  if (bar) bar.style.width = percent + '%';
+  if (panel) panel.classList.toggle('complete', complete);
+
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const group = el.closest('.form-group');
+    const unanswered = !el.value;
+    el.classList.toggle('audit-unanswered', unanswered);
+    if (!unanswered) {
+      el.classList.remove('audit-missing');
+      if (group) group.classList.remove('audit-missing');
+    } else if (auditValidationAttempted) {
+      el.classList.add('audit-missing');
+      if (group) group.classList.add('audit-missing');
+    }
+  });
+}
+
+function firstUnansweredAuditField() {
+  return auditQuestions
+    .map(id => document.getElementById(id))
+    .find(el => el && !el.value) || null;
+}
+
+function focusFirstMissingAuditField() {
+  const first = firstUnansweredAuditField();
+  if (!first) return;
+  const target = first.closest('.form-group') || first;
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => first.focus({ preventScroll: true }), 350);
+}
+
+function setAuditNotice(message, ok) {
+  const notice = document.getElementById('auditNotice');
+  if (!notice) return;
+  notice.textContent = message || '';
+  notice.classList.toggle('ok', !!ok);
+}
+
+function updateAuditControls() {
+  const label = S.get('auditDone', false)
+    ? 'UPDATE AUDIT &amp; SHOW FIXES →'
+    : 'RUN AUDIT &amp; SHOW FIXES →';
+  ['runBtn', 'runBtnBottom'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.innerHTML = label;
+  });
+}
+
+function resetAudit() {
+  auditQuestions.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  S.clearAll();
+
+  const results = document.getElementById('auditResults');
+  if (results) results.innerHTML = '';
+  const resultsSection = document.getElementById('resultsSection');
+  if (resultsSection) resultsSection.style.display = 'none';
+  const badge = document.getElementById('overallBadge');
+  if (badge) { badge.textContent = ''; badge.className = 'badge muted'; }
+
+  auditValidationAttempted = false;
+  setAuditNotice('Ghost Protocol reset. You can now start fresh with the next person or business.', true);
+  updateAuditControls();
+  updateAuditProgressUI();
+  renderNav('Exposure Audit');
+  S.updateScoreUI();
+}
+
+function runAudit() {
+  saveAuditAnswers();
+  const answered = answeredAuditCount();
+  if (answered < S.exposureMax) {
+    auditValidationAttempted = true;
+    const remaining = S.exposureMax - answered;
+    updateAuditProgressUI();
+    setAuditNotice('Please answer all 18 checks before running the audit. ' + answered + '/18 answered, ' + remaining + (remaining === 1 ? ' check remaining.' : ' checks remaining.'));
+    focusFirstMissingAuditField();
+    return;
+  }
+  auditValidationAttempted = false;
+  updateAuditProgressUI();
+  const findings = buildFindings();
+  const existingFixed = S.fixedRisks();
+  const fixed = {};
+  findings.forEach(f => { if (existingFixed[f.id]) fixed[f.id] = true; });
+
+  S.set('auditFindings', findings);
+  S.set('fixedRisks', fixed);
+  S.set('auditDone', true);
+  S.set('auditLastRun', new Date().toISOString());
+
+  renderAuditResults();
+  renderNav('Exposure Audit');
+  S.updateScoreUI();
+  updateAuditControls();
+  updateAuditProgressUI();
+  setAuditNotice('Audit complete. Review the exposure score and start marking fixes as completed.', true);
+  document.getElementById('resultsSection').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleRiskFixed(id) {
+  S.toggleRiskFixed(id);
+  renderAuditResults();
+  renderNav('Exposure Audit');
+  S.updateScoreUI();
+}
+
+function renderAuditResults() {
+  const stats = S.exposureStats();
+  const badge = document.getElementById('overallBadge');
+  if (badge) {
+    badge.textContent = stats.level.toUpperCase();
+    badge.className = 'badge ' + stats.className;
+  }
+
+  const fixed = S.fixedRisks();
+  const sorted = [
+    ...stats.findings.filter(f => !fixed[f.id] && f.sev === 'high'),
+    ...stats.findings.filter(f => !fixed[f.id] && f.sev === 'med'),
+    ...stats.findings.filter(f => fixed[f.id] && f.sev === 'high'),
+    ...stats.findings.filter(f => fixed[f.id] && f.sev === 'med')
+  ];
+
+  const priority = stats.topPriorities.length
+    ? '<strong style="color:var(--text)">Next priority:</strong> ' + stats.topPriorities.join(' + ') + '.'
+    : '<strong style="color:var(--text)">Next priority:</strong> keep reviewing accounts and repeat the audit after major changes.';
+
+  const summary = `
+    <div class="audit-summary-grid">
+      <div class="audit-summary-card"><strong>${stats.initial}/${stats.total}</strong><span>Initial risks selected</span></div>
+      <div class="audit-summary-card"><strong>${stats.current}/${stats.total}</strong><span>Current active risks</span></div>
+      <div class="audit-summary-card"><strong>${stats.fixedCount}</strong><span>Risks remediated</span></div>
+    </div>
+    <div class="audit-feedback">${stats.feedback} ${priority}</div>
+  `;
+
+  const empty = stats.findings.length === 0
+    ? '<div class="audit-feedback">No active risks were selected from the 18 checks. This is not a guarantee, but it is a strong starting point. Review again monthly or after major account/device changes.</div>'
+    : '';
+
+  document.getElementById('auditResults').innerHTML = summary + empty + sorted.map(f => {
+    const isFixed = !!fixed[f.id];
+    return `
+    <div class="audit-item${isFixed ? ' fixed' : ''}">
+      <div class="audit-score-dot ${f.sev === 'high' ? 'high' : 'med'}">${isFixed ? '✓' : f.sev === 'high' ? '!' : '~'}</div>
+      <div class="audit-body">
+        <div class="audit-title">${f.title}</div>
+        <div class="audit-desc">${f.desc}</div>
+        <div class="audit-fix">FIX: ${f.fix}${f.link ? ` <a href="${f.link}" ${f.link.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} style="color:var(--accent)">[open]</a>` : ''}</div>
+        <div class="audit-actions">
+          <button class="${isFixed ? 'btn-primary' : 'btn-ghost'}" onclick="toggleRiskFixed('${f.id}')">${isFixed ? 'FIXED ✓' : 'MARK AS FIXED'}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('resultsSection').style.display = 'block';
+}

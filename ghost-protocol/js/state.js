@@ -88,7 +88,7 @@ const S = {
     const circ = 213.6;
     el.style.strokeDashoffset = (circ - circ * stats.percent / 100).toFixed(1);
     el.style.stroke = stats.stroke;
-    if (txt) txt.textContent = stats.current + '/' + stats.total;
+    if (txt) txt.textContent = stats.auditDone ? stats.current + '/' + stats.total : '—/18';
     if (sta) sta.textContent = stats.level;
     if (fb) {
       const priority = stats.topPriorities.length
