@@ -1,0 +1,3 @@
+/* Stack full-width cards; each reuses the original featured-toolkit layout. */
+.learning-tools-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:32px}
+.learning-tools-grid .featured-toolkit-copy{min-width:0}
