@@ -1,0 +1,57 @@
+/* Shared homepage navigation. Deliberately scoped so tool UI and footers retain their styles. */
+.sc-site-header, .sc-site-header * { box-sizing: border-box; }
+.sc-site-header.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-direction: row; gap: 0; width: 100%; min-height: 64px;
+  margin: 0; padding: 16px clamp(20px, 6%, 80px);
+  position: sticky; top: 0; z-index: 1000;
+  font-family: "Segoe UI", Roboto, sans-serif; font-size: 16px; line-height: 1.65;
+  color: #e8f0f8; background: rgba(4,12,19,.78);
+  border: 0; border-bottom: 1px solid rgba(0,227,208,.13);
+  box-shadow: 0 8px 32px rgba(0,0,0,.28);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.sc-site-header.navbar.site-bridge { position: fixed; left: 0; right: 0; }
+.sc-site-header .logo {
+  display: flex; align-items: center; flex-shrink: 0; gap: 10px;
+  margin: 0; padding: 0; color: #e8f0f8; text-decoration: none;
+  background: none; border: 0; text-transform: none; min-height: 0;
+}
+.sc-site-header .logo picture { display: block; }
+.sc-site-header .logo-icon {
+  display: block; width: 40px; height: 40px; max-width: 100%; object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(0,227,208,.5));
+  image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;
+}
+.sc-site-header .logo-text {
+  font-family: "Segoe UI", Roboto, sans-serif; font-size: 23.2px; font-weight: 800;
+  letter-spacing: .2px; line-height: 1.65; white-space: nowrap;
+}
+.sc-site-header .logo-text span { color: #00e3d0; }
+.sc-site-header nav {
+  display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-start;
+  gap: 4px; min-width: 0; margin: 0; padding: 0; background: none; border: 0;
+}
+.sc-site-header.navbar nav a {
+  display: block; flex: 0 0 auto; margin: 0 0 0 6px; padding: 5px 10px;
+  min-height: 0; font-family: inherit; font-size: 14.88px; line-height: 1.65;
+  font-weight: 500; letter-spacing: normal; text-transform: none;
+  color: #e8f0f8; background: none; text-decoration: none;
+  border: 0; border-radius: 8px; transition: color .2s, background .2s;
+}
+.sc-site-header.navbar nav a:hover, .sc-site-header.navbar nav a[aria-current="page"] {
+  color: #00e3d0; background: rgba(0,227,208,.12);
+}
+.sc-site-header.navbar nav .nav-cta {
+  color: #00e3d0 !important; background: rgba(0,227,208,.12) !important;
+  border: 1px solid rgba(0,227,208,.13) !important; font-weight: 600 !important;
+}
+.sc-site-header.navbar nav .nav-cta:hover { background: rgba(0,227,208,.22) !important; }
+.sc-site-header a:focus-visible { outline: 2px solid #00e3d0; outline-offset: 4px; }
+@media (max-width: 760px) {
+  .sc-site-header.navbar { flex-direction: column; gap: 14px; padding: 14px 6%; }
+  .sc-site-header nav { justify-content: center; gap: 6px; }
+  .sc-site-header.navbar nav a { margin-left: 0; font-size: 13.92px; padding: 5px 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .sc-site-header.navbar nav a { transition: none; } }
+@media print { .sc-site-header.navbar { display: none; } }

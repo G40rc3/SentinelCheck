@@ -1,0 +1,42 @@
+/* Homepage only. Original dimensions, content and responsive grids are retained. */
+.singularity-home { background: #030b12; isolation: isolate; --muted: #b1c1ce; }
+.singularity-home::before { display: none; }
+.singularity-background, .singularity-readability { position: fixed; inset: 0; pointer-events: none; user-select: none; }
+.singularity-background { z-index: -3; overflow: hidden; background: #030b12 url('assets/singularity-fallback.webp') center / cover no-repeat; }
+.singularity-background canvas { width: 100%; height: 100%; display: block; opacity: 0; }
+.singularity-background.is-ready canvas { opacity: 1; }
+.singularity-readability { z-index: -2; background: linear-gradient(90deg, rgba(3,11,18,.38), rgba(3,11,18,.14) 60%, rgba(3,11,18,.06)), linear-gradient(0deg, rgba(3,11,18,.40), transparent 60%); }
+.singularity-home main, .singularity-home footer { position: relative; z-index: 0; }
+.singularity-home .hero::before { display: none; }
+/* An inset-free glass backing preserves the existing hero's line breaks and spacing. */
+.singularity-home .hero-inner::before { content: ''; position: absolute; inset: -28px -24px; z-index: -1; border: 1px solid rgba(126,209,226,.16); border-radius: 20px; background: rgba(4,14,22,.12); backdrop-filter: blur(26px); -webkit-backdrop-filter: blur(26px); box-shadow: inset 0 1px 0 rgba(225,255,255,.08), 0 12px 36px rgba(0,0,0,.16); }
+.singularity-home main .card, .singularity-home main .faq-item, .singularity-home main .contact-box, .singularity-home main .learning-home-card {
+  background: rgba(5,17,26,.12);
+  border-color: rgba(139,224,232,.24);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: inset 0 1px 0 rgba(225,255,255,.08), 0 12px 36px rgba(0,0,0,.16);
+  text-shadow: 0 1px 6px rgba(0,0,0,.85);
+}
+.singularity-home main .about, .singularity-home main .learning-home { background: transparent; }
+.singularity-home main .audience-tag { background: rgba(4,30,37,.12); border-color: rgba(139,224,232,.24); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.singularity-home footer { background: rgba(3,10,16,.82); }
+.singularity-home .section-intro, .singularity-home h2, .singularity-home .about-text { text-shadow: 0 2px 12px #02070b, 0 0 28px #02070b; }
+@media (max-width: 760px) {
+  .singularity-background { background-image: url('assets/singularity-fallback-mobile.webp'); }
+  .singularity-home .hero-inner::before { inset: -24px -10px; background: rgba(4,14,22,.15); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+  .singularity-readability { background: rgba(3,11,18,.30); }
+  .singularity-home main .card, .singularity-home main .faq-item, .singularity-home main .contact-box, .singularity-home main .learning-home-card { background: rgba(5,17,26,.15); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+}
+@media (prefers-reduced-motion: reduce) { .singularity-home { scroll-behavior: auto; } }
+@media print { .singularity-background, .singularity-readability, .singularity-home .hero-inner::before { display: none; } .singularity-home { background: white; } }
+
+/* A readable solid fallback only for browsers without glass support. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .singularity-home .hero-inner::before,
+  .singularity-home main .card,
+  .singularity-home main .faq-item,
+  .singularity-home main .contact-box,
+  .singularity-home main .learning-home-card,
+  .singularity-home main .audience-tag { background: rgba(5,17,26,.86); }
+}

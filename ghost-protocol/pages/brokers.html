@@ -7,22 +7,39 @@
 <link rel="stylesheet" href="../css/experience.css?v=20261004-redesign">
 <link rel="stylesheet" href="../css/brokers.css?v=20261004-redesign">
 <script src="../js/embedded-mode.js?v=20261004-redesign"></script>
+<link rel="stylesheet" href="../../site-navigation.css?v=1">
+<script src="../../site-navigation.js?v=1" defer></script>
 </head>
 <body>
 <div class="scanline"></div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
-<header class="site-bridge" aria-label="Sentinel Check navigation">
-  <a href="/" class="site-bridge-brand" aria-label="Sentinel Check home">
-    <span class="site-name">Sentinel Check</span>
-    <span class="site-divider">/</span>
-    <span class="site-product">Ghost Protocol</span>
-  </a>
-  <nav class="site-bridge-nav" aria-label="Main website links">
-    <a href="/">Home</a>
-    <a href="/learning-hub.html">Learning Hub</a>
-    <a href="/#contact" class="site-bridge-cta">Book Free Cyber MOT</a>
-  </nav>
-</header>
+<header class="navbar sc-site-header site-bridge" role="banner">
+    <a href="/" class="logo" aria-label="Sentinel Check - Home">
+
+      <picture>
+        <source srcset="/assets/logo.webp" type="image/webp" />
+        <img src="/assets/logo.png"
+             alt="Sentinel Check logo"
+             class="logo-icon"
+             width="40"
+             height="40"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async" />
+      </picture>
+      <div class="logo-text" aria-hidden="true">Sentinel<span>Check</span></div>
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <a href="/#mot">Cyber MOT</a>
+      <a href="/ghost-protocol/" aria-current="page">Ghost Protocol</a>
+      <a href="/learning-hub.html">Learning Hub</a>
+      <a href="/#audience">Who We Help</a>
+      <a href="/#faq">FAQs</a>
+      <a href="/#about">Why Us</a>
+      <a href="/#contact" class="nav-cta">Free Check</a>
+    </nav>
+  </header>
 <aside class="sidebar" aria-label="Ghost Protocol sidebar"></aside>
 <main id="main-content" class="main" tabindex="-1">
 

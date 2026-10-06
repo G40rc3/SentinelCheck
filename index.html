@@ -114,13 +114,21 @@
   </script>
 
   <link rel="stylesheet" href="style.v6.css" />
+  <link rel="stylesheet" href="singularity-background.css?v=glass-3" />
+  <link rel="preload" as="image" href="assets/singularity-fallback.webp" />
+<link rel="stylesheet" href="site-navigation.css?v=1">
+<script src="site-navigation.js?v=1" defer></script>
 </head>
 
-<body>
+<body class="singularity-home">
+  <div class="singularity-background" aria-hidden="true" inert>
+    <canvas id="singularity-background-canvas"></canvas>
+  </div>
+  <div class="singularity-readability" aria-hidden="true"></div>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header class="navbar" role="banner">
+  <header class="navbar sc-site-header" role="banner">
     <a href="/" class="logo" aria-label="Sentinel Check - Home">
 
       <picture>
@@ -175,21 +183,6 @@
       </div>
     </section>
 
-    <section class="singularity-showcase" aria-labelledby="singularity-heading">
-      <div class="section-inner">
-        <div class="singularity-card" data-singularity-card>
-          <h2 id="singularity-heading" class="sr-only">Connected by the same digital gravity</h2>
-          <iframe
-            class="singularity-frame"
-            src="singularity.html"
-            title="Sentinel Check shared digital system visual"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            sandbox="allow-scripts">
-          </iframe>
-        </div>
-      </div>
-    </section>
 
     <section id="mot" class="mot" aria-labelledby="mot-heading">
       <div class="section-inner">
@@ -489,6 +482,7 @@
   </footer>
 
   <script src="main.v6.js" defer></script>
+  <script type="module" src="singularity-background.js?v=original-2"></script>
 
 </body>
 </html>

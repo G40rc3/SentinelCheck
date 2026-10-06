@@ -55,25 +55,35 @@
   <link rel="preload" as="image" href="/assets/logo.webp" type="image/webp" fetchpriority="high" />
   <link rel="stylesheet" href="style.v6.css" />
   <link rel="stylesheet" href="learning-tools.v2.css" />
+<link rel="stylesheet" href="site-navigation.css?v=1">
+<script src="site-navigation.js?v=1" defer></script>
+  <link rel="stylesheet" href="learning-hub-refresh.css?v=1" />
 </head>
 
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header class="navbar" role="banner">
+  <header class="navbar sc-site-header" role="banner">
     <a href="/" class="logo" aria-label="Sentinel Check - Home">
+
       <picture>
         <source srcset="/assets/logo.webp" type="image/webp" />
-        <img src="/assets/logo.png" alt="Sentinel Check logo" class="logo-icon" width="40" height="40" loading="eager" fetchpriority="high" decoding="async" />
+        <img src="/assets/logo.png"
+             alt="Sentinel Check logo"
+             class="logo-icon"
+             width="40"
+             height="40"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async" />
       </picture>
       <div class="logo-text" aria-hidden="true">Sentinel<span>Check</span></div>
     </a>
 
     <nav aria-label="Primary navigation">
-      <a href="/">Home</a>
       <a href="/#mot">Cyber MOT</a>
-      <a href="ghost-protocol/">Ghost Protocol</a>
-      <a href="learning-hub.html" aria-current="page">Learning Hub</a>
+      <a href="/ghost-protocol/">Ghost Protocol</a>
+      <a href="/learning-hub.html" aria-current="page">Learning Hub</a>
       <a href="/#audience">Who We Help</a>
       <a href="/#faq">FAQs</a>
       <a href="/#about">Why Us</a>
@@ -94,20 +104,15 @@
             <a href="/#contact" class="cta cta-secondary">Book a Free Cyber MOT</a>
           </div>
         </div>
-        <div class="learning-visual" aria-label="Pause first example">
-          <div class="pause-device">
-            <div class="pause-device-top" aria-hidden="true"></div>
-            <div class="pause-lines" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="rush-message">
-              <span class="rush-label">URGENT</span>
-              <strong>Payment details changed</strong>
+        <div class="learning-visual sense-example" aria-label="Example payment request and safer response">
+          <div class="sense-example-panel">
+            <div class="sense-example-request">
+              <div class="sense-example-meta"><span>Example message</span><span class="sense-urgent">URGENT</span></div>
+              <h2>Payment details changed</h2>
               <p>Can you pay this today?</p>
             </div>
-            <div class="pause-card">
-              <span aria-hidden="true">&#9208;&#65039;</span>
-              <strong>Pause first</strong>
+            <div class="sense-example-response">
+              <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="24" cy="24" r="19"/><path d="M19 17v14m10-14v14"/></svg><h3>Pause first</h3></div>
               <p>If it feels urgent, stop and verify first.</p>
             </div>
           </div>
@@ -122,23 +127,17 @@
         <p class="section-intro">A Sense Check is a simple pause before you trust a message, payment request, link, login prompt, or unexpected instruction. It is the habit of slowing down pressure before it turns into action.</p>
         <div class="pillar-grid">
           <article class="card pillar-card">
-            <div class="pillar-icon" aria-hidden="true">&#9208;&#65039;</div>
-            <h3>Pause</h3>
+            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="24" cy="24" r="19"/><path d="M19 17v14m10-14v14"/></svg><h3>Pause</h3></div>
             <p>If something rushes you, slow down. The pause is the protective moment that gives you time to think.</p>
           </article>
           <article class="card pillar-card">
-            <div class="pillar-icon" aria-hidden="true">&#10003;</div>
-            <h3>Check</h3>
+            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="21" cy="21" r="15"/><path d="m32 32 10 10M14 21l5 5 9-10"/></svg><h3>Check</h3></div>
             <p>Verify the sender, link, payment request, phone number, or claim. Checking is not paranoia. It is responsible.</p>
           </article>
           <article class="card pillar-card">
-            <div class="pillar-icon" aria-hidden="true">&#128737;&#65039;</div>
-            <h3>Protect</h3>
+            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="icon-orbit" d="M24 4 40 10v13c0 10-9 17-16 21C17 40 8 33 8 23V10Z"/><path d="m16 23 6 6 11-12"/></svg><h3>Protect</h3></div>
             <p>Take the safer action: avoid the link, use the official website, call a known number, enable MFA, or ask for help.</p>
           </article>
-        </div>
-        <div class="learning-quote" role="note">
-          <strong>Core philosophy:</strong> Calm is a skill. A practiced, learnable, controlled response.
         </div>
       </div>
     </section>
@@ -150,6 +149,10 @@
           <h2 id="challenge-heading">The Rush steals the pause between emotion and action.</h2>
           <p class="learning-copy">Scam messages often arrive with pressure: an overdue invoice, a locked account, a failed delivery, or changed bank details. The goal is not just to fool your knowledge. The goal is to rush your calm.</p>
           <p class="learning-copy">That is why Sentinel Check teaches one repeatable habit: <strong>Pause. Check. Protect.</strong></p>
+          <aside class="calm-principle" aria-labelledby="calm-principle-heading">
+            <h3 id="calm-principle-heading">Calm is a skill.</h3>
+            <p>A practised, learnable, controlled response.</p>
+          </aside>
         </div>
         <div class="mini-stack" aria-label="The Rush problem and solution">
           <article class="mini-card">
