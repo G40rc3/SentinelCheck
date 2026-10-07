@@ -57,7 +57,7 @@
   <link rel="stylesheet" href="learning-tools.v2.css" />
 <link rel="stylesheet" href="site-navigation.css?v=1">
 <script src="site-navigation.js?v=1" defer></script>
-  <link rel="stylesheet" href="learning-hub-refresh.css?v=1" />
+  <link rel="stylesheet" href="learning-hub-refresh.css?v=2" />
 </head>
 
 <body>
@@ -92,52 +92,58 @@
   </header>
 
   <main id="main-content">
-    <section class="learning-hero" aria-labelledby="learning-heading">
+    <section class="learning-hero learning-hero-centred" aria-labelledby="learning-heading">
       <div class="section-inner learning-hero-inner">
         <div class="learning-hero-copy">
           <p class="eyebrow">Pause. Check. Protect.</p>
           <h1 id="learning-heading">Sentinel Check <span class="highlight">Learning Hub</span></h1>
           <p class="hero-sub">Practical digital safety lessons for small businesses, sole traders, and local teams.</p>
-          <p class="learning-hero-note">Most scams work by rushing trust. Start with the simple method below: Pause. Check. Protect.</p>
+          <p class="learning-hero-note">Build the habit of pausing, checking the source and choosing a safer response. Start with the example below.</p>
           <div class="hero-actions learning-actions">
             <a href="#resources" class="cta cta-primary">Explore Lessons</a>
             <a href="/#contact" class="cta cta-secondary">Book a Free Cyber MOT</a>
           </div>
         </div>
-        <div class="learning-visual sense-example" aria-label="Example payment request and safer response">
-          <div class="sense-example-panel">
-            <div class="sense-example-request">
-              <div class="sense-example-meta"><span>Example message</span><span class="sense-urgent">URGENT</span></div>
-              <h2>Payment details changed</h2>
-              <p>Can you pay this today?</p>
-            </div>
-            <div class="sense-example-response">
-              <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="24" cy="24" r="19"/><path d="M19 17v14m10-14v14"/></svg><h3>Pause first</h3></div>
-              <p>If it feels urgent, stop and verify first.</p>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
 
-    <section class="learning-section pillars-section" aria-labelledby="pillars-heading">
+    <section class="learning-section pillars-section sense-lesson" aria-labelledby="pillars-heading">
       <div class="section-inner">
         <p class="section-label">The Core Habit</p>
-        <h2 id="pillars-heading">What is a Sense Check?</h2>
-        <p class="section-intro">A Sense Check is a simple pause before you trust a message, payment request, link, login prompt, or unexpected instruction. It is the habit of slowing down pressure before it turns into action.</p>
-        <div class="pillar-grid">
-          <article class="card pillar-card">
-            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="24" cy="24" r="19"/><path d="M19 17v14m10-14v14"/></svg><h3>Pause</h3></div>
-            <p>If something rushes you, slow down. The pause is the protective moment that gives you time to think.</p>
+        <h2 id="pillars-heading">Start with a pause,<br class="sense-heading-break" /> whatever the message says.</h2>
+        <p class="section-intro">Read this fictional email, then work through the checks before taking action.</p>
+        <div class="sense-lesson-grid">
+          <article class="sense-email" aria-labelledby="sense-email-subject">
+            <div class="sense-email-meta"><span>Fictional email</span><span class="sense-example-tag">Example</span></div>
+            <div class="sense-email-envelope">
+              <p class="sense-email-sender"><span>From</span> Alex | Accounts</p>
+              <p class="sense-email-label">Subject</p>
+              <h3 id="sense-email-subject">Supplier payment needed before 3pm</h3>
+            </div>
+            <div class="sense-email-body">
+              <p>Hi,</p>
+              <p>I’m in a meeting and need you to sort this before the supplier closes our account. Their bank details have changed; use the details on the attached invoice instead of the saved ones.</p>
+              <p>Please pay today and reply once it’s done. I’ll explain afterwards.</p>
+            </div>
           </article>
-          <article class="card pillar-card">
-            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="21" cy="21" r="15"/><path d="m32 32 10 10M14 21l5 5 9-10"/></svg><h3>Check</h3></div>
-            <p>Verify the sender, link, payment request, phone number, or claim. Checking is not paranoia. It is responsible.</p>
-          </article>
-          <article class="card pillar-card">
-            <div class="sense-heading"><svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="icon-orbit" d="M24 4 40 10v13c0 10-9 17-16 21C17 40 8 33 8 23V10Z"/><path d="m16 23 6 6 11-12"/></svg><h3>Protect</h3></div>
-            <p>Take the safer action: avoid the link, use the official website, call a known number, enable MFA, or ask for help.</p>
-          </article>
+          <div class="sense-response" role="group" aria-label="Pause, Check and Protect: your response">
+            <p class="sense-response-label">Your response</p>
+            <ol class="sense-response-list">
+              <li class="sense-response-step">
+                <svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="24" cy="24" r="19"/><path d="M19 17v14m10-14v14"/></svg>
+                <div><h3>Pause</h3><p class="sense-step-lead">Take a breath.</p><p>Before you click, reply, pay or share anything, give yourself time to think. A message’s urgency does not remove the need to check.</p></div>
+              </li>
+              <li class="sense-response-step">
+                <svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle class="icon-orbit" cx="21" cy="21" r="15"/><path d="m32 32 10 10M14 21l5 5 9-10"/></svg>
+                <div><h3>Check</h3><p class="sense-step-lead">Use a trusted contact.</p><p>Read the full sender address and consider what you’re being asked to do. Contact the person or organisation using details you already trust. For changed payment details, verify directly with the supplier before paying.</p></div>
+              </li>
+              <li class="sense-response-step">
+                <svg class="sense-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="icon-orbit" d="M24 4 40 10v13c0 10-9 17-16 21C17 40 8 33 8 23V10Z"/><path d="m16 23 6 6 11-12"/></svg>
+                <div><h3>Protect</h3><p class="sense-step-lead">Protect yourself and others.</p><p>Hold off until the request is verified. If it looks suspicious, flag it to the people affected so they can check too. Your decision protects more than your own account.</p></div>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </section>

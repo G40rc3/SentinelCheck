@@ -1,66 +1,63 @@
-/* Focused Learning Hub refresh; shared navigation, tools and footer retain their styles. */
-.sense-example { min-height: 0; }
-.sense-example-panel,
-.pillars-section .pillar-card,
-.calm-principle {
-  border: 1px solid rgba(139,224,232,.24);
-  border-radius: 20px;
+/* Learning Hub teaching example. Scoped to preserve tools, navigation and footer. */
+.learning-hero-centred .learning-hero-inner { display: block; }
+.learning-hero-centred .learning-hero-copy { max-width: 850px; margin: 0 auto; text-align: center; }
+.learning-hero-centred .learning-hero-copy h1 { max-width: none; }
+.learning-hero-centred .learning-hero-copy .hero-sub,
+.learning-hero-centred .learning-hero-note { text-align: center; margin-left: auto; margin-right: auto; }
+.learning-hero-centred .learning-actions { justify-content: center; }
+.sense-lesson h2 { max-width: 850px; margin-left: auto; margin-right: auto; }
+.sense-lesson-grid {
+  display: grid; grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
+  gap: 24px; align-items: start; text-align: left;
+}
+.sense-email, .sense-response, .calm-principle {
+  border: 1px solid rgba(139,224,232,.24); border-radius: 20px;
   background: linear-gradient(135deg, rgba(0,227,208,.045), rgba(79,140,255,.035)), rgba(5,17,26,.42);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   box-shadow: inset 0 1px 0 rgba(225,255,255,.07), 0 12px 36px rgba(0,0,0,.16);
+  min-width: 0; overflow-wrap: break-word;
 }
-.sense-example-panel { width: 100%; overflow: hidden; }
-.sense-example-request { padding: 28px; }
-.sense-example-meta {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 22px;
-  color: #b1c1ce; font-size: .875rem;
+.sense-email { overflow: hidden; }
+.sense-email-meta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 18px 28px; border-bottom: 1px solid rgba(139,224,232,.14);
+  font-size: .875rem; color: #b1c1ce;
 }
-.sense-urgent {
-  padding: 3px 10px; border: 1px solid rgba(79,140,255,.6); border-radius: 6px;
-  color: #aecbff; font-size: .75rem; font-weight: 700; letter-spacing: .08em;
-  background: rgba(79,140,255,.07);
-}
-.sense-example-request h2 {
-  margin: 0 0 8px; text-align: left;
-  font-size: clamp(1.35rem, 2.2vw, 1.65rem); line-height: 1.3;
-  letter-spacing: -.02em; color: #e8f0f8;
-}
-.sense-example-request p,
-.sense-example-response p,
-.pillars-section .pillar-card p,
-.calm-principle p { font-size: 1rem; line-height: 1.65; color: #b1c1ce; margin: 0; }
-.sense-example-response {
-  padding: 24px 28px 28px;
-  border-top: 1px solid rgba(139,224,232,.18);
-  background: linear-gradient(120deg, rgba(0,227,208,.065), transparent);
-}
-.sense-heading { display: flex; align-items: center; gap: 14px; margin: 0 0 12px; }
-.sense-icon { display: block; width: 44px; height: 44px; flex: 0 0 44px; color: #00e3d0; }
+.sense-example-tag { border: 1px solid rgba(177,193,206,.25); border-radius: 6px; padding: 2px 9px; }
+.sense-email-envelope { padding: 24px 28px; border-bottom: 1px solid rgba(139,224,232,.14); }
+.sense-email-sender { margin: 0 0 20px; color: #e8f0f8; font-size: 1rem; }
+.sense-email-sender span { color: #b1c1ce; margin-right: 12px; }
+.sense-email-label { color: #b1c1ce; font-size: .875rem; margin: 0 0 6px; }
+.sense-email h3 { margin: 0; font-size: 1.45rem; line-height: 1.4; color: #e8f0f8; }
+.sense-email-body { padding: 26px 28px 30px; color: #d4e0ec; font-size: 1rem; line-height: 1.8; }
+.sense-email-body p { margin: 0 0 18px; }
+.sense-email-body p:last-child { margin-bottom: 0; }
+.sense-response { padding: 24px 28px 28px; }
+.sense-response-label { color: #b1c1ce; font-size: .875rem; margin: 0 0 22px; }
+.sense-response-list { margin: 0; padding: 0; list-style: none; }
+.sense-response-step { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 16px; }
+.sense-response-step + .sense-response-step { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(139,224,232,.14); }
+.sense-icon { display: block; width: 44px; height: 44px; color: #00e3d0; }
 .sense-icon .icon-orbit { stroke: #4f8cff; }
-.sense-heading h3,
-.pillars-section .pillar-card h3 {
-  margin: 0; color: #e8f0f8; font-size: 1.75rem; font-weight: 700; line-height: 1.2;
-  letter-spacing: -.025em;
-}
-.sense-example-response h3 { font-size: 1.4rem; }
-.pillars-section .pillar-card { min-height: 0; padding: 26px; }
-.pillars-section .pillar-card:hover { transform: translateY(-3px); }
+.sense-response-step h3 { margin: 2px 0 10px; font-size: 1.75rem; line-height: 1.2; color: #e8f0f8; letter-spacing: -.025em; }
+.sense-response-step p, .calm-principle p { margin: 0; color: #b1c1ce; font-size: 1rem; line-height: 1.65; }
+.sense-response-step .sense-step-lead { color: #00e3d0; font-weight: 600; margin-bottom: 6px; }
 .calm-principle { margin-top: 24px; padding: 22px 24px; text-align: left; }
 .calm-principle h3 { margin: 0 0 8px; color: #00e3d0; font-size: 1.4rem; line-height: 1.3; }
 @media (max-width: 960px) {
-  .sense-example-panel { max-width: 620px; }
+  .sense-lesson-grid { grid-template-columns: minmax(0,1fr); max-width: 720px; margin: 0 auto; }
 }
 @media (max-width: 760px) {
-  .sense-example-request, .sense-example-response { padding: 22px; }
-  .pillars-section .pillar-card { padding: 22px; }
-  .sense-heading h3, .pillars-section .pillar-card h3 { font-size: 1.625rem; }
-  .sense-example-response h3 { font-size: 1.4rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pillars-section .pillar-card:hover { transform: none; }
+  .sense-heading-break { display: none; }
+  .sense-email-meta, .sense-email-envelope, .sense-email-body, .sense-response { padding: 22px; }
+  .sense-response-step { gap: 12px; grid-template-columns: 36px minmax(0,1fr); }
+  .sense-icon { width: 36px; height: 36px; }
+  .sense-response-step h3 { font-size: 1.625rem; }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .sense-example-panel, .pillars-section .pillar-card, .calm-principle { background: #0a1824; }
+  .sense-email, .sense-response, .calm-principle { background: #0a1824; }
+}
+@media print {
+  .sense-lesson-grid { display: block; }
+  .sense-email, .sense-response { margin-bottom: 20px; background: none; box-shadow: none; backdrop-filter: none; }
 }
